@@ -76,6 +76,16 @@ void	handle_input(t_input *input)
 		if (input->cursor_i <= input->len)
 			input->cursor_i++;
 	}
+
+	if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyDown(KEY_LEFT))
+	{
+		input->cursor_i = 1;
+	}
+
+	if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyDown(KEY_RIGHT))
+	{
+		input->cursor_i = input->len + 1;
+	}
 }
 
 int	spacing_width(Font font)
@@ -92,9 +102,6 @@ void	render_cursor(t_input *input, int x, int y, Font font)
 	int	text_width = MeasureTextEx(font, input->text, (float)font.baseSize, FONT_SPACING).x;
 	input->text[input->cursor_i - 1] = erased;
 	int	text_height = MeasureTextEx(font, "|", (float)font.baseSize, FONT_SPACING).y;
-	//int	stand_char_width = MeasureTextEx(font, "a", (float)font.baseSize, FONT_SPACING).x;
-	//int padding_x = stand_char_width / 4;
-	//int padding_y = text_height / 8;
 
 	int	cursor_x = x + text_width + (input->cursor_i == 1 ? 0 : spacing_width(font));
 	int	cursor_y = y;

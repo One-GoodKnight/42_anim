@@ -4,7 +4,10 @@ BUILD_DIR		:= .build
 SRC_DIR			:= src
 SRCS			:= 								\
 	main.c										\
+	window.c									\
 	focus.c										\
+	input.c										\
+	ui.c										\
 
 INCLUDES		:= 								\
 	include										\
@@ -40,7 +43,7 @@ fclean: clean
 
 re: fclean all
 
-run: all
+run: re
 	./$(NAME)
 
 .PHONY: all clean fclean re

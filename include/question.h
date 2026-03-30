@@ -1,8 +1,11 @@
 #ifndef QUESTION_H
 # define QUESTION_H
 
-# define MAX_ADDITION_SOUSTRACTION 100
+# define RATIO_STRING_NB 2
+
+# define MAX_ADDITION_SUBSTRACTION 100
 # define MAX_MULTIPLICATION 20
+
 # define MAX_DIVISION 100
 
 typedef enum e_mode
@@ -14,30 +17,45 @@ typedef enum e_mode
 typedef enum e_op
 {
 	ADDITION,
-	SOUSTRACTION,
+	SUBSTRACTION,
 	MULTIPLICATION,
-	DIVISION
+	DIVISION,
+	OP_COUNT
 }	t_op;
 
 typedef struct s_str_qst
 {
-	char	*str_sol;
-	char	*mixed;
+	unsigned char	*text;
+	unsigned char	*utf8;
+	unsigned char	*ans;
+	unsigned char	*mixed;
 }	t_str_qst;
 
 typedef struct s_nb_qst
 {
-	int		n1;
-	int		n2;
-	t_op	op;
-	int		nb_sol;
+	unsigned char	*text;
+	unsigned char	*utf8;
+	int				ans;
+	int				n1;
+	int				n2;
+	t_op			op;
 }	t_nb_qst;
 
 typedef struct s_qst
 {
 	t_mode		mode;
-	t_str_qst	*str_qst;
-	t_nb_qst	*str_qst;
+	union
+	{
+		struct
+		{
+			unsigned char	*text;
+			unsigned char	*utf8;
+		}	qst;
+		t_str_qst	str_qst;
+		t_nb_qst	nb_qst;
+	}	data;
 }	t_qst;
+
+t_qst	*generate_question();
 
 #endif

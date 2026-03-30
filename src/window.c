@@ -10,6 +10,7 @@ void	place_window(void)
 
 void	init_window(void)
 {
+	SetTraceLogLevel(LOG_WARNING);
 	SetConfigFlags(FLAG_WINDOW_TRANSPARENT);
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
     SetWindowState(FLAG_WINDOW_UNDECORATED);

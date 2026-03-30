@@ -8,10 +8,11 @@
 
 typedef struct s_input
 {
-	char	text[INPUT_MAX_LEN];
-	size_t	max_len;
-	size_t	len;
-	size_t	cursor_i;
+	unsigned char	text[INPUT_MAX_LEN + 1];
+	char			utf8[INPUT_MAX_LEN * 2 + 1];
+	size_t			max_len;
+	size_t			len;
+	size_t			cursor_i;
 }	t_input;
 
 void	init_input(t_input *input);

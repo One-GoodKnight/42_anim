@@ -1,0 +1,121 @@
+#include "question.h"
+#include "utils.h"
+#include "utf8.h"
+#include <stdlib.h>
+
+/*t_str_qst	generate_str_question()
+{
+	t_str_qst	qst;
+
+	qst.text = "a";
+	return (qst);
+}*/
+
+unsigned char	*build_question_text(int n1, int n2, char op)
+{
+	unsigned char	*text;
+
+	text = malloc(uint_len(n1) + sizeof(' ') + sizeof(op) + sizeof(' ') + uint_len(n2) + 1);
+	if (!text)
+		return (NULL);
+	uint_str(text, n1);
+	append_char(text, ' ');
+	append_char(text, op);
+	append_char(text, ' ');
+	uint_str(text + ft_strlen(text), n2);
+	return (text);
+}
+
+int	find_divider(int n)
+{
+	size_t	count_dividers;
+	int i;
+	
+	count_dividers = 0;
+	i = 1;
+	while (i <= n)
+	{
+		if (n % i == 0)
+			count_dividers++;
+		i++;
+	}
+
+	size_t	target_divider = (rand() % count_dividers) + 1;
+
+	i = 1;
+	while (i <= n)
+	{
+		if (n % i == 0)
+			target_divider--;
+		if (target_divider == 0)
+			return (i);
+		i++;
+	}
+	return (1);
+}
+
+t_nb_qst	generate_nb_question()
+{
+	t_nb_qst	qst;
+
+	qst.op = rand() % OP_COUNT;
+	switch (qst.op)
+	{
+		case ADDITION:
+			qst.n1 = rand() % (MAX_ADDITION_SUBSTRACTION + 1);
+			qst.n2 = rand() % (MAX_ADDITION_SUBSTRACTION + 1);
+			qst.ans = qst.n1 + qst.n2;
+			qst.text = build_question_text(qst.n1, qst.n2, '+');
+			break;
+		case SUBSTRACTION:
+			qst.n1 = rand() % (MAX_ADDITION_SUBSTRACTION + 1);
+			qst.n2 = rand() % (MAX_ADDITION_SUBSTRACTION + 1);
+			if (qst.n1 < qst.n2)
+			{
+				qst.n1 += qst.n2;
+				qst.n2 = qst.n1 - qst.n2;
+				qst.n1 -= qst.n2;
+			}
+			qst.ans = qst.n1 - qst.n2;
+			qst.text = build_question_text(qst.n1, qst.n2, '-');
+			break;
+		case MULTIPLICATION:
+			qst.n1 = rand() % (MAX_MULTIPLICATION + 1);
+			qst.n2 = rand() % (MAX_MULTIPLICATION + 1);
+			qst.ans = qst.n1 * qst.n2;
+			qst.text = build_question_text(qst.n1, qst.n2, 'x');
+			break;
+		case DIVISION:
+			qst.n1 = rand() % (MAX_DIVISION + 1);
+			qst.n2 = find_divider(qst.n1);
+			qst.ans = qst.n1 / qst.n2;
+			qst.text = build_question_text(qst.n1, qst.n2, '/');
+			break;
+		case OP_COUNT:
+			break;
+	}
+	uchar_str_to_utf8(qst.utf8, qst.text);
+	return (qst);
+}
+
+t_qst	*generate_question()
+{
+	t_qst *qst;
+
+	qst = malloc(sizeof(t_qst));
+	if (!qst)
+		return (NULL);
+	//int	randint = rand() % (RATIO_STRING_NB + 1);
+	//qst->mode = randint == 0 ? NUMBER : STRING;
+	qst->mode = NUMBER;
+	if (qst->mode == NUMBER)
+		qst->data.nb_qst = generate_nb_question();
+	else
+		qst->data.str_qst = generate_str_question();
+	if (!qst->data.qst.text)
+	{
+		free(qst);
+		return (NULL);
+	}
+	return (qst);
+}

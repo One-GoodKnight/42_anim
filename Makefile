@@ -6,8 +6,11 @@ SRCS			:= 								\
 	main.c										\
 	window.c									\
 	focus.c										\
+	question.c									\
 	input.c										\
 	ui.c										\
+	utf8.c										\
+	utils.c										\
 
 INCLUDES		:= 								\
 	include										\

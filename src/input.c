@@ -2,7 +2,10 @@
 #include "raylib.h"
 #include "ui.h"
 #include "utf8.h"
+#include "utils.h"
 #include <string.h>
+
+#include <stdio.h>
 
 void	init_input(t_input *input)
 {
@@ -25,7 +28,7 @@ void	handle_input(t_input *input)
 	{
 		if (input->len < INPUT_MAX_LEN && key >= ' ' && key <= 255)
 		{
-			memcpy(input->text + (input->cursor_i), input->text + (input->cursor_i - 1), input->len - (input->cursor_i - 1));
+			memmove(input->text + (input->cursor_i), input->text + (input->cursor_i - 1), input->len - (input->cursor_i - 1));
 			input->text[input->cursor_i - 1] = (unsigned char)key;
 			input->len++;
 			input->text[input->len] = '\0';
@@ -40,7 +43,7 @@ void	handle_input(t_input *input)
 	{
     	if (input->len > 0 && input->cursor_i != 1)
 		{
-			memcpy(input->text + (input->cursor_i - 2), input->text + (input->cursor_i - 1), input->len - (input->cursor_i) + 1);
+			memmove(input->text + (input->cursor_i - 2), input->text + (input->cursor_i - 1), input->len - (input->cursor_i) + 1);
 			input->len--;
 			input->text[input->len] = '\0';
 			input->cursor_i--;
@@ -48,9 +51,9 @@ void	handle_input(t_input *input)
 		update_utf8(input);
 	}
 
-	if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyDown(KEY_BACKSPACE))
+	if (IsKeyDown(KEY_LEFT_CONTROL) && (IsKeyPressed(KEY_BACKSPACE) || (IsKeyPressedRepeat(KEY_BACKSPACE))))
 	{
-		memcpy(input->text, input->text + (input->cursor_i - 1), input->len - (input->cursor_i) + 1);
+		memmove(input->text, input->text + (input->cursor_i - 1), (input->len) - (input->cursor_i - 1));
 		input->len = input->len - (input->cursor_i) + 1;
 		input->text[input->len] = '\0';
 		input->cursor_i = 1;
@@ -62,7 +65,7 @@ void	handle_input(t_input *input)
 	{
     	if (input->len > 0 && input->cursor_i - 1 != input->len)
 		{
-			memcpy(input->text + (input->cursor_i - 1), input->text + (input->cursor_i), input->len - (input->cursor_i));
+			memmove(input->text + (input->cursor_i - 1), input->text + (input->cursor_i), input->len - (input->cursor_i - 1));
 			input->len--;
 			input->text[input->len] = '\0';
 		}
@@ -91,17 +94,28 @@ void	handle_input(t_input *input)
 		update_utf8(input);
 	}
 
-	if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyDown(KEY_LEFT))
+	if (IsKeyDown(KEY_LEFT_CONTROL) && (IsKeyPressed(KEY_LEFT) || IsKeyPressedRepeat(KEY_LEFT)))
 	{
-		input->cursor_i = 1;
+		int i = input->cursor_i - 2;
+		while (i >= 0 && input->text[i + 1] == ' ')
+			i--;
+		while (i >= 0 && input->text[i] != ' ')
+			i--;
+		input->cursor_i = i + 2;
 		update_utf8(input);
 	}
 
-	if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyDown(KEY_RIGHT))
+	if (IsKeyDown(KEY_LEFT_CONTROL) && (IsKeyPressed(KEY_RIGHT) || IsKeyPressedRepeat(KEY_RIGHT)))
 	{
-		input->cursor_i = input->len + 1;
+		size_t i = input->cursor_i - 1;
+		while (i < ft_strlen(input->text) && input->text[i - 1] == ' ')
+			i++;
+		while (i < ft_strlen(input->text) && input->text[i] != ' ')
+			i++;
+		input->cursor_i = i + 1;
 		update_utf8(input);
 	}
+	//printf("%c\n", input->text[input->cursor_i]);
 }
 
 int	spacing_width(Font font)

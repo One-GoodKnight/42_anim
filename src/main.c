@@ -7,6 +7,7 @@
 #include "ui.h"
 #include "question.h"
 #include "won.h"
+#include "utils.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -32,7 +33,9 @@ int	main(void)
 		return (1);
 
 	init_window();
-	Font font = LoadFontEx("assets/JetBrainsMonoNL-Regular.ttf", FONT_SIZE, NULL, 350);
+	SetTraceLogLevel(LOG_ERROR);
+	Font font = LoadFontEx("assets/JetBrainsMonoNL-Regular.ttf", FONT_SIZE, NULL, 255);
+	SetTraceLogLevel(LOG_WARNING);
 
 	while (!WindowShouldClose() && !won(&input, &qst))
 	{
@@ -41,5 +44,10 @@ int	main(void)
 	}
 
 	CloseWindow();
+
+	free(qst.data.qst.text);
+	free(qst.data.qst.utf8);
+	free_array((void *)data.lines);
+	UnloadFont(font);
 	return (0);
 }

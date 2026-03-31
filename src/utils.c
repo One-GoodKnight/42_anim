@@ -1,5 +1,6 @@
 #include "utils.h"
 #include "limits.h"
+#include <stdlib.h>
 
 size_t	ft_strlen(const unsigned char *s)
 {
@@ -69,4 +70,17 @@ unsigned int ft_uatoi(const unsigned char *str)
 		i++;
 	}
 	return (res);
+}
+
+void	free_array(void	**array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
 }

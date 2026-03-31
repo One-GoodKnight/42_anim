@@ -9,5 +9,6 @@ size_t	uint_len(unsigned int n);
 void	uint_str(unsigned char *dst, unsigned int n);
 int		ft_strcmp(const unsigned char *s1, const unsigned char *s2);
 unsigned int ft_uatoi(const unsigned char *str);
+void	free_array(void	**array);
 
 #endif

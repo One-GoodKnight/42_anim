@@ -28,7 +28,7 @@ typedef enum e_op
 typedef struct s_str_qst
 {
 	unsigned char	*text;
-	unsigned char			*utf8;
+	unsigned char	*utf8;
 	unsigned char	*ans;
 }	t_str_qst;
 

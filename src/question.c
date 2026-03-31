@@ -2,6 +2,7 @@
 #include "utils.h"
 #include "utf8.h"
 #include <stdlib.h>
+#include <string.h>
 
 t_str_qst	generate_str_question(t_data *data)
 {
@@ -12,7 +13,9 @@ t_str_qst	generate_str_question(t_data *data)
 	if (data->count == 0)
 		return (qst);
 	int	randint = rand() % (data->count);
-	qst.utf8 = data->lines[randint];
+	qst.utf8 = (unsigned char *)(strdup((char *)(data->lines[randint])));
+	if (!qst.utf8)
+		return (qst);
 	qst.text = malloc(sizeof(unsigned char) * (ft_strlen(qst.utf8) + 1));
 	if (!qst.text)
 		return (qst);

@@ -49,10 +49,10 @@ Bagage
 Baies lumineuses
 Balise
 Ballon
-Bateau
-Bateau en acacia
-Bateau en bois de bouleau
-Bateau en bois de sapin
+Bâteau
+Bâteau en acacia
+Bâteau en bois de bouleau
+Bâteau en bois de sapin
 Battement
 Betterave
 Bibliothèque
@@ -80,9 +80,9 @@ Bravoure
 Bricoleur
 Brillance
 Brique
-Brique du nether
-Briques du nether
-Buche de cerisier
+Brique du Nether
+Briques du Nether
+Bûche de cerisier
 Bâtiment
 Béton bleu
 Béton jaune
@@ -117,7 +117,7 @@ Charismatique
 Chasse-neige
 Chat
 Cheval
-Cheval zombie
+Cheval-zombie
 Chevelure
 Chocolat
 Chorus
@@ -157,7 +157,7 @@ Coup-de-pouce
 Cours-d'eau
 Coussinet
 Crapule
-Cristal de l end
+Cristal de l'end
 Critique
 Croque-monsieur
 Créativité
@@ -175,7 +175,6 @@ Distributeur
 Diversification
 Divinité
 Dossier
-Double chest
 Douleur
 Draconien
 Durabilité
@@ -188,16 +187,9 @@ Embrasser
 Embuscade
 Enchantement
 Ender dragon
-Energie
 Entrepreneur
-Equilibre
 Equinoxe
 Escalade
-Essui-glace
-Essuie-tout
-Etagere
-Evenementiel
-Evolution
 Excellence
 Exclusivement
 Expliquer
@@ -335,7 +327,7 @@ Mathématiques
 Merveilleusement
 Messieurs
 Mille-pattes
-Mine zeus
+Mine
 Minerai de charbon
 Minuscule
 Mitraillette
@@ -360,7 +352,7 @@ Médiane
 Médiéval
 Nature
 Nez-à-nez
-Nid d'abeille
+Nid d'abeilles
 Noisette
 Noix de coco
 Objectif
@@ -465,7 +457,7 @@ Précision
 Préférablement
 Pyramide
 Pépite d'or
-Quartz du nether
+Quartz du Nether
 Questionnement
 Radeau de stockage
 Rails
@@ -505,7 +497,6 @@ Rêve
 Saison
 Saisonnier
 Salle-de-bain
-Sans-abri
 Saumon cru
 Saumon cuit
 Saumon dans un seau
@@ -598,11 +589,16 @@ Zeus
 Élytres
 Émeraude
 Émotion
+Énergie
 Énigmatique
 Épanouissant
 Éphémère
 Époustouflant
+Équilibre
+Éssui-glace
+Éssuie-tout
 Étagère
 Éternité
 Évasion
 Événementiel
+Évolution

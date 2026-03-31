@@ -26,15 +26,14 @@ typedef enum e_op
 typedef struct s_str_qst
 {
 	unsigned char	*text;
-	unsigned char	*utf8;
+	char			*utf8;
 	unsigned char	*ans;
-	unsigned char	*mixed;
 }	t_str_qst;
 
 typedef struct s_nb_qst
 {
 	unsigned char	*text;
-	unsigned char	*utf8;
+	char			*utf8;
 	int				ans;
 	int				n1;
 	int				n2;
@@ -49,13 +48,13 @@ typedef struct s_qst
 		struct
 		{
 			unsigned char	*text;
-			unsigned char	*utf8;
+			char			*utf8;
 		}	qst;
 		t_str_qst	str_qst;
 		t_nb_qst	nb_qst;
 	}	data;
 }	t_qst;
 
-t_qst	*generate_question();
+void	init_question(t_qst *qst);
 
 #endif

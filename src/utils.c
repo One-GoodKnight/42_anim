@@ -1,8 +1,9 @@
 #include "utils.h"
+#include "limits.h"
 
 size_t	ft_strlen(const unsigned char *s)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (s[i])
@@ -12,7 +13,7 @@ size_t	ft_strlen(const unsigned char *s)
 
 size_t	uint_len(unsigned int n)
 {
-	int len;
+	size_t len;
 
 	len = 1;
 	while (n > 9)
@@ -47,10 +48,25 @@ int	ft_strncmp(const unsigned char *s1, const unsigned char *s2)
 {
 	size_t			i;
 
-	if (n == 0)
-		return (0);
 	i = 0;
 	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
 	return (s1[i] - s2[i]);
+}
+
+unsigned int ft_uatoi(const unsigned char *str)
+{
+	unsigned int	res;
+	size_t	i;
+
+	res = 0;
+	i = 0;
+	while (str[i] && str[i] >= '0' && str[i] <= '9')
+	{
+		if (UINT_MAX - (str[i] - '0') < res)
+			return (UINT_MAX);
+		res = (res * 10) + (str[i] - '0');
+		i++;
+	}
+	return (res);
 }

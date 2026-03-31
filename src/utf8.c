@@ -1,4 +1,6 @@
-void	uchar_str_to_utf8(char *utf8, unsigned char *src)
+#include <stddef.h>
+
+void	uchar_str_to_utf8(unsigned char *utf8, unsigned char *src)
 {
 	int	i;
 	int j;
@@ -19,4 +21,43 @@ void	uchar_str_to_utf8(char *utf8, unsigned char *src)
 		i++;
 	}
 	utf8[j] = '\0';
+}
+
+size_t	count_leading_bits(char byte)
+{
+	size_t	count = 0;
+
+	while (count < 8 && (byte & 0b10000000))
+	{
+		byte <<= 1;
+		count++;
+	}
+	return (count);
+}
+
+void	utf8_to_uchar_latin1(unsigned char *dest, unsigned char *utf8)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while(utf8[j])
+	{
+		if (utf8[j] >= 0b11100000)
+		{
+			j += count_leading_bits(utf8[j]);
+			continue ;
+		}
+		if (utf8[j] < 0b10000000)
+			dest[i++] = utf8[j++];
+		else
+		{
+			unsigned char	n = 0;
+			n |= (0b00000011 & utf8[j++]) << 6;
+			n |= (0b00111111 & utf8[j++]);
+			dest[i++] = n;
+		}
+	}
+	dest[i] = '\0';
 }

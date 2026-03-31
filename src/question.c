@@ -3,13 +3,21 @@
 #include "utf8.h"
 #include <stdlib.h>
 
-/*t_str_qst	generate_str_question()
+t_str_qst	generate_str_question()
 {
 	t_str_qst	qst;
 
-	qst.text = "a";
+	qst.text = malloc(2);
+	if (!qst.text)
+		return (qst);
+	qst.text[0] = 224;
+	qst.text[1] = '\0';
+	qst.utf8 = malloc(ft_strlen(qst.text)*2 + 1);
+	if (!qst.utf8)
+		return (qst);
+	uchar_str_to_utf8(qst.utf8, qst.text);
 	return (qst);
-}*/
+}
 
 unsigned char	*build_question_text(int n1, int n2, char op)
 {
@@ -94,28 +102,28 @@ t_nb_qst	generate_nb_question()
 		case OP_COUNT:
 			break;
 	}
+	if (!qst.text)
+		return (qst);
+	qst.utf8 = malloc(ft_strlen(qst.text)*2 + 1);
+	if (!qst.utf8)
+		return (qst);
 	uchar_str_to_utf8(qst.utf8, qst.text);
 	return (qst);
 }
 
-t_qst	*generate_question()
+void	init_question(t_qst *qst)
 {
-	t_qst *qst;
-
-	qst = malloc(sizeof(t_qst));
-	if (!qst)
-		return (NULL);
-	//int	randint = rand() % (RATIO_STRING_NB + 1);
-	//qst->mode = randint == 0 ? NUMBER : STRING;
-	qst->mode = NUMBER;
+	int	randint = rand() % (RATIO_STRING_NB + 1);
+	qst->mode = randint == 0 ? NUMBER : STRING;
 	if (qst->mode == NUMBER)
 		qst->data.nb_qst = generate_nb_question();
 	else
 		qst->data.str_qst = generate_str_question();
-	if (!qst->data.qst.text)
+	if (!qst->data.qst.text || !qst->data.qst.utf8)
 	{
-		free(qst);
-		return (NULL);
+		free(qst->data.qst.text);
+		free(qst->data.qst.utf8);
+		qst->data.qst.text = NULL;
+		qst->data.qst.utf8 = NULL;
 	}
-	return (qst);
 }

@@ -1,6 +1,6 @@
 #include <stddef.h>
 
-void	uchar_str_to_utf8(unsigned char *utf8, unsigned char *src)
+void	latin1_to_utf8(unsigned char *utf8, unsigned char *src)
 {
 	int	i;
 	int j;
@@ -35,7 +35,7 @@ size_t	count_leading_bits(char byte)
 	return (count);
 }
 
-void	utf8_to_uchar_latin1(unsigned char *dest, unsigned char *utf8)
+void	utf8_to_latin1(unsigned char *dest, unsigned char *utf8)
 {
 	int	i;
 	int	j;

@@ -1,6 +1,8 @@
 #include "raylib.h"
 #include "window.h"
 #include "focus.h"
+#include "data.h"
+#include "read_file.h"
 #include "input.h"
 #include "ui.h"
 #include "question.h"
@@ -16,13 +18,16 @@ int	main(void)
 	
 	srand(time(NULL));
 
-	//unsigned char	**lines = get_lines_from_file();
+	t_data	data;
+	get_lines_from_file(&data);
+	if (!data.lines)
+		return (1);
 
 	t_input input;
 	init_input(&input);
 
 	t_qst	qst;
-	init_question(&qst);
+	init_question(&qst, &data);
 	if (!qst.data.qst.text)
 		return (1);
 

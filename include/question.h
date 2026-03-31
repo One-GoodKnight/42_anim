@@ -1,6 +1,8 @@
 #ifndef QUESTION_H
 # define QUESTION_H
 
+# include "data.h"
+
 # define RATIO_STRING_NB 2
 
 # define MAX_ADDITION_SUBSTRACTION 100
@@ -26,14 +28,14 @@ typedef enum e_op
 typedef struct s_str_qst
 {
 	unsigned char	*text;
-	char			*utf8;
+	unsigned char			*utf8;
 	unsigned char	*ans;
 }	t_str_qst;
 
 typedef struct s_nb_qst
 {
 	unsigned char	*text;
-	char			*utf8;
+	unsigned char	*utf8;
 	int				ans;
 	int				n1;
 	int				n2;
@@ -48,13 +50,13 @@ typedef struct s_qst
 		struct
 		{
 			unsigned char	*text;
-			char			*utf8;
+			unsigned char	*utf8;
 		}	qst;
 		t_str_qst	str_qst;
 		t_nb_qst	nb_qst;
 	}	data;
 }	t_qst;
 
-void	init_question(t_qst *qst);
+void	init_question(t_qst *qst, t_data *data);
 
 #endif

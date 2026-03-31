@@ -52,7 +52,7 @@ void	render_ui(t_qst *qst, t_input *input, Font font)
 	t_line target_line;
 	init_line(&target_line, 550, 4, TARGET_OUTLINE_BOX, 0);
 	draw_box(10, 10, target_line, 60, TARGET_FILL_BOX, false);
-	DrawTextEx(font, qst->data.qst.utf8, (Vector2){28, 27}, (float)font.baseSize, FONT_SPACING, FONT_COLOR);
+	DrawTextEx(font, (char *)qst->data.qst.utf8, (Vector2){28, 27}, (float)font.baseSize, FONT_SPACING, FONT_COLOR);
 
 	//input_field
 	t_line input_field_line;

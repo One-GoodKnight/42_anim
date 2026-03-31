@@ -7,6 +7,7 @@ SRCS			:= 								\
 	window.c									\
 	focus.c										\
 	question.c									\
+	read_file.c									\
 	input.c										\
 	ui.c										\
 	utf8.c										\

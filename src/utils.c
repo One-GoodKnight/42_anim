@@ -44,7 +44,7 @@ void	append_char(unsigned char *dst, unsigned char c)
 	dst[dst_len + 1] = '\0';
 }
 
-int	ft_strncmp(const unsigned char *s1, const unsigned char *s2)
+int	ft_strcmp(const unsigned char *s1, const unsigned char *s2)
 {
 	size_t			i;
 

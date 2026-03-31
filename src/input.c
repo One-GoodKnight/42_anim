@@ -15,7 +15,7 @@ void	init_input(t_input *input)
 
 void	update_utf8(t_input *input)
 {
-	uchar_str_to_utf8(input->utf8, input->text);
+	latin1_to_utf8(input->utf8, input->text);
 }
 
 void	handle_input(t_input *input)
@@ -127,7 +127,7 @@ void	render_cursor(t_input *input, int x, int y, Font font)
 #include <stdio.h>
 void	render_input(t_input *input, int x, int y, Font font)
 {
-	DrawTextEx(font, input->utf8, (Vector2){x, y}, (float)font.baseSize, FONT_SPACING, FONT_COLOR);
+	DrawTextEx(font, (char *)input->utf8, (Vector2){x, y}, (float)font.baseSize, FONT_SPACING, FONT_COLOR);
 	
 	//cursor
 	render_cursor(input, x, y, font);

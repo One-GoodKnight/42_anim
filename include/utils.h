@@ -7,7 +7,7 @@ size_t	ft_strlen(const unsigned char *s);
 void	append_char(unsigned char *dst, unsigned char c);
 size_t	uint_len(unsigned int n);
 void	uint_str(unsigned char *dst, unsigned int n);
-int		ft_strncmp(const unsigned char *s1, const unsigned char *s2);
+int		ft_strcmp(const unsigned char *s1, const unsigned char *s2);
 unsigned int ft_uatoi(const unsigned char *str);
 
 #endif

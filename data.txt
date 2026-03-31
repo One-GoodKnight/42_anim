@@ -1,608 +1,608 @@
-abondance
-abonnement
-absorber
-accomplissement
-action
-admiration
-affection
-affichage
-affirmation
-agrandissement
-algorithme
-algue
-allocation
-allumette
-ambition
-amplitude
-amulette
-anticyclone
-apaisement
-apercevoir
-appareiller
-appartement
-applaudir
-apprendre
-approcher
-appréciation
-appétit
-arc-en-ciel
-architecte
-armure pour cheval
-armure pour cheval en cuir
-armure pour cheval en diamant
-arranger
-arrière-plan
-articulation
-artistique
-astronaute
-attentivement
-audace
-audience
-authenticité
-authentique
-avant-garde
-aventureux
-aventurier
-axolotl
-axolotl dans un seau
-bagage
-baies lumineuses
-balise
-ballon
-bateau
-bateau en acacia
-bateau en bois de bouleau
-bateau en bois de sapin
-battement
-betterave
-bibliothèque
-bionique
-blaze
-bloc
-bloc d'or
-bloc d'or brut
-bloc de fer brut
-boeuf cru
-bois de bambou
-boisson
-bonheur
-botte
-bottes en fer
-bottes en netherite
-bottes en or
-boucher
-bouclier
-bougie
-boule de feu
-boule de neige
-boussole
-bravoure
-bricoleur
-brillance
-brique
-brique du nether
-briques du nether
-buche de cerisier
-bâtiment
-béton bleu
-béton jaune
-béton rose
-béton rouge
-cadre
-caillou
-canalisation
-canne à pêche
-capteur
-capture
-carapace de tortue
-caricature
-carotte
-carte-son
-casque en diamant
-casque en fer
-casque en netherite
-casse-cou
-casserole
-cataclysme
-catastrophe
-catalogue
-cavalier
-champagne
-champignon
-championne
-chanson
-charbon de bois
-chargement
-charismatique
-chasse-neige
-chat
-cheval
-cheval zombie
-chevelure
-chocolat
-chorus
-chunk
-chêne
-cisaille
-cisailles
-citadelle
-citation
-claquette
-clarification
-classique
-clavicule
-clé-à-molette
-coccinelle
-cochon
-coeur de la mer
-collaborer
-collection
-compétence
-conduit
-confortable
-connaissance
-conquérant
-conquête
-consolation
-constellation
-construction
-construire
-contemplation
-continuation
-convivialité
-coordination
-corde-à-sauter
-coup-d'éclat
-coup-de-pouce
-cours-d'eau
-coussinet
-crapule
-cristal de l end
-critique
-croque-monsieur
-créativité
-cube de magma
-cuillère
-cuir
-cure-dent
-cyclope
-célébration
-dalle de prismarine
-descendre
-dicton
-disposition
-distributeur
-diversification
-divinité
-dossier
-double chest
-douleur
-draconien
-durabilité
-dynamique
-dynamite
-détermination
-délicieux
-effrayant
-embrasser
-embuscade
-enchantement
-ender dragon
-energie
-entrepreneur
-equilibre
-equinoxe
-escalade
-essui-glace
-essuie-tout
-etagere
-evenementiel
-evolution
-excellence
-exclusivement
-expliquer
-exploiter
-extraordinaire
-extravagance
-extravagant
-exubérance
-faisable
-fanatique
-fantaisie
-farine
-fer brut
-ferme
-fierté
-fiole
-fiole d'expérience
-fiole de miel
-fleur de lys
-fleuve
-flèche de force
-flèche spectrale
-folie
-fondateur
-forteresse
-fourchette
-fournisseur
-fragment de netherite
-fragments de netherite
-framboise
-fusion
-fusée
-galaxie
-gardien
-gastronomique
-gaufres
-ghast
-girafe
-globuleux
-golem de fer
-golem de neige
-gouttière
-gouvernement
-graine
-graine de betterave
-graines de betteraves
-grand gardien
-grand-parent
-grandiose
-granite
-gravité
-grenouille
-guérison
-gâteaux
-hache
-hache en diamant
-hache en netherite
-hache en or
-hache en pierre
-hadès
-hamburger
-harmonica
-harmonie
-harmonieux
-harmonisation
-hercule
-hippopotame
-histoire
-horrible
-hydratation
-hypocrite
-illumination
-imagination
-imaginer
-immeuble
-imposteur
-impression
-impulsion
-inattendu
-incandescence
-incandescent
-incomparable
-incontournable
-incroyablement
-insaisissable
-insouciance
-inspiration
-installer
-interrogatoire
-intrigant
-introduction
-introverti
-intrépide
-intégration
-inventaire
-irrésistible
-joindre
-juridique
-jubilant
-jus-de-fruit
-kangourou
-lait
-lama
-lampadaire
-lanterne aquatique
-lapin
-lapis-lazuli
-largeur
-larme de ghast
-lendemain
-lentement
-levier
-liberté
-libraire
-librairie
-libération
-lingot de cuivre
-lingot de netherite
-livre
-livre vierge
-logiciel
-longue-vue
-loup-garou
-lucidité
-magicien
-magnifique
-magnétique
-magnétisme
-magnétite
-main-d'oeuvre
-marchand
-marchand ambulant
-marteau-piqueur
-mathématiques
-merveilleusement
-messieurs
-mille-pattes
-mine zeus
-minerai de charbon
-minuscule
-mitraillette
-monstres hostiles
-mont olympe
-montre
-morceau
-morue cuite
-morue dans un seau
-motte d'argile
-moustache
-moustiquaire
-mouton
-mouton cru
-mouton cuit
-mouvement
-musculation
-musique
-mystique
-mythique
-médiane
-médiéval
-nature
-nez-à-nez
-nid d'abeille
-noisette
-noix de coco
-objectif
-observateur
-observatoire
-occasion
-océanique
-oeil d'araignée
-oeuf
-oeuf d'apparition
-oeuf d'apparition de dauphin
-orchestre
-oreille
-organisme
-orthographe
-ours blanc
-paiement
-paire de ciseaux
-palindrome
-papier
-parapluie
-parasol
-parpaing
-partenaire
-passager
-passe-partout
-passionnément
-peau de lapin
-peintre
-peinture
-pelle en diamant
-pelle en fer
-pelle en netherite
-pelle en or
-pelle en pierre
-pelouse
-perceptible
-perfectionnement
-perfectionniste
-performance
-perle de l'ender
-permission
-permissions
-personnages
-perspectives
-perspicacité
-pertinence
-phalange
-philosophique
-phénomène
-pillard
-pioche
-pioche en diamant
-pioche en netherite
-pioche en or
-pioche en pierre
-piston
-placard
-plantation
-plastron
-plastron en fer
-plastron en or
-plume
-plénitude
-poche d'encre
-poche d'encre luisante
-podzol
-poisson globe dans un seau
-poisson tropical dans un seau
-poisson-chat
-pomme
-pomme de terre
-pomme de terre cuite
-pomme de terre empoisonnée
-pommier
-portail de l'end
-porte-armure
-portefeuille
-portemonnaie
-potion
-potion de saut
-potion de vision
-potion jetable
-poudre d'os
-poudre de blaze
-poudre de pierre lumineuse
-poulet cru
-poulpe
-pourboire
-pragmatique
-princesse
-problème
-procession
-prodigieux
-production
-professeur
-projection
-proviseur
-prudence
-précieusement
-précision
-préférablement
-pyramide
-pépite d'or
-quartz du nether
-questionnement
-radeau de stockage
-rails
-rails de propulsion
-rangement
-rationnel
-rationnelle
-ravissement
-rayon de miel
-recevoir
-recherche
-recrutement
-relationnel
-renaissance
-rencontre
-rendement
-reprendre
-respectueusement
-respiration
-responsable
-ressembler
-retourner
-retrouver
-rideaux
-roman
-rouflaquette
-règlement
-réconciliation
-réfléchir
-réminescence
-résistance
-révision
-révolution
-révolutionnaire
-révélation
-rêve
-saison
-saisonnier
-salle-de-bain
-sans-abri
-saumon cru
-saumon cuit
-saumon dans un seau
-seau de lait
-seau de lave
-seau de neige poudreuse
-selle
-sensation
-sensationnel
-sensationnelle
-sentiment
-silex
-simplicité
-situation
-slime
-soleil
-souffrir
-soupe de betterave
-soupe suspecte
-soustraire
-sportif
-stagiaire
-stigmatiser
-storycraft
-sublime
-substantiellement
-successeur
-sucre
-suggestion
-suivre
-survie
-sympathiquement
-symphonie
-séduction
-sérénité
-table de craft
-talentueux
-tapis blanc
-tapis bleu
-tapis vert clair
-tapis violet
-teindre
-teinture
-teinture bleue
-teinture orange
-teinture rouge
-teinture violette
-templier
-temporel
-température
-terre labourée
-tonnerre
-totem
-tournure
-tracteur
-tractopelle
-tranquille
-transcendant
-transformation
-transport
-traverser
-tremblement
-trident
-tunique en cuir
-téléphone
-téléphonique
-vagabond
-vaisseau
-ventilateur
-verre
-verrue du nether
-victoire
-victorieux
-villageois
-vision
-visuel
-vitre
-vivacité
-vivifiant
-volontaire
-wagonnet de stockage
-wither squelette
-xylophone
-yeux
-zeus
-éclairage
-éclatant
-écriture
-électrifiant
-élytres
-émeraude
-émotion
-énigmatique
-épanouissant
-éphémère
-époustouflant
-étagère
-éternité
-évasion
-événementiel
+Abondance
+Abonnement
+Absorber
+Accomplissement
+Action
+Admiration
+Affection
+Affichage
+Affirmation
+Agrandissement
+Algorithme
+Algue
+Allocation
+Allumette
+Ambition
+Amplitude
+Amulette
+Anticyclone
+Apaisement
+Apercevoir
+Appareiller
+Appartement
+Applaudir
+Apprendre
+Approcher
+Appréciation
+Appétit
+Arc-en-ciel
+Architecte
+Armure pour cheval
+Armure pour cheval en cuir
+Armure pour cheval en diamant
+Arranger
+Arrière-plan
+Articulation
+Artistique
+Astronaute
+Attentivement
+Audace
+Audience
+Authenticité
+Authentique
+Avant-garde
+Aventureux
+Aventurier
+Axolotl
+Axolotl dans un seau
+Bagage
+Baies lumineuses
+Balise
+Ballon
+Bateau
+Bateau en acacia
+Bateau en bois de bouleau
+Bateau en bois de sapin
+Battement
+Betterave
+Bibliothèque
+Bionique
+Blaze
+Bloc
+Bloc d'or
+Bloc d'or brut
+Bloc de fer brut
+Boeuf cru
+Bois de bambou
+Boisson
+Bonheur
+Botte
+Bottes en fer
+Bottes en netherite
+Bottes en or
+Boucher
+Bouclier
+Bougie
+Boule de feu
+Boule de neige
+Boussole
+Bravoure
+Bricoleur
+Brillance
+Brique
+Brique du nether
+Briques du nether
+Buche de cerisier
+Bâtiment
+Béton bleu
+Béton jaune
+Béton rose
+Béton rouge
+Cadre
+Caillou
+Canalisation
+Canne à pêche
+Capteur
+Capture
+Carapace de tortue
+Caricature
+Carotte
+Carte-son
+Casque en diamant
+Casque en fer
+Casque en netherite
+Casse-cou
+Casserole
+Cataclysme
+Catastrophe
+Catalogue
+Cavalier
+Champagne
+Champignon
+Championne
+Chanson
+Charbon de bois
+Chargement
+Charismatique
+Chasse-neige
+Chat
+Cheval
+Cheval zombie
+Chevelure
+Chocolat
+Chorus
+Chunk
+Chêne
+Cisaille
+Cisailles
+Citadelle
+Citation
+Claquette
+Clarification
+Classique
+Clavicule
+Clé-à-molette
+Coccinelle
+Cochon
+Coeur de la mer
+Collaborer
+Collection
+Compétence
+Conduit
+Confortable
+Connaissance
+Conquérant
+Conquête
+Consolation
+Constellation
+Construction
+Construire
+Contemplation
+Continuation
+Convivialité
+Coordination
+Corde-à-sauter
+Coup-d'éclat
+Coup-de-pouce
+Cours-d'eau
+Coussinet
+Crapule
+Cristal de l end
+Critique
+Croque-monsieur
+Créativité
+Cube de magma
+Cuillère
+Cuir
+Cure-dent
+Cyclope
+Célébration
+Dalle de prismarine
+Descendre
+Dicton
+Disposition
+Distributeur
+Diversification
+Divinité
+Dossier
+Double chest
+Douleur
+Draconien
+Durabilité
+Dynamique
+Dynamite
+Détermination
+Délicieux
+Effrayant
+Embrasser
+Embuscade
+Enchantement
+Ender dragon
+Energie
+Entrepreneur
+Equilibre
+Equinoxe
+Escalade
+Essui-glace
+Essuie-tout
+Etagere
+Evenementiel
+Evolution
+Excellence
+Exclusivement
+Expliquer
+Exploiter
+Extraordinaire
+Extravagance
+Extravagant
+Exubérance
+Faisable
+Fanatique
+Fantaisie
+Farine
+Fer brut
+Ferme
+Fierté
+Fiole
+Fiole d'expérience
+Fiole de miel
+Fleur de lys
+Fleuve
+Flèche de force
+Flèche spectrale
+Folie
+Fondateur
+Forteresse
+Fourchette
+Fournisseur
+Fragment de netherite
+Fragments de netherite
+Framboise
+Fusion
+Fusée
+Galaxie
+Gardien
+Gastronomique
+Gaufres
+Ghast
+Girafe
+Globuleux
+Golem de fer
+Golem de neige
+Gouttière
+Gouvernement
+Graine
+Graine de betterave
+Graines de betteraves
+Grand gardien
+Grand-parent
+Grandiose
+Granite
+Gravité
+Grenouille
+Guérison
+Gâteaux
+Hache
+Hache en diamant
+Hache en netherite
+Hache en or
+Hache en pierre
+Hadès
+Hamburger
+Harmonica
+Harmonie
+Harmonieux
+Harmonisation
+Hercule
+Hippopotame
+Histoire
+Horrible
+Hydratation
+Hypocrite
+Illumination
+Imagination
+Imaginer
+Immeuble
+Imposteur
+Impression
+Impulsion
+Inattendu
+Incandescence
+Incandescent
+Incomparable
+Incontournable
+Incroyablement
+Insaisissable
+Insouciance
+Inspiration
+Installer
+Interrogatoire
+Intrigant
+Introduction
+Introverti
+Intrépide
+Intégration
+Inventaire
+Irrésistible
+Joindre
+Juridique
+Jubilant
+Jus-de-fruit
+Kangourou
+Lait
+Lama
+Lampadaire
+Lanterne aquatique
+Lapin
+Lapis-lazuli
+Largeur
+Larme de ghast
+Lendemain
+Lentement
+Levier
+Liberté
+Libraire
+Librairie
+Libération
+Lingot de cuivre
+Lingot de netherite
+Livre
+Livre vierge
+Logiciel
+Longue-vue
+Loup-garou
+Lucidité
+Magicien
+Magnifique
+Magnétique
+Magnétisme
+Magnétite
+Main-d'oeuvre
+Marchand
+Marchand ambulant
+Marteau-piqueur
+Mathématiques
+Merveilleusement
+Messieurs
+Mille-pattes
+Mine zeus
+Minerai de charbon
+Minuscule
+Mitraillette
+Monstres hostiles
+Mont olympe
+Montre
+Morceau
+Morue cuite
+Morue dans un seau
+Motte d'argile
+Moustache
+Moustiquaire
+Mouton
+Mouton cru
+Mouton cuit
+Mouvement
+Musculation
+Musique
+Mystique
+Mythique
+Médiane
+Médiéval
+Nature
+Nez-à-nez
+Nid d'abeille
+Noisette
+Noix de coco
+Objectif
+Observateur
+Observatoire
+Occasion
+Océanique
+Oeil d'araignée
+Oeuf
+Oeuf d'apparition
+Oeuf d'apparition de dauphin
+Orchestre
+Oreille
+Organisme
+Orthographe
+Ours blanc
+Paiement
+Paire de ciseaux
+Palindrome
+Papier
+Parapluie
+Parasol
+Parpaing
+Partenaire
+Passager
+Passe-partout
+Passionnément
+Peau de lapin
+Peintre
+Peinture
+Pelle en diamant
+Pelle en fer
+Pelle en netherite
+Pelle en or
+Pelle en pierre
+Pelouse
+Perceptible
+Perfectionnement
+Perfectionniste
+Performance
+Perle de l'ender
+Permission
+Permissions
+Personnages
+Perspectives
+Perspicacité
+Pertinence
+Phalange
+Philosophique
+Phénomène
+Pillard
+Pioche
+Pioche en diamant
+Pioche en netherite
+Pioche en or
+Pioche en pierre
+Piston
+Placard
+Plantation
+Plastron
+Plastron en fer
+Plastron en or
+Plume
+Plénitude
+Poche d'encre
+Poche d'encre luisante
+Podzol
+Poisson globe dans un seau
+Poisson tropical dans un seau
+Poisson-chat
+Pomme
+Pomme de terre
+Pomme de terre cuite
+Pomme de terre empoisonnée
+Pommier
+Portail de l'end
+Porte-armure
+Portefeuille
+Portemonnaie
+Potion
+Potion de saut
+Potion de vision
+Potion jetable
+Poudre d'os
+Poudre de blaze
+Poudre de pierre lumineuse
+Poulet cru
+Poulpe
+Pourboire
+Pragmatique
+Princesse
+Problème
+Procession
+Prodigieux
+Production
+Professeur
+Projection
+Proviseur
+Prudence
+Précieusement
+Précision
+Préférablement
+Pyramide
+Pépite d'or
+Quartz du nether
+Questionnement
+Radeau de stockage
+Rails
+Rails de propulsion
+Rangement
+Rationnel
+Rationnelle
+Ravissement
+Rayon de miel
+Recevoir
+Recherche
+Recrutement
+Relationnel
+Renaissance
+Rencontre
+Rendement
+Reprendre
+Respectueusement
+Respiration
+Responsable
+Ressembler
+Retourner
+Retrouver
+Rideaux
+Roman
+Rouflaquette
+Règlement
+Réconciliation
+Réfléchir
+Réminescence
+Résistance
+Révision
+Révolution
+Révolutionnaire
+Révélation
+Rêve
+Saison
+Saisonnier
+Salle-de-bain
+Sans-abri
+Saumon cru
+Saumon cuit
+Saumon dans un seau
+Seau de lait
+Seau de lave
+Seau de neige poudreuse
+Selle
+Sensation
+Sensationnel
+Sensationnelle
+Sentiment
+Silex
+Simplicité
+Situation
+Slime
+Soleil
+Souffrir
+Soupe de betterave
+Soupe suspecte
+Soustraire
+Sportif
+Stagiaire
+Stigmatiser
+Storycraft
+Sublime
+Substantiellement
+Successeur
+Sucre
+Suggestion
+Suivre
+Survie
+Sympathiquement
+Symphonie
+Séduction
+Sérénité
+Table de craft
+Talentueux
+Tapis blanc
+Tapis bleu
+Tapis vert clair
+Tapis violet
+Teindre
+Teinture
+Teinture bleue
+Teinture orange
+Teinture rouge
+Teinture violette
+Templier
+Temporel
+Température
+Terre labourée
+Tonnerre
+Totem
+Tournure
+Tracteur
+Tractopelle
+Tranquille
+Transcendant
+Transformation
+Transport
+Traverser
+Tremblement
+Trident
+Tunique en cuir
+Téléphone
+Téléphonique
+Vagabond
+Vaisseau
+Ventilateur
+Verre
+Verrue du nether
+Victoire
+Victorieux
+Villageois
+Vision
+Visuel
+Vitre
+Vivacité
+Vivifiant
+Volontaire
+Wagonnet de stockage
+Wither squelette
+Xylophone
+Yeux
+Zeus
+Éclairage
+Éclatant
+Écriture
+Électrifiant
+Élytres
+Émeraude
+Émotion
+Énigmatique
+Épanouissant
+Éphémère
+Époustouflant
+Étagère
+Éternité
+Évasion
+Événementiel

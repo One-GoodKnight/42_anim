@@ -20,7 +20,7 @@ bool	won(t_input *input, t_qst *qst)
 					return (true);
 				break;
 			case SHUF_STR:
-				if (ft_strcmp(input->text, qst->data.shuf_str_qst.ans) == 0)
+				if (ft_strcmp_ignore_case(input->text, qst->data.shuf_str_qst.ans) == 0)
 					return (true);
 				break;
 			case MODE_COUNT:

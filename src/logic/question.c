@@ -9,7 +9,6 @@ void	init_question(t_qst *qst, t_data *data)
 	qst->data.qst.text = NULL;
 	qst->data.qst.utf8 = NULL;
 	qst->mode = rand() % (MODE_COUNT);
-	qst->mode = SHUF_STR;
 	switch(qst->mode)
 	{
 		case NB:

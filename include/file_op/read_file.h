@@ -3,7 +3,7 @@
 
 # include "data.h"
 
-# define FILE_PATH "data2"
+# define FILE_PATH "data.txt"
 
 void	get_lines_from_file(t_data *data);
 

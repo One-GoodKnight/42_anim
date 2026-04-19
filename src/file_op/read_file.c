@@ -1,6 +1,6 @@
-#include "gnl.h"
-#include "read_file.h"
-#include "data.h"
+#include "gnl/gnl.h"
+#include "file_op/read_file.h"
+#include "file_op/data.h"
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -59,7 +59,6 @@ void	get_lines_from_file(t_data *data)
 		lines[i++] = line;
 		line = (unsigned char *)get_next_line(fd);
 	}
-	free(line);
 	lines[i] = NULL;
 	close(fd);
 	data->lines = lines;

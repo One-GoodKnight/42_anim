@@ -3,18 +3,31 @@ BUILD_DIR		:= .build
 
 SRC_DIR			:= src
 SRCS			:= 								\
-	main.c										\
-	window.c									\
-	focus.c										\
-	question.c									\
-	read_file.c									\
-	input.c										\
-	ui.c										\
-	utf8.c										\
-	utils.c										\
-	won.c										\
+	file_op/read_file.c							\
+												\
 	gnl/gnl.c									\
 	gnl/gnl_utils.c								\
+												\
+	logic/nb_question.c							\
+	logic/question.c							\
+	logic/shuf_str_question.c					\
+	logic/str_question.c						\
+	logic/won.c									\
+												\
+	utils/utf8.c								\
+	utils/utils.c								\
+	utils/utils_n.c								\
+	utils/utils_str.c							\
+	utils/utils_uchar.c							\
+												\
+	window/input.c								\
+	window/rendering/box.c						\
+	window/rendering/input_render.c				\
+	window/rendering/ui.c						\
+	window/focus.c								\
+	window/window.c								\
+												\
+	main.c										\
 
 INCLUDES		:= 								\
 	include										\
@@ -52,7 +65,10 @@ fclean: clean
 
 re: fclean all
 
-run: re
+run: all
 	./$(NAME)
+
+val: all
+	valgrind --leak-check=full --suppressions=val.supp ./anim
 
 .PHONY: all clean fclean re

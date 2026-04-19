@@ -10,7 +10,6 @@ typedef struct s_input
 {
 	unsigned char	text[INPUT_MAX_LEN + 1];
 	unsigned char	utf8[INPUT_MAX_LEN * 2 + 1];
-	size_t			max_len;
 	size_t			len;
 	size_t			cursor_i;
 }	t_input;

@@ -1,4 +1,4 @@
-#include "window.h"
+#include "window/window.h"
 #include "raylib.h"
 
 void	place_window(void)

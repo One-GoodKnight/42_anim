@@ -47,6 +47,7 @@ Axolotl
 Axolotl dans un seau
 Bagage
 Baies lumineuses
+Balance
 Balise
 Ballon
 Bâteau
@@ -164,6 +165,7 @@ Créativité
 Cube de magma
 Cuillère
 Cuir
+Cupidité
 Cure-dent
 Cyclope
 Célébration
@@ -171,6 +173,7 @@ Dalle de prismarine
 Descendre
 Dicton
 Disposition
+Distance
 Distributeur
 Diversification
 Divinité
@@ -183,6 +186,7 @@ Dynamite
 Détermination
 Délicieux
 Effrayant
+Embarrassement
 Embrasser
 Embuscade
 Enchantement
@@ -350,11 +354,13 @@ Mystique
 Mythique
 Médiane
 Médiéval
+Mémoire
 Nature
 Nez-à-nez
 Nid d'abeilles
 Noisette
 Noix de coco
+Nourriture
 Objectif
 Observateur
 Observatoire
@@ -375,6 +381,7 @@ Palindrome
 Papier
 Parapluie
 Parasol
+Pardon
 Parpaing
 Partenaire
 Passager
@@ -488,6 +495,7 @@ Règlement
 Réconciliation
 Réfléchir
 Réminescence
+Résilience
 Résistance
 Révision
 Révolution
@@ -567,9 +575,10 @@ Vagabond
 Vaisseau
 Ventilateur
 Verre
-Verrue du nether
+Verrue du Nether
 Victoire
 Victorieux
+Vie
 Villageois
 Vision
 Visuel

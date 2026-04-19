@@ -1,8 +1,8 @@
-#include "input.h"
+#include "window/input.h"
 #include "raylib.h"
-#include "ui.h"
-#include "utf8.h"
-#include "utils.h"
+#include "window/rendering/ui.h"
+#include "utils/utf8.h"
+#include "utils/utils.h"
 #include <string.h>
 
 #include <stdio.h>
@@ -11,7 +11,6 @@ void	init_input(t_input *input)
 {
 	input->text[0] = '\0';
 	input->utf8[0] = '\0';
-	input->max_len = INPUT_MAX_LEN;
 	input->len = 0;
 	input->cursor_i = 1;
 }
@@ -118,31 +117,6 @@ void	handle_input(t_input *input)
 	//printf("%c\n", input->text[input->cursor_i]);
 }
 
-int	spacing_width(Font font)
-{
-	int	single_char = MeasureTextEx(font, "|", (float)font.baseSize, FONT_SPACING).x;
-	int	double_char = MeasureTextEx(font, "||", (float)font.baseSize, FONT_SPACING).x;
-	return (double_char - 2*single_char);
-}
 
-void	render_cursor(t_input *input, int x, int y, Font font)
-{
-	char	erased = input->text[input->cursor_i - 1];
-	input->text[input->cursor_i - 1] = '\0';
-	int	text_width = MeasureTextEx(font, (char *)input->text, (float)font.baseSize, FONT_SPACING).x;
-	input->text[input->cursor_i - 1] = erased;
-	int	text_height = MeasureTextEx(font, "|", (float)font.baseSize, FONT_SPACING).y;
 
-	int	cursor_x = x + text_width + (input->cursor_i == 1 ? 0 : spacing_width(font));
-	int	cursor_y = y;
-	DrawRectangle(cursor_x, cursor_y, 2, text_height, FONT_COLOR);
-}
 
-#include <stdio.h>
-void	render_input(t_input *input, int x, int y, Font font)
-{
-	DrawTextEx(font, (char *)input->utf8, (Vector2){x, y}, (float)font.baseSize, FONT_SPACING, FONT_COLOR);
-	
-	//cursor
-	render_cursor(input, x, y, font);
-}

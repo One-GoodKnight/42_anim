@@ -1,13 +1,13 @@
 #include "raylib.h"
-#include "window.h"
-#include "focus.h"
-#include "data.h"
-#include "read_file.h"
-#include "input.h"
-#include "ui.h"
-#include "question.h"
-#include "won.h"
-#include "utils.h"
+#include "window/window.h"
+#include "window/focus.h"
+#include "file_op/data.h"
+#include "file_op/read_file.h"
+#include "window/input.h"
+#include "window/rendering/ui.h"
+#include "logic/question.h"
+#include "logic/won.h"
+#include "utils/utils.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -17,7 +17,9 @@ int	main(void)
 {
 	//start_focus_thread(WINDOW_TITLE);
 	
-	srand(time(NULL));
+	struct timespec	ts;
+	clock_gettime(CLOCK_MONOTONIC, &ts);
+	srand(ts.tv_sec ^ ts.tv_nsec);
 
 	t_data	data;
 	get_lines_from_file(&data);
@@ -30,7 +32,10 @@ int	main(void)
 	t_qst	qst;
 	init_question(&qst, &data);
 	if (!qst.data.qst.text)
+	{
+		free_array((void *)data.lines);
 		return (1);
+	}
 
 	init_window();
 	SetTraceLogLevel(LOG_ERROR);
@@ -45,8 +50,7 @@ int	main(void)
 
 	CloseWindow();
 
-	free(qst.data.qst.text);
-	free(qst.data.qst.utf8);
+	free_qst(&qst);
 	free_array((void *)data.lines);
 	UnloadFont(font);
 	return (0);

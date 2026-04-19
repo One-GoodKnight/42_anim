@@ -1,4 +1,4 @@
-#include "gnl.h"
+#include "gnl/gnl.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <limits.h>

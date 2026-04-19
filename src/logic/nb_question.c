@@ -1,46 +1,25 @@
-#include "question.h"
-#include "utils.h"
-#include "utf8.h"
+#include "logic/question.h"
+#include "utils/utils.h"
+#include "utils/utf8.h"
 #include <stdlib.h>
-#include <string.h>
 
-t_str_qst	generate_str_question(t_data *data)
-{
-	t_str_qst	qst;
-
-	qst.text = NULL;
-	qst.utf8 = NULL;
-	if (data->count == 0)
-		return (qst);
-	int	randint = rand() % (data->count);
-	qst.utf8 = (unsigned char *)(strdup((char *)(data->lines[randint])));
-	if (!qst.utf8)
-		return (qst);
-	qst.text = malloc(sizeof(unsigned char) * (ft_strlen(qst.utf8) + 1));
-	if (!qst.text)
-		return (qst);
-	utf8_to_latin1(qst.text, qst.utf8);
-	//temp
-	qst.ans = qst.text;
-	return (qst);
-}
-
-unsigned char	*build_question_text(int n1, int n2, char op)
+static unsigned char	*build_question_text(int n1, int n2, char op)
 {
 	unsigned char	*text;
 
 	text = malloc(uint_len(n1) + sizeof(' ') + sizeof(op) + sizeof(' ') + uint_len(n2) + 1);
 	if (!text)
 		return (NULL);
-	uint_str(text, n1);
+	//change to str join with multiple arguments ? using a one malloc and strcat to remove those 2 functions
+	uitoa(text, n1);
 	append_char(text, ' ');
 	append_char(text, op);
 	append_char(text, ' ');
-	uint_str(text + ft_strlen(text), n2);
+	uitoa(text + ft_strlen(text), n2);
 	return (text);
 }
 
-int	find_divider(int n)
+static int	find_divider(int n)
 {
 	size_t	count_dividers;
 	int i;
@@ -115,21 +94,4 @@ t_nb_qst	generate_nb_question()
 		return (qst);
 	latin1_to_utf8(qst.utf8, qst.text);
 	return (qst);
-}
-
-void	init_question(t_qst *qst, t_data *data)
-{
-	int	randint = rand() % (RATIO_STRING_NB + 1);
-	qst->mode = randint == 0 ? NUMBER : STRING;
-	if (qst->mode == NUMBER)
-		qst->data.nb_qst = generate_nb_question();
-	else
-		qst->data.str_qst = generate_str_question(data);
-	if (!qst->data.qst.text || !qst->data.qst.utf8)
-	{
-		free(qst->data.qst.text);
-		free(qst->data.qst.utf8);
-		qst->data.qst.text = NULL;
-		qst->data.qst.utf8 = NULL;
-	}
 }

@@ -1,4 +1,4 @@
-#include "focus.h"
+#include "window/focus.h"
 #include <pthread.h>
 #include <unistd.h>
 #include <string.h>

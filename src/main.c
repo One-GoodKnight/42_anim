@@ -12,10 +12,31 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h>
 
 int	main(void)
 {
 	//start_focus_thread(WINDOW_TITLE);
+	
+	int sock = socket(AF_INET, SOCK_DGRAM, 0);
+	
+	int ttl = 1;
+	setsockopt(sock, IPPROTO_IP, IP_MULTICAST_TTL, &ttl, sizeof(ttl));
+
+	struct sockaddr_in dest;
+	dest.sin_family = AF_INET;
+	dest.sin_port = htons(7474);
+	inet_pton(AF_INET, "239.0.0.1", &dest.sin_addr);
+
+	while (1)
+	{
+		sendto(sock, "Coucou", 7, 0, (struct sockaddr*)&dest, sizeof(dest));
+		sleep(1);
+	}
+	return (0);
 	
 	struct timespec	ts;
 	clock_gettime(CLOCK_MONOTONIC, &ts);

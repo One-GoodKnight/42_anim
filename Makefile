@@ -36,20 +36,36 @@ LIB_DIR			:= lib
 LIBS			:=								\
 	raylib
 
+RAYLIB_GIT      := https://github.com/raysan5/raylib.git
+RAYLIB_VERSION	:= 6.0
+RAYLIB_DIR		:= external/raylib
+RAYLIB_A        := $(LIB_DIR)/libraylib.a
+
 
 SRCS			:= $(SRCS:%=$(SRC_DIR)/%)
 OBJS			:= $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 DEPS			:= $(OBJS:.o=.d)
 
 CC				:= cc
-CFLAGS			:= -Wall -Wextra -Werror -g3
+CFLAGS			:= -Wall -Wextra -g3 -fsanitize=address
 CPPFLAGS		:= $(addprefix -I,$(INCLUDES)) -MMD -MP
-LDFLAGS 		:= -L$(LIB_DIR) $(addprefix -l,$(LIBS)) -lm -ldl -lpthread -lGL -lX11
+LDFLAGS 		:= -L$(LIB_DIR) $(addprefix -l,$(LIBS))	\
+				   -lm -ldl -lpthread -lGL -lX11		\
+				   -fsanitize=address
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(RAYLIB_A)
 	$(CC) $^ $(LDFLAGS) -o $@
+
+$(RAYLIB_A):
+	@echo "Building Raylib $(RAYLIB_VERSION)..."
+	@mkdir -p external $(LIB_DIR)
+	@git clone --depth 1 --branch $(RAYLIB_VERSION) $(RAYLIB_GIT) $(RAYLIB_DIR)	--quiet -c advice.detachedHead=false
+	@cd $(RAYLIB_DIR)/src
+	@$(MAKE) -C $(RAYLIB_DIR)/src PLATFORM=PLATFORM_DESKTOP --silent 2>/dev/null
+	@cp $(RAYLIB_DIR)/src/libraylib.a $(LIB_DIR)
+	@rm -rf external/
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(dir $@)

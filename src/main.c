@@ -20,7 +20,7 @@
 int	main(void)
 {
 	//start_focus_thread(WINDOW_TITLE);
-	
+	/*
 	int sock = socket(AF_INET, SOCK_DGRAM, 0);
 	
 	int ttl = 1;
@@ -36,7 +36,7 @@ int	main(void)
 		sendto(sock, "Coucou", 7, 0, (struct sockaddr*)&dest, sizeof(dest));
 		sleep(1);
 	}
-	return (0);
+	return (0);*/
 	
 	struct timespec	ts;
 	clock_gettime(CLOCK_MONOTONIC, &ts);
@@ -69,10 +69,10 @@ int	main(void)
 		render_ui(&qst, &input, font);
 	}
 
+	UnloadFont(font);
 	CloseWindow();
 
 	free_qst(&qst);
 	free_array((void *)data.lines);
-	UnloadFont(font);
 	return (0);
 }

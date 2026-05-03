@@ -14,6 +14,8 @@ SRCS			:= 								\
 	logic/str_question.c						\
 	logic/won.c									\
 												\
+	net/setup_sockets.c							\
+												\
 	utils/utf8.c								\
 	utils/utils.c								\
 	utils/utils_n.c								\
@@ -47,11 +49,10 @@ OBJS			:= $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 DEPS			:= $(OBJS:.o=.d)
 
 CC				:= cc
-CFLAGS			:= -Wall -Wextra -g3 -fsanitize=address
+CFLAGS			:= -Wall -Wextra -g3
 CPPFLAGS		:= $(addprefix -I,$(INCLUDES)) -MMD -MP
 LDFLAGS 		:= -L$(LIB_DIR) $(addprefix -l,$(LIBS))	\
 				   -lm -ldl -lpthread -lGL -lX11		\
-				   -fsanitize=address
 
 all: $(NAME)
 

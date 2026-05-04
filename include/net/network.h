@@ -1,6 +1,7 @@
 #ifndef NETWORK_H
 # define NETWORK_H
 
+# define MULTICAST_ADDR "239.74.74.74"
 # define PORT 7474
 
 # include "net/state.h"

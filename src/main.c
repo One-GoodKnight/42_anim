@@ -7,7 +7,7 @@
 #include "logic/question.h"
 #include "logic/won.h"
 #include "net/actions.h"
-#include "net/message.h"
+#include "net/handle_msg.h"
 #include "net/network.h"
 #include "net/setup_sock_addr.h"
 #include "net/state.h"
@@ -29,8 +29,6 @@ int	main(void)
 	if (setup_net(&net) == -1)
 		return (1);
 
-	printf("Waiting to get 2 host to have a conflict\n");
-	sleep(5);
 	while (1)
 	{
 		if (read_all_messages(net.sock, &net.messages) == -1)
@@ -38,21 +36,22 @@ int	main(void)
 			clean_net(&net);
 			return (1);
 		}
+		handle_conflicts(&net);
+
 		if (net.state == HOST)
 		{
-			handle_conflicts(&net);
-			if (net.state != HOST)
-				continue;
-
-			printf("I am a host\n");
+			handle_msg_host(&net);
 			announce_hosting(net.sock, net.multicast_addr);
 		}
 		if (net.state == CLIENT)
 		{
 			printf("I am a client\n");
+			send_answer(net.sock, net.host_addr, "AAA");
+			send_answer(net.sock, net.host_addr, "BB");
+			send_answer(net.sock, net.host_addr, "CCCCC");
 		}
 		vec_clear(&net.messages);
-		usleep(0.5 * 1000000);
+		usleep(0.016 * 1000000);
 	}
 
 	clean_net(&net);

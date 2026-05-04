@@ -1,3 +1,4 @@
+#include "net/network.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -23,7 +24,7 @@ int setup_sock(int *sock)
 
     struct sockaddr_in addr;
     addr.sin_family = AF_INET;
-    addr.sin_port = htons(7474);
+    addr.sin_port = htons(PORT);
     addr.sin_addr.s_addr = htonl(INADDR_ANY);
     if (bind(*sock, (struct sockaddr*)&addr, sizeof(addr)) == -1)
 	{
@@ -32,7 +33,7 @@ int setup_sock(int *sock)
 	}
 
     struct ip_mreq mreq;
-    inet_pton(AF_INET, "239.74.74.74", &mreq.imr_multiaddr);
+    inet_pton(AF_INET, MULTICAST_ADDR, &mreq.imr_multiaddr);
     mreq.imr_interface.s_addr = htonl(INADDR_ANY);
     if (setsockopt(*sock, IPPROTO_IP, IP_ADD_MEMBERSHIP, &mreq, sizeof(mreq)) == -1)
 	{
@@ -54,7 +55,7 @@ int setup_sock(int *sock)
 void	setup_multicast_addr(struct sockaddr_in *addr)
 {
 	addr->sin_family = AF_INET;
-	addr->sin_port = htons(7474);
-	inet_pton(AF_INET, "239.74.74.74", &addr->sin_addr);
+	addr->sin_port = htons(PORT);
+	inet_pton(AF_INET, MULTICAST_ADDR, &addr->sin_addr);
 }
 

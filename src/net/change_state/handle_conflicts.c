@@ -1,6 +1,5 @@
 #include "net/message.h"
 #include "net/network.h"
-#include "stdio.h"
 #include "string.h"
 
 void	handle_conflicts(t_net *net)
@@ -17,7 +16,6 @@ void	handle_conflicts(t_net *net)
 			if (net->state == CLIENT && msg->sender.sin_addr.s_addr > net->host_addr.sin_addr.s_addr)
 				continue ;
 
-			printf("Conflict ! downgrading to client\n");
 			net->host_addr = msg->sender;
 			net->host_addr.sin_port = htons(PORT);
 			net->state = CLIENT;

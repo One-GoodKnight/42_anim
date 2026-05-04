@@ -14,6 +14,12 @@ SRCS			:= 								\
 	logic/str_question.c						\
 	logic/won.c									\
 												\
+	net/actions/announce.c						\
+	net/actions/listen.c						\
+	net/change_state/handle_conflicts.c			\
+	net/change_state/set_initial_state.c		\
+	net/get_addr.c								\
+	net/network.c								\
 	net/setup_sockets.c							\
 												\
 	utils/utf8.c								\

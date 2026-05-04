@@ -6,7 +6,10 @@
 #include "window/rendering/ui.h"
 #include "logic/question.h"
 #include "logic/won.h"
+#include "net/actions.h"
+#include "net/network.h"
 #include "net/setup_sockets.h"
+#include "net/state.h"
 #include "utils/utils.h"
 #include <stdio.h>
 #include <stdbool.h>
@@ -18,58 +21,38 @@
 #include <unistd.h>
 #include <string.h>
 
-int	main(int argc, char **argv)
+int	main(void)
 {
-	if (argc == 1 || argv[1][0] == 'h')
+	t_net net = {0};
+
+	if (setup_net(&net) == -1)
+		return (-1);
+
+	printf("Waiting to get 2 host to have a conflict\n");
+	sleep(5);
+	while (1)
 	{
-		int sock = socket(AF_INET, SOCK_DGRAM, 0);
-		if (sock == -1)
-			return 1;
-		
-		int ttl = 10;
-		setsockopt(sock, IPPROTO_IP, IP_MULTICAST_TTL, &ttl, sizeof(ttl));
-
-		struct sockaddr_in dest;
-		dest.sin_family = AF_INET;
-		dest.sin_port = htons(7474);
-		inet_pton(AF_INET, "239.74.74.74", &dest.sin_addr);
-
-		while (1)
+		if (net.state == HOST)
 		{
-			sendto(sock, "Coucou", 7, 0, (struct sockaddr*)&dest, sizeof(dest));
-			sleep(1);
-		}
-
-		close(sock);
-		return (0);
-	}
-	if (argv[1][0] == 'c')
-	{
-		int sock = socket(AF_INET, SOCK_DGRAM, 0);
-		if (!setup_socket(&sock))
-			return (1);
-		
-		struct sockaddr_in sender_addr;
-		socklen_t sender_len = sizeof(sender_addr);
-		char buf[256];
-		while (1)
-		{
-			int n = recvfrom(sock, buf, sizeof(buf) - 1, 0, (struct sockaddr*)&sender_addr, &sender_len);
-			if (n < 0)
+			if (handle_conflicts(&net) == -1)
 			{
-				close(sock);
+				clean_net(&net);
 				return (1);
 			}
-			buf[n] = '\0';
-			if (buf[0])
-				printf("Received: %s from %s\n", buf, inet_ntoa(sender_addr.sin_addr));
-			buf[0] = '\0';
-		}
+			if (net.state != HOST)
+				continue;
 
-		close(sock);
-		return (0);
+			printf("I am a host\n");
+			announce_hosting(net.multicast_sock, net.multicast_addr);
+		}
+		if (net.state == CLIENT)
+		{
+			printf("I am a client\n");
+		}
+		usleep(0.5 * 1000000);
 	}
 
+	clean_net(&net);
 	return (0);
 	
 	//start_focus_thread(WINDOW_TITLE);

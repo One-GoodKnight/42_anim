@@ -2,30 +2,63 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <fcntl.h>
 
-int setup_socket(int *sock_a)
+int setup_multicast_socket(int *sock, struct sockaddr_in *dest)
 {
-	int sock = *sock_a;
-	if (!sock)
-		return (0);
+	*sock = socket(AF_INET, SOCK_DGRAM, 0);
+	if (*sock == -1)
+		return (-1);
 
-    int reuse = 1;
-    setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
+	// make the socket non blockant
+	if (fcntl(*sock, F_SETFL, O_NONBLOCK) == -1)
+	{
+		close(*sock);
+		return (-1);
+	}
+
+	//setup for receiving
+	int reuse = 1;
+    setsockopt(*sock, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
 
     struct sockaddr_in addr;
     addr.sin_family = AF_INET;
     addr.sin_port = htons(7474);
     addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    if (bind(sock, (struct sockaddr*)&addr, sizeof(addr)) == -1)
+    if (bind(*sock, (struct sockaddr*)&addr, sizeof(addr)) == -1)
 	{
-		close(sock);
-		return (0);
+		close(*sock);
+		return (-1);
 	}
 
     struct ip_mreq mreq;
     inet_pton(AF_INET, "239.74.74.74", &mreq.imr_multiaddr);
     mreq.imr_interface.s_addr = htonl(INADDR_ANY);
-    setsockopt(sock, IPPROTO_IP, IP_ADD_MEMBERSHIP, &mreq, sizeof(mreq));
-	
-	return (1);
+    if (setsockopt(*sock, IPPROTO_IP, IP_ADD_MEMBERSHIP, &mreq, sizeof(mreq)) == -1)
+	{
+		close(*sock);
+		return (-1);
+	}
+
+	// setup for sending
+	int ttl = 1;
+	if (setsockopt(*sock, IPPROTO_IP, IP_MULTICAST_TTL, &ttl, sizeof(ttl)) == -1)
+	{
+		close(*sock);
+		return (-1);
+	}
+
+	dest->sin_family = AF_INET;
+	dest->sin_port = htons(7474);
+	inet_pton(AF_INET, "239.74.74.74", &dest->sin_addr);
+
+	return (0);
+}
+
+int	setup_unicast_socket(int *sock)
+{
+	*sock = socket(AF_INET, SOCK_DGRAM, 0);
+	if (*sock == -1)
+		return (-1);
+	return (0);
 }

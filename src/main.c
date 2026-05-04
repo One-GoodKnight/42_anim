@@ -7,10 +7,12 @@
 #include "logic/question.h"
 #include "logic/won.h"
 #include "net/actions.h"
+#include "net/message.h"
 #include "net/network.h"
-#include "net/setup_sockets.h"
+#include "net/setup_sock_addr.h"
 #include "net/state.h"
 #include "utils/utils.h"
+#include "vector.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -24,31 +26,32 @@
 int	main(void)
 {
 	t_net net = {0};
-
 	if (setup_net(&net) == -1)
-		return (-1);
+		return (1);
 
 	printf("Waiting to get 2 host to have a conflict\n");
 	sleep(5);
 	while (1)
 	{
+		if (read_all_messages(net.sock, &net.messages) == -1)
+		{
+			clean_net(&net);
+			return (1);
+		}
 		if (net.state == HOST)
 		{
-			if (handle_conflicts(&net) == -1)
-			{
-				clean_net(&net);
-				return (1);
-			}
+			handle_conflicts(&net);
 			if (net.state != HOST)
 				continue;
 
 			printf("I am a host\n");
-			announce_hosting(net.multicast_sock, net.multicast_addr);
+			announce_hosting(net.sock, net.multicast_addr);
 		}
 		if (net.state == CLIENT)
 		{
 			printf("I am a client\n");
 		}
+		vec_clear(&net.messages);
 		usleep(0.5 * 1000000);
 	}
 

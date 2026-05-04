@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-int setup_multicast_socket(int *sock, struct sockaddr_in *dest)
+int setup_sock(int *sock)
 {
 	*sock = socket(AF_INET, SOCK_DGRAM, 0);
 	if (*sock == -1)
@@ -40,7 +40,7 @@ int setup_multicast_socket(int *sock, struct sockaddr_in *dest)
 		return (-1);
 	}
 
-	// setup for sending
+	// setup for multicast sending
 	int ttl = 1;
 	if (setsockopt(*sock, IPPROTO_IP, IP_MULTICAST_TTL, &ttl, sizeof(ttl)) == -1)
 	{
@@ -48,17 +48,13 @@ int setup_multicast_socket(int *sock, struct sockaddr_in *dest)
 		return (-1);
 	}
 
-	dest->sin_family = AF_INET;
-	dest->sin_port = htons(7474);
-	inet_pton(AF_INET, "239.74.74.74", &dest->sin_addr);
-
 	return (0);
 }
 
-int	setup_unicast_socket(int *sock)
+void	setup_multicast_addr(struct sockaddr_in *addr)
 {
-	*sock = socket(AF_INET, SOCK_DGRAM, 0);
-	if (*sock == -1)
-		return (-1);
-	return (0);
+	addr->sin_family = AF_INET;
+	addr->sin_port = htons(7474);
+	inet_pton(AF_INET, "239.74.74.74", &addr->sin_addr);
 }
+

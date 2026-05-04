@@ -1,11 +1,37 @@
+#include "net/message.h"
+#include "vector.h"
 #include <string.h>
 #include <arpa/inet.h>
 #include <time.h>
 #include <errno.h>
 #include <stdbool.h>
 #include <unistd.h>
-#include <stdio.h>
+#include <stdlib.h>
 
+int read_all_messages(int sock, t_vec *messages)
+{
+	t_msg msg;
+	socklen_t sender_len;
+
+	sender_len = sizeof(msg.sender);
+	int n = recvfrom(sock, msg.msg, sizeof(msg.msg) - 1, 0, (struct sockaddr*)&msg.sender, &sender_len);
+	while (n != -1)
+	{
+		msg.msg[n] = '\0';
+		if (vec_push(messages, &msg) == -1)
+			return (-1);
+
+		sender_len = sizeof(msg.sender);
+		n = recvfrom(sock, msg.msg, sizeof(msg.msg) - 1, 0, (struct sockaddr*)&msg.sender, &sender_len);
+	}
+
+	if (errno != EAGAIN)
+		return (-1);
+
+	return (0);
+}
+
+/*
 int listen_for_host(int sock, bool *found, struct sockaddr_in *host_addr, int duration)
 {
 	struct sockaddr_in sender_addr;
@@ -44,3 +70,4 @@ int listen_for_host(int sock, bool *found, struct sockaddr_in *host_addr, int du
 	
 	return (0);
 }
+*/

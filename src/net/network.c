@@ -1,13 +1,17 @@
+#include "net/message.h"
 #include "net/network.h"
-#include "net/setup_sockets.h"
+#include "net/setup_sock_addr.h"
 
 int	setup_net(t_net *net)
 {
+	vec_init(&net->messages, sizeof(t_msg), NULL);
+
 	if (get_my_addr(&net->my_addr) == -1)
 		return (-1);
 
-	if (setup_multicast_socket(&net->multicast_sock, &net->multicast_addr) == -1)
+	if (setup_sock(&net->sock) == -1)
 		return (-1);
+	setup_multicast_addr(&net->multicast_addr);
 
 	if (set_initial_state(net) == -1)
 	{
@@ -19,14 +23,11 @@ int	setup_net(t_net *net)
 
 void	clean_net(t_net *net)
 {
-	if (net->multicast_sock != -1)
+	if (net->sock != -1)
 	{
-		close(net->multicast_sock);
-		net->multicast_sock = -1;
+		close(net->sock);
+		net->sock = -1;
 	}
-	if (net->host_sock != -1)
-	{
-		close(net->host_sock);
-		net->host_sock = -1;
-	}
+
+	vec_free(&net->messages);
 }

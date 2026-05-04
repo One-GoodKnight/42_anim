@@ -1,20 +1,41 @@
+#include "net/message.h"
 #include "net/network.h"
-#include "net/setup_sockets.h"
+#include "net/setup_sock_addr.h"
 #include "net/actions.h"
+#include <time.h>
+#include <string.h>
 
 int	set_initial_state(t_net *net)
 {
-	bool found;
+	time_t endtime = time(NULL) + LISTENING_PHASE_DURATION;
 
-	if (listen_for_host(net->multicast_sock, &found, &net->host_addr, LISTENING_DURATION) == -1)
-		return (-1);
-	if (found)
+	net->state = HOST;
+	while (time(NULL) < endtime)
 	{
-		if (setup_unicast_socket(&net->host_sock) == -1)
+		if (read_all_messages(net->sock, &net->messages) == -1)
+		{
+			clean_net(net);
 			return (-1);
-		net->state = CLIENT;
+		}
+
+		int i = 0;
+		while (i < net->messages.size)
+		{
+			t_msg *msg = vec_get(&net->messages, i);
+			if (strncmp(msg->msg, "HOSTING", sizeof("HOSTING") - 1) == 0)
+			{
+				net->state = CLIENT;
+				net->host_addr = msg->sender;
+				net->host_addr.sin_port = htons(PORT);
+				vec_clear(&net->messages);
+				return (0);
+			}
+			i++;
+		}
+
+		vec_clear(&net->messages);
+		sleep(1);
 	}
-	else
-		net->state = HOST;
+
 	return (0);
 }

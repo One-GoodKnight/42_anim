@@ -20,7 +20,7 @@ SRCS			:= 								\
 	net/change_state/set_initial_state.c		\
 	net/get_addr.c								\
 	net/network.c								\
-	net/setup_sockets.c							\
+	net/setup_sock_addr.c						\
 												\
 	utils/utf8.c								\
 	utils/utils.c								\
@@ -36,6 +36,8 @@ SRCS			:= 								\
 	window/window.c								\
 												\
 	main.c										\
+												\
+	vector.c									\
 
 INCLUDES		:= 								\
 	include										\

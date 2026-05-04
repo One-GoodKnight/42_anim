@@ -1,37 +1,26 @@
+#include "net/message.h"
 #include "net/network.h"
-#include "net/actions.h"
-#include "net/setup_sockets.h"
 #include "stdio.h"
+#include "string.h"
 
-int	handle_conflicts(t_net *net)
+void	handle_conflicts(t_net *net)
 {
-	uint32_t			lowest_addr = net->my_addr.s_addr;
-	struct sockaddr_in	host_addr;
-	bool 				found;
-
-	if (listen_for_host(net->multicast_sock, &found, &host_addr, 0) == -1)
-		return (-1);
-
-	while (found)
+	int i = 0;
+	while (i < net->messages.size)
 	{
-		if (host_addr.sin_addr.s_addr < lowest_addr)
+		t_msg *msg = vec_get(&net->messages, i++);
+		if (strncmp(msg->msg, "HOSTING", strlen("HOSTING")) != 0)
+			continue ;
+
+		if (msg->sender.sin_addr.s_addr < net->my_addr.s_addr)
 		{
-			lowest_addr = host_addr.sin_addr.s_addr;
-			// set new host addr here, open host socket later
-			net->host_addr = host_addr;
+			if (net->state == CLIENT && msg->sender.sin_addr.s_addr > net->host_addr.sin_addr.s_addr)
+				continue ;
+
+			printf("Conflict ! downgrading to client\n");
+			net->host_addr = msg->sender;
+			net->host_addr.sin_port = htons(PORT);
+			net->state = CLIENT;
 		}
-
-		if (listen_for_host(net->multicast_sock, &found, &host_addr, 0) == -1)
-			return (-1);
 	}
-
-	// downgrading from host to client
-	if (lowest_addr != net->my_addr.s_addr)
-	{
-		printf("Conflict ! downgrading to client\n");
-		if (setup_unicast_socket(&net->host_sock) == -1)
-			return (-1);
-		net->state = CLIENT;
-	}
-	return (0);
 }

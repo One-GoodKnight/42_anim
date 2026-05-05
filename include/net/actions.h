@@ -1,6 +1,7 @@
 #ifndef ACTIONS_H
 # define ACTIONS_H
 
+# include "net/network.h"
 # include "vector.h"
 # include <sys/socket.h>
 # include <netinet/in.h>
@@ -8,7 +9,8 @@
 
 int 	read_all_messages(int sock, t_vec *messages);
 
-void	announce_hosting(int sock, struct sockaddr_in dest);
+void	announce_hosting(t_net *net);
+void	announce_winner(t_net *net);
 void	send_answer(int sock, struct sockaddr_in dest, char *answer);
 
 #endif

@@ -4,8 +4,8 @@
 #include "window/input.h"
 #include "window/window.h"
 #include "window/rendering/ui.h"
+#include "logic/check_win.h"
 #include "logic/question.h"
-#include "logic/won.h"
 #include "net/actions.h"
 #include "net/process_msg.h"
 #include "net/network.h"
@@ -62,7 +62,7 @@ int	main(void)
 	init_window();
 	Font font = init_font();
 
-	while (!WindowShouldClose() && !won(&input, &qst))
+	while (!WindowShouldClose())
 	{
 		if (read_all_messages(net.sock, &net.messages) == -1)
 			return release_mem(&data, &qst, &net, &font, 1);
@@ -70,12 +70,12 @@ int	main(void)
 
 		if (net.state == HOST)
 		{
-			announce_hosting(net.sock, net.multicast_addr);
-			handle_msg_host(&net);
+			announce_hosting(&net);
+			process_msg_host(&net, &qst);
 		}
 
 		// todo: become a host if the host left
-		handle_msg_client(&net);
+		process_msg_client(&net);
 
 		vec_clear(&net.messages);
 

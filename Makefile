@@ -8,11 +8,11 @@ SRCS			:= 								\
 	gnl/gnl.c									\
 	gnl/gnl_utils.c								\
 												\
+	logic/check_win.c							\
 	logic/nb_question.c							\
 	logic/question.c							\
 	logic/shuf_str_question.c					\
 	logic/str_question.c						\
-	logic/won.c									\
 												\
 												\
 	net/actions/send.c							\

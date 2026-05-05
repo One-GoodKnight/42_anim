@@ -9,16 +9,25 @@ static void	process_hosting(t_net *net, t_msg *msg)
 	if (strncmp(msg->msg, "HOSTING", strlen("HOSTING")) != 0)
 		return ;
 
-	return ;
 	printf("Received host heartbeat\n");
 }
 
-void	handle_msg_client(t_net *net)
+static void	process_winner(t_net *net, t_msg *msg)
+{
+	(void)net;
+	if (strncmp(msg->msg, "WINNER:", strlen("WINNER:")) != 0)
+		return ;
+
+	printf("%s\n", msg->msg);
+}
+
+void	process_msg_client(t_net *net)
 {
 	int i = 0;
 	while (i < net->messages.size)
 	{
 		t_msg *msg = vec_get(&net->messages, i++);
 		process_hosting(net, msg);
+		process_winner(net, msg);
 	}
 }

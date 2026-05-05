@@ -18,6 +18,7 @@ int	setup_net(t_net *net)
 		clean_net(net);
 		return (-1);
 	}
+
 	return (0);
 }
 

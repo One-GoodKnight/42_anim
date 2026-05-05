@@ -1,10 +1,28 @@
+#include "net/network.h"
 #include "net/state.h"
 #include <string.h>
 #include <stdio.h>
 
-void	announce_hosting(int sock, struct sockaddr_in dest)
+void	announce_hosting(t_net *net)
 {
+	if (time(NULL) == net->last_heartbeat_sent)
+		return ;
+
 	char message[] = "HOSTING";
+	int sock = net->sock;
+	struct sockaddr_in dest = net->multicast_addr;
+
+	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
+	
+	net->last_heartbeat_sent = time(NULL);
+}
+
+void	announce_winner(t_net *net)
+{
+	char message[] = "WINNER: XXX won !";
+	int sock = net->sock;
+	struct sockaddr_in dest = net->multicast_addr;
+
 	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
 }
 

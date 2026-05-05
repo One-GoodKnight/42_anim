@@ -5,6 +5,9 @@ void	free_array(void	**array)
 {
 	int	i;
 
+	if (!array)
+		return ;
+
 	i = 0;
 	while (array[i])
 	{

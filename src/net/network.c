@@ -23,6 +23,8 @@ int	setup_net(t_net *net)
 
 void	clean_net(t_net *net)
 {
+	if (!net)
+		return ;
 	if (net->sock != -1)
 	{
 		close(net->sock);

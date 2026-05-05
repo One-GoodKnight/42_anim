@@ -4,12 +4,16 @@
 #include "net/actions.h"
 #include <time.h>
 #include <string.h>
+#include <arpa/inet.h>
 
 int	set_initial_state(t_net *net)
 {
 	time_t endtime = time(NULL) + LISTENING_PHASE_DURATION;
 
 	net->state = HOST;
+	inet_pton(AF_INET, "127.0.0.1", &net->host_addr.sin_addr);
+	net->host_addr.sin_port = htons(PORT);
+	net->host_addr.sin_family = AF_INET;
 	while (time(NULL) < endtime)
 	{
 		if (read_all_messages(net->sock, &net->messages) == -1)

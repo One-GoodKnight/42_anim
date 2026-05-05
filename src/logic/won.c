@@ -5,6 +5,7 @@
 
 bool	won(t_input *input, t_qst *qst)
 {
+	/*
 	unsigned int	out_uatoi;
 
 	if (IsKeyPressed(KEY_ENTER))
@@ -27,5 +28,9 @@ bool	won(t_input *input, t_qst *qst)
 				break;
 		}
 	}
+	return (false);
+	*/
+	(void)input;
+	(void)qst;
 	return (false);
 }

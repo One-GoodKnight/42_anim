@@ -34,6 +34,9 @@ void	init_question(t_qst *qst, t_data *data)
 
 void	free_qst(t_qst *qst)
 {
+	if (!qst)
+		return ;
+
 	free(qst->data.qst.utf8);
 	qst->data.qst.utf8 = NULL;
 	free(qst->data.qst.text);

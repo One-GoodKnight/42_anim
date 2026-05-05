@@ -7,93 +7,83 @@
 #include "logic/question.h"
 #include "logic/won.h"
 #include "net/actions.h"
-#include "net/handle_msg.h"
+#include "net/process_msg.h"
 #include "net/network.h"
-#include "net/setup_sock_addr.h"
 #include "net/state.h"
 #include "utils/utils.h"
+#include "init.h"
 #include "vector.h"
 #include <stdio.h>
 #include <stdbool.h>
-#include <stdlib.h>
-#include <time.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
 
+static int release_mem(t_data *data, t_qst *qst, t_net *net, Font *font, int ret)
+{
+	free_array((void *)data->lines);
+	free_qst(qst);
+	clean_net(net);
+
+	// raylib
+	if (!font)
+		return (ret);
+	UnloadFont(*font);
+	CloseWindow();
+	return (ret);
+}
+
 int	main(void)
 {
-	t_net net = {0};
-	if (setup_net(&net) == -1)
-		return (1);
-
-	while (1)
-	{
-		if (read_all_messages(net.sock, &net.messages) == -1)
-		{
-			clean_net(&net);
-			return (1);
-		}
-		handle_conflicts(&net);
-
-		if (net.state == HOST)
-		{
-			handle_msg_host(&net);
-			announce_hosting(net.sock, net.multicast_addr);
-		}
-		if (net.state == CLIENT)
-		{
-			printf("I am a client\n");
-			send_answer(net.sock, net.host_addr, "AAA");
-			send_answer(net.sock, net.host_addr, "BB");
-			send_answer(net.sock, net.host_addr, "CCCCC");
-		}
-		vec_clear(&net.messages);
-		usleep(0.016 * 1000000);
-	}
-
-	clean_net(&net);
-	return (0);
-	
 	//start_focus_thread(WINDOW_TITLE);
-	
-	struct timespec	ts;
-	clock_gettime(CLOCK_MONOTONIC, &ts);
-	srand(ts.tv_sec ^ ts.tv_nsec);
+
+	set_random_seed();
+
+	t_input input;
+	init_input(&input);
 
 	t_data	data;
 	get_lines_from_file(&data);
 	if (!data.lines)
 		return (1);
 
-	t_input input;
-	init_input(&input);
-
-	t_qst	qst;
+	t_qst	qst = {0};
+	// todo: only initialize a question on host initialization
 	init_question(&qst, &data);
 	if (!qst.data.qst.text)
-	{
-		free_array((void *)data.lines);
-		return (1);
-	}
+		release_mem(&data, NULL, NULL, NULL, 1);
+
+	t_net net = {0};
+	if (setup_net(&net) == -1)
+		release_mem(&data, &qst, NULL, NULL, 1);
 
 	init_window();
-	SetTraceLogLevel(LOG_ERROR);
-	Font font = LoadFontEx("assets/JetBrainsMonoNL-Regular.ttf", FONT_SIZE, NULL, 255);
-	SetTraceLogLevel(LOG_WARNING);
+	Font font = init_font();
 
 	while (!WindowShouldClose() && !won(&input, &qst))
 	{
+		if (read_all_messages(net.sock, &net.messages) == -1)
+			return release_mem(&data, &qst, &net, &font, 1);
+		handle_conflicts(&net);
+
+		if (net.state == HOST)
+		{
+			announce_hosting(net.sock, net.multicast_addr);
+			handle_msg_host(&net);
+		}
+
+		// todo: become a host if the host left
+		handle_msg_client(&net);
+
+		vec_clear(&net.messages);
+
 		handle_input(&input);
+		if (IsKeyPressed(KEY_ENTER) && strlen((char *)input.text) > 0)
+			send_answer(net.sock, net.host_addr, (char *)input.text);
 		render_ui(&qst, &input, font);
 	}
 
-	UnloadFont(font);
-	CloseWindow();
-
-	free_qst(&qst);
-	free_array((void *)data.lines);
-	return (0);
+	release_mem(&data, &qst, &net, &font, 0);
 }

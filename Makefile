@@ -14,14 +14,20 @@ SRCS			:= 								\
 	logic/str_question.c						\
 	logic/won.c									\
 												\
+												\
 	net/actions/send.c							\
 	net/actions/listen.c						\
+												\
 	net/change_state/handle_conflicts.c			\
 	net/change_state/set_initial_state.c		\
-	net/handle_msg/handle_msg_host.c			\
+												\
+	net/process_msg/process_msg_host.c			\
+	net/process_msg/process_msg_client.c		\
+												\
 	net/get_addr.c								\
 	net/network.c								\
 	net/setup_sock_addr.c						\
+												\
 												\
 	utils/utf8.c								\
 	utils/utils.c								\
@@ -36,6 +42,7 @@ SRCS			:= 								\
 	window/focus.c								\
 	window/window.c								\
 												\
+	init.c										\
 	main.c										\
 												\
 	vector.c									\

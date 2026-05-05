@@ -2,3 +2,4 @@ anim
 .build
 lib
 compile_commands.json
+vm_ip.txt

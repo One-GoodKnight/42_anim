@@ -37,22 +37,6 @@ static int release_mem(t_data *data, t_qst *qst, t_net *net, Font *font, int ret
 
 int	main(void)
 {
-	init_window();
-
-	sleep(2);
-
-	CloseWindow();
-
-	sleep(4);
-
-	init_window();
-
-	sleep(2);
-
-	CloseWindow();
-
-
-	return (0);
 	//start_focus_thread(WINDOW_TITLE);
 
 	set_random_seed();
@@ -80,6 +64,24 @@ int	main(void)
 	init_window();
 	Font font = init_font();
 
+	/*while (1)
+	{
+		// change game state, initialize the game
+		if (game.state == WAITING)
+		{
+			sleep(1);
+			continue ;
+		}
+
+		init_window();
+		Font font = init_font();
+
+
+
+		UnloadFont(font);
+		CloseWindow();
+	}*/
+
 	while (!WindowShouldClose())
 	{
 		if (read_all_messages(net.sock, &net.messages) == -1)
@@ -92,11 +94,11 @@ int	main(void)
 			process_msg_host(&net, &qst);
 		}
 
-		if (game.state == WAITING)
+		/*if (game.state == WAITING)
 		{
 			render_ui(&qst, &input, font);
 			continue ;
-		}
+		}*/
 		// todo: become a host if the host left
 		process_msg_client(&net);
 

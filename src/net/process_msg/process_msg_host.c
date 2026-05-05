@@ -1,5 +1,5 @@
-#include "logic/check_win.h"
-#include "logic/question.h"
+#include "game/check_win.h"
+#include "game/question.h"
 #include "net/message.h"
 #include "net/network.h"
 #include "net/actions.h"

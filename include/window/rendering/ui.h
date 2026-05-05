@@ -3,7 +3,7 @@
 
 #include "raylib.h"
 #include "window/input.h"
-#include "logic/question.h"
+#include "game/question.h"
 #include "window/rendering/colors.h"
 
 # define TARGET_OUTLINE_BOX LIGHT_PINK

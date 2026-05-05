@@ -1,6 +1,4 @@
-#include "logic/question.h"
-#include "utils/utils.h"
-#include "utils/utf8.h"
+#include "game/question.h"
 #include <stdlib.h>
 #include <string.h>
 

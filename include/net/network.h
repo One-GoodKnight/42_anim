@@ -12,7 +12,7 @@
 
 typedef struct s_net
 {
-    t_state             state;
+    t_net_state             state;
 
 	struct in_addr		my_addr;
 

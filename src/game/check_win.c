@@ -1,8 +1,5 @@
-#include "window/input.h"
-#include "logic/question.h"
+#include "game/question.h"
 #include "utils/utils.h"
-#include "raylib.h"
-#include <stdio.h>
 
 bool	check_win(char *answer, t_qst *qst)
 {

@@ -4,8 +4,7 @@
 #include "window/input.h"
 #include "window/window.h"
 #include "window/rendering/ui.h"
-#include "logic/check_win.h"
-#include "logic/question.h"
+#include "game/question.h"
 #include "net/actions.h"
 #include "net/process_msg.h"
 #include "net/network.h"
@@ -13,7 +12,6 @@
 #include "utils/utils.h"
 #include "init.h"
 #include "vector.h"
-#include <stdio.h>
 #include <stdbool.h>
 #include <sys/socket.h>
 #include <netinet/in.h>

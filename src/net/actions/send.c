@@ -8,6 +8,8 @@ void	announce_hosting(t_net *net)
 	if (time(NULL) == net->last_heartbeat_sent)
 		return ;
 
+	printf("I am the host\n");
+
 	char message[] = "HOSTING";
 	int sock = net->sock;
 	struct sockaddr_in dest = net->multicast_addr;

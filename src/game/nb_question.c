@@ -1,4 +1,4 @@
-#include "logic/question.h"
+#include "game/question.h"
 #include "utils/utils.h"
 #include "utils/utf8.h"
 #include <stdlib.h>

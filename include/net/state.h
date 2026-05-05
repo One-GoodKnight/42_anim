@@ -15,7 +15,7 @@ typedef enum e_state
 	LISTENING,
 	HOST,
 	CLIENT,
-} t_state;
+} t_net_state;
 
 int		set_initial_state(t_net *net);
 void	handle_conflicts(t_net *net);

@@ -1,9 +1,11 @@
+#include "raylib.h"
 #include "window/focus.h"
 #include "file_op/data.h"
 #include "file_op/read_file.h"
 #include "window/input.h"
 #include "window/window.h"
 #include "window/rendering/ui.h"
+#include "game/game.h"
 #include "game/question.h"
 #include "net/actions.h"
 #include "net/process_msg.h"
@@ -35,9 +37,27 @@ static int release_mem(t_data *data, t_qst *qst, t_net *net, Font *font, int ret
 
 int	main(void)
 {
+	init_window();
+
+	sleep(2);
+
+	CloseWindow();
+
+	sleep(4);
+
+	init_window();
+
+	sleep(2);
+
+	CloseWindow();
+
+
+	return (0);
 	//start_focus_thread(WINDOW_TITLE);
 
 	set_random_seed();
+
+	t_game game = {0};
 
 	t_input input;
 	init_input(&input);
@@ -47,8 +67,8 @@ int	main(void)
 	if (!data.lines)
 		return (1);
 
+	// question will be changed if we are not the host
 	t_qst	qst = {0};
-	// todo: only initialize a question on host initialization
 	init_question(&qst, &data);
 	if (!qst.data.qst.text)
 		release_mem(&data, NULL, NULL, NULL, 1);
@@ -72,6 +92,11 @@ int	main(void)
 			process_msg_host(&net, &qst);
 		}
 
+		if (game.state == WAITING)
+		{
+			render_ui(&qst, &input, font);
+			continue ;
+		}
 		// todo: become a host if the host left
 		process_msg_client(&net);
 

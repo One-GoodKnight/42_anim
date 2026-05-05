@@ -10,7 +10,7 @@
 
 typedef struct s_net t_net;
 
-typedef enum e_state
+typedef enum e_net_state
 {
 	LISTENING,
 	HOST,

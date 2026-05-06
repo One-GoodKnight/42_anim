@@ -9,8 +9,6 @@ int	lobby_loop(t_data *data, t_net *net, t_qst *qst, t_game *game)
 {
 	while (game->state == WAITING)
 	{
-		usleep(0.016 * 1000000);
-
 		if (net->state == HOST)
 		{
 			init_question(qst, data);
@@ -18,6 +16,9 @@ int	lobby_loop(t_data *data, t_net *net, t_qst *qst, t_game *game)
 				return (-1);
 			announce_question(net, (char *)qst->data.qst.utf8);
 		}
+
+		// both limit the framerate of the loop and wait for the question so game state changes to IN_GAME
+		usleep(0.016 * 1000000);
 
 		if (read_all_messages(net->sock, &net->messages) == -1)
 			return (-1);

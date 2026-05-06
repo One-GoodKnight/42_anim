@@ -9,7 +9,7 @@ static void	init_corner(t_corner *corner, int x, int y, t_dir line_one_dir, int 
 	corner->x_offset = 0;
 	corner->y_offset = 0;
 
-	corner->thickness = 4;
+	corner->thickness = BORDER_THICKNESS;
 
 	corner->line_one_dir = line_one_dir;
 	corner->line_one_length = line_one_length;

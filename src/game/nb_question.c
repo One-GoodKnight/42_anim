@@ -23,6 +23,9 @@ static int	find_divider(int n)
 {
 	size_t	count_dividers;
 	int i;
+
+	if (n == 0)
+		return (rand() % MAX_DIVISION + 1);
 	
 	count_dividers = 0;
 	i = 1;

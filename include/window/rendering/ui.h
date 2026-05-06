@@ -14,6 +14,10 @@
 # define BOX_WIDTH 1000
 # define BOX_HEIGHT 600
 
+# define BORDER_THICKNESS 4
+
+# define TEXT_Y_OFFSET 30
+
 typedef enum e_ui_state
 {
 	BACKGROUND_FADE,
@@ -41,6 +45,6 @@ typedef struct s_ui
 
 void	render_ui(t_ui *ui, t_qst *qst, t_input *input, Font font, Texture2D logo);
 void	render_corners(t_ui *ui);
-void	render_input(t_input *input, int x, int y, Font font);
+void	render_input(t_ui *ui, t_qst *qst, t_input *input, Font font);
 
 #endif

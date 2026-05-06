@@ -22,11 +22,11 @@ static void	render_background(t_ui *ui)
 
 static void	render_logo(t_ui *ui, Texture2D logo)
 {
-	int	x = ui->top_right_corner.org_x;
-	int	y = ui->top_right_corner.org_y;
+	int	x = ui->top_left_corner.org_x;
+	int	y = ui->top_left_corner.org_y;
 
-	x -= 245;
-	y -= 116;
+	x += 180;
+	y -= 180;
 
 	DrawTextureEx(logo, (Vector2){x, y}, 0.0f, 1.0f, WHITE);
 }

@@ -8,6 +8,8 @@ SRCS			:= 								\
 	gnl/gnl.c									\
 	gnl/gnl_utils.c								\
 												\
+	loops/lobby_loop.c							\
+												\
 	game/check_win.c							\
 	game/nb_question.c							\
 	game/question.c								\
@@ -39,7 +41,6 @@ SRCS			:= 								\
 	window/rendering/box.c						\
 	window/rendering/input_render.c				\
 	window/rendering/ui.c						\
-	window/focus.c								\
 	window/window.c								\
 												\
 	init.c										\

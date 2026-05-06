@@ -12,7 +12,7 @@
 
 typedef struct s_net
 {
-    t_net_state             state;
+    t_net_state			state;
 
 	struct in_addr		my_addr;
 
@@ -26,7 +26,7 @@ typedef struct s_net
 	time_t				last_heartbear_received;
 }   t_net;
 
-int		setup_net(t_net *net);
+int		init_net(t_net *net);
 void	clean_net(t_net *net);
 int		get_my_addr(struct in_addr *addr);
 

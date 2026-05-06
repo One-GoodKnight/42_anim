@@ -2,7 +2,7 @@
 #include "net/network.h"
 #include "net/setup_sock_addr.h"
 
-int	setup_net(t_net *net)
+int	init_net(t_net *net)
 {
 	vec_init(&net->messages, sizeof(t_msg), NULL);
 

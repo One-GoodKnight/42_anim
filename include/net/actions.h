@@ -10,6 +10,7 @@
 int 	read_all_messages(int sock, t_vec *messages);
 
 void	announce_hosting(t_net *net);
+void	announce_question(t_net *net, char *qst);
 void	announce_winner(t_net *net);
 void	send_answer(int sock, struct sockaddr_in dest, char *answer);
 

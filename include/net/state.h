@@ -6,7 +6,7 @@
 # include <unistd.h>
 # include <stdbool.h>
 
-# define LISTENING_PHASE_DURATION 2
+# define LISTENING_PHASE_DURATION 0
 
 typedef struct s_net t_net;
 

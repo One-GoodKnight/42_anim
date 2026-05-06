@@ -1,3 +1,4 @@
+#include "window/rendering/colors.h"
 #include "window/input.h"
 #include "window/rendering/ui.h"
 

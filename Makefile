@@ -38,11 +38,12 @@ SRCS			:= 								\
 	utils/utils_str.c							\
 	utils/utils_uchar.c							\
 												\
+	window/rendering/init_ui.c					\
+	window/rendering/render_corners.c			\
+	window/rendering/render_input.c				\
+	window/rendering/render_ui.c				\
+	window/init_window.c						\
 	window/input.c								\
-	window/rendering/box.c						\
-	window/rendering/input_render.c				\
-	window/rendering/ui.c						\
-	window/window.c								\
 												\
 	init.c										\
 	main.c										\

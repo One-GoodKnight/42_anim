@@ -56,40 +56,10 @@ int	main(void)
 			return (1);
 
 		// in the game (window open)
-		//if (game_loop() == -1)
-		//	return (1);
+		if (game_loop(&net, &qst, &game) == -1)
+			return (1);
 
-		init_window();
-		Font font = init_font();
-		t_input input;
-		init_input(&input);
-
-		while (!WindowShouldClose())
-		{
-			if (read_all_messages(net.sock, &net.messages) == -1)
-				return release_mem(&data, &net, &qst, &font, 1);
-			handle_conflicts(&net);
-
-			if (net.state == HOST)
-			{
-				announce_hosting(&net);
-				process_msg_host(&net, &qst);
-			}
-
-			// todo: become a host if the host left
-			process_msg_client(&net, &game, &qst);
-
-			vec_clear(&net.messages);
-
-			handle_input(&input);
-			if (IsKeyPressed(KEY_ENTER) && strlen((char *)input.text) > 0)
-				send_answer(net.sock, net.host_addr, (char *)input.text);
-			render_ui(&qst, &input, font);
-		}
-
-
-		UnloadFont(font);
-		CloseWindow();
+		game.state = WAITING;
 	}
 
 	release_mem(&data, &net, &qst, NULL, 0);

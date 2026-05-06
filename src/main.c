@@ -1,24 +1,18 @@
 #include "raylib.h"
 #include "file_op/data.h"
 #include "window/input.h"
-#include "window/window.h"
-#include "window/rendering/ui.h"
 #include "game/game.h"
 #include "game/question.h"
-#include "net/actions.h"
-#include "net/process_msg.h"
 #include "net/network.h"
 #include "net/state.h"
 #include "utils/utils.h"
 #include "init.h"
 #include "loops.h"
-#include "vector.h"
 #include <stdbool.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
-#include <string.h>
 #include <stdio.h>
 
 static int release_mem(t_data *data, t_net *net, t_qst *qst, Font *font, int ret)

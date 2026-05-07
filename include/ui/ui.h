@@ -15,6 +15,8 @@
 
 # define TEXT_Y_OFFSET 30
 
+# define RESULT_SCREEN_TIME 3
+
 typedef enum e_ui_state
 {
 	BACKGROUND_FADE,
@@ -38,6 +40,8 @@ typedef struct s_ui
 	t_corner	top_right_corner;
 	t_corner	bottom_right_corner;
 	t_corner	bottom_left_corner;
+
+	float		result_screen_time_left;
 }	t_ui;
 
 void	init_ui(t_ui *ui);

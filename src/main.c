@@ -34,7 +34,7 @@ int	main(void)
 	t_data	data;
 	t_net	net = {0};
 	t_qst	qst = {0};
-	t_game	game = {0};
+	t_game	game;
 
 	set_random_seed();
 
@@ -42,6 +42,7 @@ int	main(void)
 		return (1);
 	if (init_net(&net) == -1)
 		return release_mem(&data, NULL, NULL, NULL, 1);
+	init_game(&game);
 
 	while (1)
 	{

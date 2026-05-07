@@ -3,7 +3,7 @@
 #include "stdlib.h"
 #include "raylib.h"
 
-static t_vector2	compute_semi_rand_pos(t_ui *ui, t_corner *corner, t_dir line_one_dir, t_dir line_two_dir)
+static t_vector2	compute_semi_rand_pos(t_ui *ui, t_corner *corner)
 {
 	t_vector2	pos = {0};
 
@@ -99,7 +99,7 @@ void	init_corner(
 	corner->line_two_length = line_two_length;
 
 	// pid controller animation, bring the borders to the screen
-	corner->org = compute_semi_rand_pos(ui, corner, line_one_dir, line_two_dir);
+	corner->org = compute_semi_rand_pos(ui, corner);
 	corner->vel = (t_vector2){0, 0};
 	corner->prev_err = (t_vector2){0, 0};
 

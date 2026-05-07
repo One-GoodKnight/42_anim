@@ -21,21 +21,19 @@ static void	render_logo(t_ui *ui, Texture2D logo)
 	DrawTextureEx(logo, (Vector2){x, y}, 0.0f, 1.0f, WHITE);
 }
 
-static void	render_question(t_ui *ui, t_qst *qst, Font font)
+static void	render_question(t_ui *ui, char *qst, Font font)
 {
-	char *text = (char *)qst->data.qst.utf8;
-
-	int	text_width = MeasureTextEx(font, text, (float)font.baseSize, FONT_SPACING).x;
+	int	text_width = MeasureTextEx(font, qst, (float)font.baseSize, FONT_SPACING).x;
 	int	text_height = MeasureTextEx(font, "|", (float)font.baseSize, FONT_SPACING).y;
 
 	int	x = ui->width / 2 - text_width / 2;
 	int	y = ui->height / 2 - text_height; // make the center y of the screen perfectly separate question and input
 	y -= TEXT_Y_OFFSET;
 
-	DrawTextEx(font, text, (Vector2){x, y}, FONT_SIZE, FONT_SPACING, FONT_COLOR);
+	DrawTextEx(font, qst, (Vector2){x, y}, FONT_SIZE, FONT_SPACING, FONT_COLOR);
 }
 
-void	render_ui(t_ui *ui, t_qst *qst, t_input *input, Font font, Font font_anim, Texture2D logo)
+void	render_ui(t_ui *ui, char *qst, t_input *input, Font font, Font font_anim, Texture2D logo)
 {
 	BeginDrawing();
 	ClearBackground(BLANK);

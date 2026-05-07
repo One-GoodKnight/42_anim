@@ -12,6 +12,7 @@ SRCS			:= 								\
 	loops/lobby_loop.c							\
 												\
 	game/check_win.c							\
+	game/init_game.c							\
 	game/nb_question.c							\
 	game/question.c								\
 	game/shuf_str_question.c					\

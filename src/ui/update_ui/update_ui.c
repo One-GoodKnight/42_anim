@@ -26,7 +26,7 @@ void	update_ui(t_ui *ui, t_pid_controller *pid)
 		apply_pid_controller(ui, *pid);
 
 	if (ui->state == SHOW_TEXT)
-		printf("cc\n");
+		printf("SHOW_TEXT\n");
 
 	floating_corners(ui);
 }

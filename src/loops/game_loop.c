@@ -73,8 +73,11 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 	init_ui(&ui);
 	init_pid_controller(&pid_controller);
 
-	while (game->state == IN_GAME)
+	while (game->state != FINNISHED)
 	{
+		if (IsKeyPressed(KEY_ESCAPE))
+			return (release(&font, &font_anim, &logo, &net->messages, 0));
+
 		if (read_all_messages(net->sock, &net->messages) == -1)
 			return (release(&font, &font_anim, &logo, &net->messages, -1));
 		handle_conflicts(net);
@@ -86,23 +89,24 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 		}
 
 		// todo: become a host if the host left
-		process_msg_client(net, game, qst);
+		process_msg_client(net, game);
 
 		vec_clear(&net->messages);
 
 		handle_input(&input);
+
 		if (IsKeyPressed(KEY_ENTER) && strlen((char *)input.text) > 0)
 			send_answer(net->sock, net->host_addr, (char *)input.text);
 
-		update_ui(&ui, &pid_controller);
-		render_ui(&ui, qst, &input, font, font_anim, logo);
-	}
+		if (game->state == RESULTS)
+		{
+			ui.result_screen_time_left -= ui.dt;
+			if (ui.result_screen_time_left <= 0)
+				game->state = FINNISHED;
+		}
 
-	while (game->state == RESULTS)
-	{
-		// todo: display winner
-		printf("%s\n", game->winner_name);
-		game->state = FINNISHED;
+		update_ui(&ui, &pid_controller);
+		render_ui(&ui, (char *)game->question, &input, font, font_anim, logo);
 	}
 
 	return (release(&font, &font_anim, &logo, &net->messages, 0));

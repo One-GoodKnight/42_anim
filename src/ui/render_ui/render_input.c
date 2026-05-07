@@ -1,4 +1,3 @@
-#include "game/question.h"
 #include "ui/render_ui/colors.h"
 #include "ui/ui.h"
 #include "window/input.h"
@@ -29,10 +28,9 @@ static void	render_text(t_input *input, Font font, int x, int y)
 	DrawTextEx(font, (char *)input->utf8, (Vector2){x, y}, (float)font.baseSize, FONT_SPACING, FONT_COLOR);
 }
 
-void	render_input(t_ui *ui, t_qst *qst, t_input *input, Font font)
+void	render_input(t_ui *ui, char *qst, t_input *input, Font font)
 {
-	char *qst_text = (char *)qst->data.qst.utf8;
-	int	qst_text_width = MeasureTextEx(font, qst_text, (float)font.baseSize, FONT_SPACING).x;
+	int	qst_text_width = MeasureTextEx(font, qst, (float)font.baseSize, FONT_SPACING).x;
 
 	int	x = ui->width / 2 - qst_text_width / 2;
 	int	y = ui->height / 2;

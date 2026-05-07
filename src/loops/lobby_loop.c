@@ -23,7 +23,7 @@ int	lobby_loop(t_data *data, t_net *net, t_qst *qst, t_game *game)
 		if (read_all_messages(net->sock, &net->messages) == -1)
 			return (-1);
 
-		process_msg_client(net, game, qst);
+		process_msg_client(net, game);
 
 		vec_clear(&net->messages);
 	}

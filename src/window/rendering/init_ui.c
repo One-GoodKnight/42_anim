@@ -1,13 +1,11 @@
 #include "window/rendering/corner.h"
 #include "window/rendering/ui.h"
+#include <stdlib.h>
 
 static void	init_corner(t_corner *corner, int x, int y, t_dir line_one_dir, int line_one_length, t_dir line_two_dir, int line_two_length)
 {
 	corner->org_x = x;
 	corner->org_y = y;
-
-	corner->x_offset = 0;
-	corner->y_offset = 0;
 
 	corner->thickness = BORDER_THICKNESS;
 
@@ -16,6 +14,12 @@ static void	init_corner(t_corner *corner, int x, int y, t_dir line_one_dir, int 
 
 	corner->line_two_dir = line_two_dir;
 	corner->line_two_length = line_two_length;
+
+	corner->x_offset = 0;
+	corner->y_offset = 0;
+
+	float	t = (float)rand() / (float)RAND_MAX;
+	corner->phase = PI * 2 * t;
 }
 
 void	init_ui(t_ui *ui)
@@ -39,10 +43,10 @@ void	init_ui(t_ui *ui)
 	int offset_x = BOX_WIDTH / 2;
 	int offset_y = BOX_HEIGHT / 2;
 
-	init_corner(&ui->top_left_corner, center_x - offset_x, center_y - offset_y, SOUTH, 100, EAST, 250);
-	init_corner(&ui->top_right_corner, center_x + offset_x, center_y - offset_y, SOUTH, 100, WEST, 150);
-	init_corner(&ui->bottom_right_corner, center_x + offset_x, center_y + offset_y, NORTH, 200, WEST, 200);
-	init_corner(&ui->bottom_left_corner, center_x - offset_x, center_y + offset_y, NORTH, 150, EAST, 300);
+	init_corner(&ui->top_left_corner, center_x - offset_x, center_y - offset_y, SOUTH, 125, EAST, 250);
+	init_corner(&ui->top_right_corner, center_x + offset_x, center_y - offset_y, SOUTH, 125, WEST, 150);
+	init_corner(&ui->bottom_right_corner, center_x + offset_x, center_y + offset_y, NORTH, 125, WEST, 350);
+	init_corner(&ui->bottom_left_corner, center_x - offset_x, center_y + offset_y, NORTH, 125, EAST, 300);
 
 	int local_offset = 30;
 

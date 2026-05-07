@@ -41,6 +41,7 @@ SRCS			:= 								\
 	ui/update_ui/pid_controller.c				\
 	ui/update_ui/update_ui.c					\
 												\
+	ui/init_corner.c							\
 	ui/init_ui.c								\
 												\
 												\

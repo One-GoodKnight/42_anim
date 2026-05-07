@@ -1,7 +1,5 @@
 #include "ui/render_ui/colors.h"
 #include "ui/render_ui/render_ui.h"
-#include "ui/update_ui/pid_controller.h"
-#include "ui/update_ui/update_ui.h"
 #include "ui/ui.h"
 #include "raylib.h"
 
@@ -14,8 +12,8 @@ static void	render_background(t_ui *ui)
 
 static void	render_logo(t_ui *ui, Texture2D logo)
 {
-	int	x = ui->top_left_corner.org_x + ui->top_left_corner.x_offset;
-	int	y = ui->top_left_corner.org_y + ui->top_left_corner.y_offset;
+	int	x = ui->top_left_corner.org.x + ui->top_left_corner.offset.x;
+	int	y = ui->top_left_corner.org.y + ui->top_left_corner.offset.y;
 
 	x += 179;
 	y -= 180;

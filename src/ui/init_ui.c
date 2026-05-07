@@ -1,32 +1,7 @@
 #include "ui/corner.h"
 #include "ui/ui.h"
 #include "raylib.h"
-#include <stdlib.h>
-
-static void	init_corner(t_corner *corner, int x, int y, t_dir line_one_dir, int line_one_length, t_dir line_two_dir, int line_two_length)
-{
-	corner->tar_x = x;
-	corner->tar_y = y;
-
-	corner->thickness = BORDER_THICKNESS;
-
-	corner->line_one_dir = line_one_dir;
-	corner->line_one_length = line_one_length;
-
-	corner->line_two_dir = line_two_dir;
-	corner->line_two_length = line_two_length;
-
-	// pid controller animation, bring the borders to the screen
-	corner->org_x = 0;  // temp
-	corner->org_y = 0;
-
-	// floating animation
-	corner->x_offset = 0;
-	corner->y_offset = 0;
-
-	float	t = (float)rand() / (float)RAND_MAX;
-	corner->phase = PI * 2 * t;
-}
+#include "vector2.h"
 
 void	init_ui(t_ui *ui)
 {
@@ -49,15 +24,15 @@ void	init_ui(t_ui *ui)
 	int offset_x = BOX_WIDTH / 2;
 	int offset_y = BOX_HEIGHT / 2;
 
-	init_corner(&ui->top_left_corner, center_x - offset_x, center_y - offset_y, SOUTH, 125, EAST, 250);
-	init_corner(&ui->top_right_corner, center_x + offset_x, center_y - offset_y, SOUTH, 125, WEST, 150);
-	init_corner(&ui->bottom_right_corner, center_x + offset_x, center_y + offset_y, NORTH, 125, WEST, 350);
-	init_corner(&ui->bottom_left_corner, center_x - offset_x, center_y + offset_y, NORTH, 125, EAST, 300);
+	init_corner(ui, &ui->top_left_corner, center_x - offset_x, center_y - offset_y, SOUTH, 125, EAST, 250);
+	init_corner(ui, &ui->top_right_corner, center_x + offset_x, center_y - offset_y, SOUTH, 125, WEST, 150);
+	init_corner(ui, &ui->bottom_right_corner, center_x + offset_x, center_y + offset_y, NORTH, 125, WEST, 350);
+	init_corner(ui, &ui->bottom_left_corner, center_x - offset_x, center_y + offset_y, NORTH, 125, EAST, 300);
 
 	int local_offset = 30;
 
-	ui->top_left_corner.org_x -= local_offset;
-	ui->top_left_corner.org_y -= local_offset;
-	ui->bottom_right_corner.org_x += local_offset;
-	ui->bottom_right_corner.org_y += local_offset;
+	ui->top_left_corner.org.x -= local_offset;
+	ui->top_left_corner.org.y -= local_offset;
+	ui->bottom_right_corner.org.x += local_offset;
+	ui->bottom_right_corner.org.y += local_offset;
 }

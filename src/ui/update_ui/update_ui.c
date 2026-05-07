@@ -2,6 +2,7 @@
 #include "ui/update_ui/update_ui.h"
 #include "ui/ui.h"
 #include "raylib.h"
+#include <stdio.h>
 
 static void fade(t_ui *ui)
 {
@@ -14,7 +15,7 @@ static void fade(t_ui *ui)
 	}
 }
 
-void	update_ui(t_ui *ui, t_pid_controller *pid_controller)
+void	update_ui(t_ui *ui, t_pid_controller *pid)
 {
 	ui->dt = GetFrameTime();
 
@@ -22,7 +23,10 @@ void	update_ui(t_ui *ui, t_pid_controller *pid_controller)
 		fade(ui);
 
 	if (ui->state == BRING_BORDERS)
-		apply_pid_controller(ui);
+		apply_pid_controller(ui, *pid);
+
+	if (ui->state == SHOW_TEXT)
+		printf("cc\n");
 
 	floating_corners(ui);
 }

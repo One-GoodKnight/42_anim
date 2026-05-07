@@ -4,9 +4,8 @@ BUILD_DIR		:= .build
 SRC_DIR			:= src
 SRCS			:= 								\
 	file_op/read_file.c							\
-												\
-	gnl/gnl.c									\
-	gnl/gnl_utils.c								\
+	file_op/gnl/gnl.c							\
+	file_op/gnl/gnl_utils.c						\
 												\
 	loops/game_loop.c							\
 	loops/lobby_loop.c							\

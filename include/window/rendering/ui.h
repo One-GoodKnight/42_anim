@@ -9,6 +9,8 @@
 # define FONT_SIZE 32
 # define FONT_SPACING 0
 
+# define FONT_SIZE_ANIM_TEXT 80
+
 # define FADE_SPEED 10
 
 # define BOX_WIDTH 1000
@@ -43,8 +45,10 @@ typedef struct s_ui
 	t_corner	bottom_left_corner;
 }	t_ui;
 
-void	render_ui(t_ui *ui, t_qst *qst, t_input *input, Font font, Texture2D logo);
+void	render_ui(t_ui *ui, t_qst *qst, t_input *input, Font font, Font font_anim, Texture2D logo);
 void	render_corners(t_ui *ui);
+void	floating_corners(t_ui *ui);
+void	render_anim_text(t_ui *ui, Font font_anim);
 void	render_input(t_ui *ui, t_qst *qst, t_input *input, Font font);
 
 #endif

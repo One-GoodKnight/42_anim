@@ -6,6 +6,6 @@
 
 void	set_random_seed(void);
 int		load_data(t_data *data);
-Font	init_font(void);
+Font	init_font(char *path, int size);
 
 #endif

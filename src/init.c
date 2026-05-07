@@ -19,10 +19,10 @@ int	load_data(t_data *data)
 	return (0);
 }
 
-Font	init_font(void)
+Font	init_font(char *path, int size)
 {
 	SetTraceLogLevel(LOG_ERROR);
-	Font font = LoadFontEx("assets/JetBrainsMonoNL-Regular.ttf", FONT_SIZE, NULL, 255);
+	Font font = LoadFontEx(path, size, NULL, 255);
 	SetTraceLogLevel(LOG_WARNING);
 	return font;
 }

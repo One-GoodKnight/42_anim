@@ -38,7 +38,9 @@ SRCS			:= 								\
 	utils/utils_str.c							\
 	utils/utils_uchar.c							\
 												\
+	window/rendering/floating_corners.c			\
 	window/rendering/init_ui.c					\
+	window/rendering/render_anim_text.c			\
 	window/rendering/render_corners.c			\
 	window/rendering/render_input.c				\
 	window/rendering/render_ui.c				\

@@ -11,18 +11,26 @@
 #include <string.h>
 #include <stdio.h>
 
-static int	load_assets(Font *font, Texture2D *logo_texture)
+static int	load_assets(Font *font, Font *font_anim, Texture2D *logo_texture)
 {
 	Image	logo_img;
 
-	*font = init_font();
+	*font = init_font("assets/JetBrainsMonoNL-Regular.ttf", FONT_SIZE);
 	if (!font->glyphs)
 		return (-1);
+
+	*font_anim = init_font("assets/Motorblock.ttf", FONT_SIZE_ANIM_TEXT);
+	if (!font_anim->glyphs)
+	{
+		UnloadFont(*font);
+		return (-1);
+	}
 
 	logo_img = LoadImage("assets/42_Logo.png");
 	if (!logo_img.data)
 	{
 		UnloadFont(*font);
+		UnloadFont(*font_anim);
 		return (-1);
 	}
 
@@ -33,11 +41,12 @@ static int	load_assets(Font *font, Texture2D *logo_texture)
 	return (0);
 }
 
-static int	release(Font *font, Texture2D *logo, t_vec *messages, int ret)
+static int	release(Font *font, Font *font_anim, Texture2D *logo, t_vec *messages, int ret)
 {
 	vec_clear(messages);
 
 	UnloadFont(*font);
+	UnloadFont(*font_anim);
 	UnloadTexture(*logo);
 
 	CloseWindow();
@@ -47,11 +56,12 @@ static int	release(Font *font, Texture2D *logo, t_vec *messages, int ret)
 int	game_loop(t_net *net, t_qst *qst, t_game *game)
 {
 	Font		font;
+	Font		font_anim;
 	Texture2D	logo;
 
 	init_window();
 
-	if (load_assets(&font, &logo) == -1)
+	if (load_assets(&font, &font_anim, &logo) == -1)
 		return (-1);
 
 	t_input input;
@@ -63,7 +73,7 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 	while (game->state == IN_GAME)
 	{
 		if (read_all_messages(net->sock, &net->messages) == -1)
-			return (release(&font, &logo, &net->messages, -1));
+			return (release(&font, &font_anim, &logo, &net->messages, -1));
 		handle_conflicts(net);
 
 		if (net->state == HOST)
@@ -81,7 +91,7 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 		if (IsKeyPressed(KEY_ENTER) && strlen((char *)input.text) > 0)
 			send_answer(net->sock, net->host_addr, (char *)input.text);
 
-		render_ui(&ui, qst, &input, font, logo);
+		render_ui(&ui, qst, &input, font, font_anim, logo);
 	}
 
 	while (game->state == RESULTS)
@@ -91,5 +101,5 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 		game->state = FINNISHED;
 	}
 
-	return (release(&font, &logo, &net->messages, 0));
+	return (release(&font, &font_anim, &logo, &net->messages, 0));
 }

@@ -1,6 +1,6 @@
+#include "ui/render_ui/colors.h"
+#include "ui/ui.h"
 #include "raylib.h"
-#include "window/rendering/colors.h"
-#include "window/rendering/ui.h"
 
 static void	render_line(int x, int y, int thickness, t_dir dir, int length)
 {

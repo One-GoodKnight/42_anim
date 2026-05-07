@@ -1,5 +1,5 @@
-#include "window/rendering/corner.h"
-#include "window/rendering/ui.h"
+#include "ui/corner.h"
+#include "ui/ui.h"
 #include <time.h>
 #include <math.h>
 

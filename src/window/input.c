@@ -1,6 +1,5 @@
 #include "window/input.h"
 #include "raylib.h"
-#include "window/rendering/ui.h"
 #include "utils/utf8.h"
 #include "utils/utils.h"
 #include <string.h>

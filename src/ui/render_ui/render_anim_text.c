@@ -1,5 +1,6 @@
-#include "window/rendering/colors.h"
-#include "window/rendering/ui.h"
+#include "ui/render_ui/colors.h"
+#include "ui/ui.h"
+#include "raylib.h"
 
 void	render_anim_text(t_ui *ui, Font font_anim)
 {

@@ -19,8 +19,8 @@ typedef enum e_dir
 
 typedef struct s_corner
 {
-	int		org_x;
-	int		org_y;
+	int		tar_x;
+	int		tar_y;
 
 	int		thickness;
 
@@ -30,11 +30,15 @@ typedef struct s_corner
 	t_dir	line_two_dir;
 	int		line_two_length;
 
+	// pid controller animation, bring the borders to the screen
+	float	org_x;
+	float	org_y;
+
 	// floating animation
 	float	x_offset;
 	float	y_offset;
 
-	float	phase;	// random start in the trig circle
+	float	phase;  // random start in the trig circle
 }	t_corner;
 
 #endif

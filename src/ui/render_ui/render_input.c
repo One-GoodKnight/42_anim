@@ -1,6 +1,8 @@
-#include "window/rendering/colors.h"
+#include "game/question.h"
+#include "ui/render_ui/colors.h"
+#include "ui/ui.h"
 #include "window/input.h"
-#include "window/rendering/ui.h"
+#include "raylib.h"
 
 static int	spacing_width(Font font)
 {

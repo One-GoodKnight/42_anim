@@ -2,10 +2,12 @@
 #include "game/question.h"
 #include "net/actions.h"
 #include "net/process_msg.h"
-#include "window/rendering/init_ui.h"
+#include "ui/render_ui/render_ui.h"
+#include "ui/update_ui/pid_controller.h"
+#include "ui/ui.h"
+#include "ui/update_ui/update_ui.h"
 #include "window/input.h"
 #include "window/window.h"
-#include "window/rendering/ui.h"
 #include "init.h"
 #include "raylib.h"
 #include <string.h>
@@ -55,20 +57,21 @@ static int	release(Font *font, Font *font_anim, Texture2D *logo, t_vec *messages
 
 int	game_loop(t_net *net, t_qst *qst, t_game *game)
 {
-	Font		font;
-	Font		font_anim;
-	Texture2D	logo;
+	Font				font;
+	Font				font_anim;
+	Texture2D			logo;
+	t_input				input;
+	t_ui				ui;
+	t_pid_controller	pid_controller;
 
 	init_window();
 
 	if (load_assets(&font, &font_anim, &logo) == -1)
 		return (-1);
 
-	t_input input;
 	init_input(&input);
-
-	t_ui ui;
 	init_ui(&ui);
+	init_pid_controller(&pid_controller);
 
 	while (game->state == IN_GAME)
 	{
@@ -91,6 +94,7 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 		if (IsKeyPressed(KEY_ENTER) && strlen((char *)input.text) > 0)
 			send_answer(net->sock, net->host_addr, (char *)input.text);
 
+		update_ui(&ui, &pid_controller);
 		render_ui(&ui, qst, &input, font, font_anim, logo);
 	}
 

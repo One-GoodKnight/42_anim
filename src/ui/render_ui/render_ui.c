@@ -1,18 +1,9 @@
-#include "window/rendering/corner.h"
-#include "window/rendering/ui.h"
+#include "ui/render_ui/colors.h"
+#include "ui/render_ui/render_ui.h"
+#include "ui/update_ui/pid_controller.h"
+#include "ui/update_ui/update_ui.h"
+#include "ui/ui.h"
 #include "raylib.h"
-#include "window/rendering/colors.h"
-
-static void fade(t_ui *ui)
-{
-	ui->fade_progress += ui->dt * FADE_SPEED;
-
-	if (ui->fade_progress >= 1)
-	{
-		ui->fade_progress = 1;
-		ui->state = BRING_BORDERS;
-	}
-}
 
 static void	render_background(t_ui *ui)
 {
@@ -48,13 +39,6 @@ static void	render_question(t_ui *ui, t_qst *qst, Font font)
 
 void	render_ui(t_ui *ui, t_qst *qst, t_input *input, Font font, Font font_anim, Texture2D logo)
 {
-	ui->dt = GetFrameTime();
-
-	if (ui->state == BACKGROUND_FADE)
-		fade(ui);
-
-	floating_corners(ui);
-
 	BeginDrawing();
 	ClearBackground(BLANK);
 

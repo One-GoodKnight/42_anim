@@ -26,16 +26,6 @@ static void	process_question(t_net *net, t_msg *msg, t_game *game)
 	printf("Received a question\n");
 }
 
-static void	process_winner(t_net *net, t_msg *msg, t_game *game)
-{
-	(void)net;
-	if (strncmp(msg->msg, "WINNER:", strlen("WINNER:")) != 0)
-		return ;
-
-	strncpy((char *)&game->winner_name, msg->msg + strlen("WINNER:"), sizeof(game->winner_name) - 1);
-	game->state = RESULTS;
-}
-
 void	process_msg_client(t_net *net, t_game *game)
 {
 	int i = 0;
@@ -44,8 +34,5 @@ void	process_msg_client(t_net *net, t_game *game)
 		t_msg *msg = vec_get(&net->messages, i++);
 		process_hosting(net, msg);
 		process_question(net, msg, game);
-		process_winner(net, msg, game);
 	}
 }
-
-//void	process_msg_client_ui()

@@ -2,6 +2,7 @@
 # define UI_H
 
 # include "ui/corner.h"
+# include "vector.h"
 
 # define FONT_SIZE 32
 # define FONT_SPACING 0
@@ -42,6 +43,8 @@ typedef struct s_ui
 	t_corner	bottom_left_corner;
 
 	float		result_screen_time_left;
+
+	t_vec		messages_popups;
 }	t_ui;
 
 void	init_ui(t_ui *ui);

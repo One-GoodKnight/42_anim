@@ -27,6 +27,7 @@ SRCS			:= 								\
 												\
 	net/process_msg/process_msg_host.c			\
 	net/process_msg/process_msg_client.c		\
+	net/process_msg/process_msg_client_ui.c		\
 												\
 	net/get_addr.c								\
 	net/network.c								\

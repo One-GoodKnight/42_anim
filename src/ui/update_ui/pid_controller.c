@@ -40,14 +40,14 @@ void	apply_pid_controller(t_ui *ui, t_pid_controller pid)
 	move_system(dt, &ui->bottom_left_corner, pid);
 
 	if (
-		ui->top_left_corner.prev_err.x / ui->dt < 150 &&
-		ui->top_left_corner.prev_err.y / ui->dt < 150 &&
-		ui->top_right_corner.prev_err.x / ui->dt < 150 &&
-		ui->top_right_corner.prev_err.y / ui->dt < 150 &&
-		ui->bottom_right_corner.prev_err.x / ui->dt < 150 &&
-		ui->bottom_right_corner.prev_err.y / ui->dt < 150 &&
-		ui->bottom_left_corner.prev_err.x / ui->dt < 150 &&
-		ui->bottom_left_corner.prev_err.y / ui->dt < 150
+		ui->top_left_corner.prev_err.x / ui->dt < 50 &&
+		ui->top_left_corner.prev_err.y / ui->dt < 50 &&
+		ui->top_right_corner.prev_err.x / ui->dt < 50 &&
+		ui->top_right_corner.prev_err.y / ui->dt < 50 &&
+		ui->bottom_right_corner.prev_err.x / ui->dt < 50 &&
+		ui->bottom_right_corner.prev_err.y / ui->dt < 50 &&
+		ui->bottom_left_corner.prev_err.x / ui->dt < 50 &&
+		ui->bottom_left_corner.prev_err.y / ui->dt < 50
 	)
 		ui->state = SHOW_TEXT;
 }

@@ -1,7 +1,9 @@
 #include "ui/corner.h"
+#include "ui/msg_popup.h"
 #include "ui/ui.h"
 #include "raylib.h"
 #include "vector2.h"
+#include <stddef.h>
 
 void	init_ui(t_ui *ui)
 {
@@ -37,4 +39,6 @@ void	init_ui(t_ui *ui)
 	ui->bottom_right_corner.org.y += local_offset;
 
 	ui->result_screen_time_left = RESULT_SCREEN_TIME;
+
+	vec_init(&ui->messages_popups, sizeof(t_msg_popup), NULL);
 }

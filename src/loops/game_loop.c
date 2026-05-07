@@ -90,6 +90,7 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 
 		// todo: become a host if the host left
 		process_msg_client(net, game);
+		process_msg_client_ui(net, &ui, game);
 
 		vec_clear(&net->messages);
 

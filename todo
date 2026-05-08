@@ -2,3 +2,7 @@ accents lower case
 shuffle letters inside current words only, not outside it
 better contrl + (del | supp)
 remove spaces at the end when checking the end
+
+wait between games
+stop checking answers once the game has finnished
+if the user leaves the interface, keep the game running in background

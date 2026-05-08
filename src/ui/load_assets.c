@@ -10,15 +10,33 @@ static Font	init_font(char *path, int size)
 	return font;
 }
 
+static int	load_texture(char *path, Texture2D **texture, bool invert_color)
+{
+	Image		img;
+
+	img = LoadImage(path);
+	if (!img.data)
+		return (-1);
+
+	if (invert_color)
+		ImageColorInvert(&img);
+	**texture = LoadTextureFromImage(img);
+	UnloadImage(img);
+
+	if ((*texture)->id == 0)
+		return (-1);
+
+	return (0);
+}
+
 int	load_assets(t_ui *ui)
 {
 	Font		*font = &ui->fonts.font;
 	Font		*font_popups = &ui->fonts.font_popups;
 	Font		*font_anim = &ui->fonts.font_anim;
 	Texture2D	*logo_texture = &ui->logo;
-	Image		logo_img;
 	Texture2D	*crown_texture = &ui->crown;
-	Image		crown_img;
+	Texture2D	*train_texture = &ui->train;
 
 	*font = init_font("assets/JetBrainsMonoNL-Regular.ttf", FONT_SIZE);
 	if (!font->glyphs)
@@ -32,25 +50,13 @@ int	load_assets(t_ui *ui)
 	if (!font_anim->glyphs)
 		return (-1);
 
-	logo_img = LoadImage("assets/42_Logo.png");
-	if (!logo_img.data)
+	if (load_texture("assets/42_logo.png", &logo_texture, true) == -1)
 		return (-1);
 
-	ImageColorInvert(&logo_img);
-	*logo_texture = LoadTextureFromImage(logo_img);
-	UnloadImage(logo_img);
-
-	if (logo_texture->id == 0)
+	if (load_texture("assets/crown.png", &crown_texture, false) == -1)
 		return (-1);
 
-	crown_img = LoadImage("assets/crown.png");
-	if (!crown_img.data)
-		return (-1);
-
-	*crown_texture = LoadTextureFromImage(crown_img);
-	UnloadImage(crown_img);
-
-	if (crown_texture->id == 0)
+	if (load_texture("assets/train.png", &train_texture, false) == -1)
 		return (-1);
 
 	return (0);

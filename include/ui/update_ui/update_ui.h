@@ -7,9 +7,10 @@
 
 # define FADE_SPEED 10
 
-void	update_ui(t_ui *ui, t_pid_controller *pid);
+void	update_ui(t_ui *ui, t_pid_controller *pid, char *qst);
 void	apply_pid_controller(t_ui *ui, t_pid_controller pid);
 void	floating_corners(t_ui *ui);
+void	update_train(t_ui *ui, char *qst);
 
 void	add_msg_popup(t_ui *ui, char *name, char *msg, bool winner, float win_time);
 void	update_msg_popups(t_ui *ui);

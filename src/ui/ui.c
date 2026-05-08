@@ -2,6 +2,7 @@
 #include "ui/msg_popup.h"
 #include "ui/ui.h"
 #include "raylib.h"
+#include "ui/train.h"
 #include "vector2.h"
 #include <stddef.h>
 
@@ -24,6 +25,25 @@ static void	init_corners(t_ui *ui)
 	ui->top_left_corner.org.y -= local_offset;
 	ui->bottom_right_corner.org.x += local_offset;
 	ui->bottom_right_corner.org.y += local_offset;
+}
+
+void	init_train(t_ui *ui)
+{
+	t_train *pika_choo = &ui->pika_choo;
+	int		train_width = ui->train.width;
+	int		screen_height = ui->height;
+
+	ui->show_qst = false;
+
+	pika_choo->width = train_width;
+
+	pika_choo->pos.x = 0 - train_width;
+	pika_choo->pos.y = screen_height / 2.0f - 131;
+
+	pika_choo->vel.x = TRAIN_INIT_VEL;
+	pika_choo->vel.y = 0;
+
+	pika_choo->cooldown = TRAIN_COOLDOWN;
 }
 
 void	init_ui(t_ui *ui)
@@ -68,6 +88,9 @@ int	release_ui(t_ui *ui)
 
 	if (ui->crown.id != 0)
 		UnloadTexture(ui->crown);
+
+	if (ui->train.id != 0)
+		UnloadTexture(ui->train);
 
 	vec_free(&ui->messages_popups);
 

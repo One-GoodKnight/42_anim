@@ -2,6 +2,7 @@
 # define UI_H
 
 # include "ui/corner.h"
+# include "ui/train.h"
 # include "vector.h"
 # include "raylib.h"
 
@@ -29,8 +30,7 @@ typedef struct s_fonts
 typedef enum e_ui_state
 {
 	BACKGROUND_FADE,
-	BRING_BORDERS,
-	SHOW_TEXT,
+	TRAIN_TRANSITION,
 	COMPLETE,
 }	t_ui_state;
 
@@ -53,13 +53,18 @@ typedef struct s_ui
 	t_corner	bottom_right_corner;
 	t_corner	bottom_left_corner;
 
+	bool		show_qst;
+	t_train		pika_choo;
+
 	// assets
 	t_fonts		fonts;
 	Texture2D	logo;
 	Texture2D	crown;
+	Texture2D	train;
 }	t_ui;
 
 void	init_ui(t_ui *ui);
+void	init_train(t_ui *ui);
 int		release_ui(t_ui *ui);
 int		load_assets(t_ui *ui);
 

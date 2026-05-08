@@ -92,6 +92,7 @@ void	render_msg_popups(t_ui *ui, Font font)
 			winner_popup = msg_popup;
 	}
 
+	// render winner popup on top
 	if (winner_popup && !winner_popup->dead)
 		render_popup(*winner_popup, font, ui->crown);
 }

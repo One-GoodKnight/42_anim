@@ -21,6 +21,14 @@ static void	render_logo(t_ui *ui, Texture2D logo)
 	DrawTextureEx(logo, (Vector2){x, y}, 0.0f, 1.0f, WHITE);
 }
 
+static void	render_train(t_ui *ui, Texture2D train)
+{
+	int	x = ui->pika_choo.pos.x;
+	int	y = ui->pika_choo.pos.y;
+
+	DrawTextureEx(train, (Vector2){x, y}, 0.0f, 1.0f, WHITE);
+}
+
 static void	render_question(t_ui *ui, char *qst, Font font)
 {
 	int	text_width = MeasureTextEx(font, qst, (float)font.baseSize, FONT_SPACING).x;
@@ -44,8 +52,12 @@ void	render_ui(t_ui *ui, char *qst, t_input *input)
 	render_anim_text(ui, ui->fonts.font_anim);
 
 	render_msg_popups(ui, ui->fonts.font_popups);
-	render_question(ui, qst, ui->fonts.font);
 	render_input(ui, qst, input, ui->fonts.font);
+
+	if (ui->show_qst)
+		render_question(ui, qst, ui->fonts.font);
+
+	render_train(ui, ui->train);
 
 	EndDrawing();
 }

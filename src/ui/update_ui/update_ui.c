@@ -2,8 +2,6 @@
 #include "ui/update_ui/update_ui.h"
 #include "ui/ui.h"
 #include "raylib.h"
-#include "utils/utils.h"
-#include <stdio.h>
 
 static void fade(t_ui *ui)
 {
@@ -12,26 +10,21 @@ static void fade(t_ui *ui)
 	if (ui->fade_progress >= 1)
 	{
 		ui->fade_progress = 1;
-		ui->state = BRING_BORDERS;
+		ui->state = TRAIN_TRANSITION;
 	}
 }
 
-void	update_ui(t_ui *ui, t_pid_controller *pid)
+void	update_ui(t_ui *ui, t_pid_controller *pid, char *qst)
 {
 	ui->dt = GetFrameTime();
+	if (ui->dt == 0)
+		ui->dt = 1.0f / 60.0f;  // simulate a frame to not break first tick of animations
 
 	if (ui->state == BACKGROUND_FADE)
 		fade(ui);
 
-	if (ui->state == BRING_BORDERS)
-		apply_pid_controller(ui, *pid);
-
-	if (ui->state == SHOW_TEXT)
-	{
-		ui->time_question_popped = get_time();
-		ui->state = COMPLETE;
-	}
-
+	update_train(ui, qst);
+	apply_pid_controller(ui, *pid);
 	floating_corners(ui);
 	update_msg_popups(ui);
 }

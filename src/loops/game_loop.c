@@ -60,12 +60,15 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 	t_pid_controller	pid;
 
 	init_window();
+
 	init_ui(&ui);
 	init_input(&input);
 	init_pid_controller(&pid);
 
 	if (load_assets(&ui) == -1)
 		return (release_window(&ui, &net->messages, -1));
+
+	init_train(&ui);
 
 	while (game->state != FINISHED)
 	{
@@ -82,8 +85,9 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 
 		handle_result(&ui, game);
 
-		update_ui(&ui, &pid);
-		render_ui(&ui, (char *)game->question, &input);
+		char *qst = (char *)game->question;
+		update_ui(&ui, &pid, qst);
+		render_ui(&ui, qst, &input);
 	}
 
 	return (release_window(&ui, &net->messages, 0));

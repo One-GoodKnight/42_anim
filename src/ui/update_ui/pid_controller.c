@@ -1,5 +1,6 @@
 #include "ui/update_ui/pid_controller.h"
 #include "ui/ui.h"
+#include "stdio.h"
 
 static t_vector2	compute_error(t_corner corner)
 {
@@ -38,18 +39,6 @@ void	apply_pid_controller(t_ui *ui, t_pid_controller pid)
 	move_system(dt, &ui->top_right_corner, pid);
 	move_system(dt, &ui->bottom_right_corner, pid);
 	move_system(dt, &ui->bottom_left_corner, pid);
-
-	if (
-		ui->top_left_corner.prev_err.x / ui->dt < 50 &&
-		ui->top_left_corner.prev_err.y / ui->dt < 50 &&
-		ui->top_right_corner.prev_err.x / ui->dt < 50 &&
-		ui->top_right_corner.prev_err.y / ui->dt < 50 &&
-		ui->bottom_right_corner.prev_err.x / ui->dt < 50 &&
-		ui->bottom_right_corner.prev_err.y / ui->dt < 50 &&
-		ui->bottom_left_corner.prev_err.x / ui->dt < 50 &&
-		ui->bottom_left_corner.prev_err.y / ui->dt < 50
-	)
-		ui->state = SHOW_TEXT;
 }
 
 void	init_pid_controller(t_pid_controller *pid)

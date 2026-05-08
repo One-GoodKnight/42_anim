@@ -45,7 +45,8 @@ SRCS			:= 								\
 	ui/update_ui/update_ui.c					\
 												\
 	ui/init_corner.c							\
-	ui/init_ui.c								\
+	ui/load_assets.c							\
+	ui/ui.c										\
 												\
 												\
 	utils/get_time.c							\

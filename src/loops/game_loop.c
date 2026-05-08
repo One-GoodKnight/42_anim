@@ -8,48 +8,14 @@
 #include "ui/update_ui/update_ui.h"
 #include "window/input.h"
 #include "window/window.h"
-#include "init.h"
 #include "raylib.h"
 #include <string.h>
-#include <stdio.h>
 
-static int	load_assets(Font *font, Font *font_anim, Texture2D *logo_texture)
-{
-	Image	logo_img;
-
-	*font = init_font("assets/JetBrainsMonoNL-Regular.ttf", FONT_SIZE);
-	if (!font->glyphs)
-		return (-1);
-
-	*font_anim = init_font("assets/Motorblock.ttf", FONT_SIZE_ANIM_TEXT);
-	if (!font_anim->glyphs)
-	{
-		UnloadFont(*font);
-		return (-1);
-	}
-
-	logo_img = LoadImage("assets/42_Logo.png");
-	if (!logo_img.data)
-	{
-		UnloadFont(*font);
-		UnloadFont(*font_anim);
-		return (-1);
-	}
-
-	ImageColorInvert(&logo_img);
-	*logo_texture = LoadTextureFromImage(logo_img);
-	UnloadImage(logo_img);
-
-	return (0);
-}
-
-static int	release(Font *font, Font *font_anim, Texture2D *logo, t_vec *messages, int ret)
+static int	release_window(t_ui *ui, t_vec *messages, int ret)
 {
 	vec_clear(messages);
 
-	UnloadFont(*font);
-	UnloadFont(*font_anim);
-	UnloadTexture(*logo);
+	release_ui(ui);
 
 	CloseWindow();
 	return (ret);
@@ -57,29 +23,25 @@ static int	release(Font *font, Font *font_anim, Texture2D *logo, t_vec *messages
 
 int	game_loop(t_net *net, t_qst *qst, t_game *game)
 {
-	Font				font;
-	Font				font_anim;
-	Texture2D			logo;
-	t_input				input;
 	t_ui				ui;
-	t_pid_controller	pid_controller;
+	t_input				input;
+	t_pid_controller	pid;
 
 	init_window();
-
-	if (load_assets(&font, &font_anim, &logo) == -1)
-		return (-1);
-
-	init_input(&input);
 	init_ui(&ui);
-	init_pid_controller(&pid_controller);
+	init_input(&input);
+	init_pid_controller(&pid);
+
+	if (load_assets(&ui) == -1)
+		return (release_ui(&ui));
 
 	while (game->state != FINNISHED)
 	{
 		if (IsKeyPressed(KEY_ESCAPE))
-			return (release(&font, &font_anim, &logo, &net->messages, 0));
+			return (release_window(&ui, &net->messages, 0));
 
 		if (read_all_messages(net->sock, &net->messages) == -1)
-			return (release(&font, &font_anim, &logo, &net->messages, -1));
+			return (release_window(&ui, &net->messages, -1));
 		handle_conflicts(net);
 
 		if (net->state == HOST)
@@ -106,9 +68,9 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 				game->state = FINNISHED;
 		}
 
-		update_ui(&ui, &pid_controller);
-		render_ui(&ui, (char *)game->question, &input, font, font_anim, logo);
+		update_ui(&ui, &pid);
+		render_ui(&ui, (char *)game->question, &input);
 	}
 
-	return (release(&font, &font_anim, &logo, &net->messages, 0));
+	return (release_window(&ui, &net->messages, 0));
 }

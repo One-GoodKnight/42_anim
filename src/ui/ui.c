@@ -5,23 +5,10 @@
 #include "vector2.h"
 #include <stddef.h>
 
-void	init_ui(t_ui *ui)
+static void	init_corners(t_ui *ui)
 {
-	int monitor = GetCurrentMonitor();
-    int width   = GetMonitorWidth(monitor);
-    int height  = GetMonitorHeight(monitor);
-
-	ui->width = width;
-	ui->height = height;
-
-	ui->dt = 0;
-
-	ui->state = BACKGROUND_FADE;
-
-	ui->fade_progress = 0;
-
-	int	center_x = width / 2;
-	int	center_y = height / 2;
+	int	center_x = ui->width / 2;
+	int	center_y = ui->height / 2;
 
 	int offset_x = BOX_WIDTH / 2;
 	int offset_y = BOX_HEIGHT / 2;
@@ -37,10 +24,49 @@ void	init_ui(t_ui *ui)
 	ui->top_left_corner.org.y -= local_offset;
 	ui->bottom_right_corner.org.x += local_offset;
 	ui->bottom_right_corner.org.y += local_offset;
+}
 
-	ui->result_screen_time_left = 0;
+void	init_ui(t_ui *ui)
+{
+	int monitor = GetCurrentMonitor();
+    int width   = GetMonitorWidth(monitor);
+    int height  = GetMonitorHeight(monitor);
 
+	ui->width = width;
+	ui->height = height;
+
+	ui->dt = 0;
+	ui->state = BACKGROUND_FADE;
+
+	ui->fade_progress = 0;
+	ui->time_question_popped = 0;
 	ui->result_screen_time_left = RESULT_SCREEN_TIME;
 
 	vec_init(&ui->messages_popups, sizeof(t_msg_popup), NULL);
+
+	init_corners(ui);
+	
+	// assets
+	ui->fonts.font.glyphs = NULL;
+	ui->fonts.font_popups.glyphs = NULL;
+	ui->fonts.font_anim.glyphs = NULL;
+}
+
+int	release_ui(t_ui *ui)
+{
+	if (ui->fonts.font.glyphs)
+		UnloadFont(ui->fonts.font);
+
+	if (ui->fonts.font_popups.glyphs)
+		UnloadFont(ui->fonts.font_popups);
+
+	if (ui->fonts.font_anim.glyphs)
+		UnloadFont(ui->fonts.font_anim);
+
+	if (ui->logo.id != 0)
+		UnloadTexture(ui->logo);
+
+	vec_free(&ui->messages_popups);
+
+	return (-1);
 }

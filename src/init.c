@@ -17,11 +17,3 @@ int	load_data(t_data *data)
 		return (-1);
 	return (0);
 }
-
-Font	init_font(char *path, int size)
-{
-	SetTraceLogLevel(LOG_ERROR);
-	Font font = LoadFontEx(path, size, NULL, 255);
-	SetTraceLogLevel(LOG_WARNING);
-	return font;
-}

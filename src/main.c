@@ -1,6 +1,5 @@
 #include "raylib.h"
 #include "file_op/data.h"
-#include "window/input.h"
 #include "game/game.h"
 #include "game/question.h"
 #include "net/network.h"

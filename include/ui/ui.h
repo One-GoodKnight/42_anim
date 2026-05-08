@@ -3,11 +3,12 @@
 
 # include "ui/corner.h"
 # include "vector.h"
+# include "raylib.h"
 
 # define FONT_SIZE 32
-# define FONT_SPACING 0
-
+# define FONT_SIZE_POPUPS 24
 # define FONT_SIZE_ANIM_TEXT 80
+# define FONT_SPACING 0
 
 # define BOX_WIDTH 1000
 # define BOX_HEIGHT 600
@@ -17,6 +18,13 @@
 # define TEXT_Y_OFFSET 30
 
 # define RESULT_SCREEN_TIME 3
+
+typedef struct s_fonts
+{
+	Font	font;
+	Font	font_popups;
+	Font	font_anim;
+}	t_fonts;
 
 typedef enum e_ui_state
 {
@@ -32,23 +40,26 @@ typedef struct s_ui
 	int			height;
 
 	float		dt;
-
 	t_ui_state	state;
 
 	float 		fade_progress;
+	float		time_question_popped;
+	float		result_screen_time_left;
+
+	t_vec		messages_popups;
 
 	t_corner	top_left_corner;
 	t_corner	top_right_corner;
 	t_corner	bottom_right_corner;
 	t_corner	bottom_left_corner;
 
-	float		time_question_popped;
-
-	float		result_screen_time_left;
-
-	t_vec		messages_popups;
+	// assets
+	t_fonts		fonts;
+	Texture2D			logo;
 }	t_ui;
 
 void	init_ui(t_ui *ui);
+int		release_ui(t_ui *ui);
+int		load_assets(t_ui *ui);
 
 #endif

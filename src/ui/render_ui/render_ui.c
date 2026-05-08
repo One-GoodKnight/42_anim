@@ -33,19 +33,19 @@ static void	render_question(t_ui *ui, char *qst, Font font)
 	DrawTextEx(font, qst, (Vector2){x, y}, FONT_SIZE, FONT_SPACING, FONT_COLOR);
 }
 
-void	render_ui(t_ui *ui, char *qst, t_input *input, Font font, Font font_anim, Texture2D logo)
+void	render_ui(t_ui *ui, char *qst, t_input *input)
 {
 	BeginDrawing();
 	ClearBackground(BLANK);
 
 	render_background(ui);
 	render_corners(ui);
-	render_logo(ui, logo);
-	render_anim_text(ui, font_anim);
+	render_logo(ui, ui->logo);
+	render_anim_text(ui, ui->fonts.font_anim);
 
-	render_msg_popups(ui, font);
-	render_question(ui, qst, font);
-	render_input(ui, qst, input, font);
+	render_msg_popups(ui, ui->fonts.font_popups);
+	render_question(ui, qst, ui->fonts.font);
+	render_input(ui, qst, input, ui->fonts.font);
 
 	EndDrawing();
 }

@@ -1,8 +1,9 @@
 #include "game/game.h"
-#include "ui/ui.h"
-#include "ui/update_ui/update_ui.h"
 #include "net/message.h"
 #include "net/network.h"
+#include "ui/ui.h"
+#include "ui/update_ui/update_ui.h"
+#include "utils/utf8.h"
 #include "utils/utils.h"
 #include <string.h>
 
@@ -26,7 +27,12 @@ static void	process_winner(t_ui *ui, t_msg *msg, t_game *game)
 
 	float winner_time = get_time() - ui->time_question_popped;
 
-	add_msg_popup(ui, name, ans, true, winner_time);
+	char name_utf8[512];
+	latin1_to_utf8((unsigned char *)name_utf8, (unsigned char *)name);
+	char ans_utf8[512];
+	latin1_to_utf8((unsigned char *)ans_utf8, (unsigned char *)ans);
+
+	add_msg_popup(ui, name_utf8, ans_utf8, true, winner_time);
 	game->state = RESULTS;
 }
 

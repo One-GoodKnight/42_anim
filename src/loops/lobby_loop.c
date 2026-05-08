@@ -9,6 +9,11 @@ int	lobby_loop(t_data *data, t_net *net, t_qst *qst, t_game *game)
 {
 	while (game->state == WAITING)
 	{
+		if (time(NULL) - net->last_heartbeat_received >= HOST_TIMEOUT)
+		{
+			set_to_host(net);
+		}
+
 		if (net->state == HOST)
 		{
 			init_question(qst, data);

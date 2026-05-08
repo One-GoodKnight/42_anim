@@ -10,6 +10,8 @@
 #include "window/window.h"
 #include "raylib.h"
 #include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 static int	release_window(t_ui *ui, t_vec *messages, int ret)
 {
@@ -25,7 +27,7 @@ static int handle_network(t_net *net, t_ui *ui, t_qst *qst, t_game *game)
 {
 	if (read_all_messages(net->sock, &net->messages) == -1)
 		return (-1);
-	handle_conflicts(net);
+	handle_conflicts(net, game);
 
 	if (net->state == HOST)
 	{
@@ -33,7 +35,6 @@ static int handle_network(t_net *net, t_ui *ui, t_qst *qst, t_game *game)
 		process_msg_host(net, qst);
 	}
 
-	// todo: become a host if the host left
 	process_msg_client(net, game);
 	process_msg_client_ui(net, ui, game);
 
@@ -64,7 +65,7 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 	init_pid_controller(&pid);
 
 	if (load_assets(&ui) == -1)
-		return (release_ui(&ui));
+		return (release_window(&ui, &net->messages, -1));
 
 	while (game->state != FINISHED)
 	{

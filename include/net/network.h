@@ -1,6 +1,9 @@
 #ifndef NETWORK_H
 # define NETWORK_H
 
+# define LISTENING_PHASE_DURATION 2
+# define HOST_TIMEOUT 3
+
 # define MULTICAST_ADDR "239.74.74.74"
 # define PORT 7474
 
@@ -21,11 +24,12 @@ typedef struct s_net
 	t_vec				messages;
 
 	time_t				last_heartbeat_sent;
-	time_t				last_heartbear_received;
+	time_t				last_heartbeat_received;
 }   t_net;
 
 int		init_net(t_net *net);
 void	clean_net(t_net *net);
+void	set_to_host(t_net *net);
 int		get_my_addr(struct in_addr *addr);
 
 #endif

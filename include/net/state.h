@@ -6,9 +6,8 @@
 # include <unistd.h>
 # include <stdbool.h>
 
-# define LISTENING_PHASE_DURATION 0
-
 typedef struct s_net t_net;
+typedef struct s_game t_game;
 
 typedef enum e_net_state
 {
@@ -18,6 +17,6 @@ typedef enum e_net_state
 } t_net_state;
 
 int		set_initial_state(t_net *net);
-void	handle_conflicts(t_net *net);
+void	handle_conflicts(t_net *net, t_game *game);
 
 #endif

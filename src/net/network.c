@@ -1,6 +1,7 @@
 #include "net/message.h"
 #include "net/network.h"
 #include "net/setup_sock_addr.h"
+#include <arpa/inet.h>
 
 int	init_net(t_net *net)
 {
@@ -19,6 +20,8 @@ int	init_net(t_net *net)
 		return (-1);
 	}
 
+	net->last_heartbeat_received = time(NULL);
+
 	return (0);
 }
 
@@ -33,4 +36,12 @@ void	clean_net(t_net *net)
 	}
 
 	vec_free(&net->messages);
+}
+
+void	set_to_host(t_net *net)
+{
+	net->state = HOST;
+	inet_pton(AF_INET, "127.0.0.1", &net->host_addr.sin_addr);
+	net->host_addr.sin_port = htons(PORT);
+	net->host_addr.sin_family = AF_INET;
 }

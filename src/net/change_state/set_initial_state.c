@@ -1,6 +1,5 @@
 #include "net/message.h"
 #include "net/network.h"
-#include "net/setup_sock_addr.h"
 #include "net/actions.h"
 #include <time.h>
 #include <string.h>
@@ -10,10 +9,10 @@ int	set_initial_state(t_net *net)
 {
 	time_t endtime = time(NULL) + LISTENING_PHASE_DURATION;
 
-	net->state = HOST;
-	inet_pton(AF_INET, "127.0.0.1", &net->host_addr.sin_addr);
-	net->host_addr.sin_port = htons(PORT);
-	net->host_addr.sin_family = AF_INET;
+	// set to host by default, change if there is another host
+	set_to_host(net);
+	net->last_heartbeat_received = time(NULL);
+
 	while (time(NULL) < endtime)
 	{
 		if (read_all_messages(net->sock, &net->messages) == -1)

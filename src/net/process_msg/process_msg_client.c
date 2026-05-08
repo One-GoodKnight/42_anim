@@ -6,10 +6,10 @@
 
 static void	process_hosting(t_net *net, t_msg *msg)
 {
-	(void)net;
 	if (strncmp(msg->msg, "HOSTING", strlen("HOSTING")) != 0)
 		return ;
 
+	net->last_heartbeat_received = time(NULL);
 	printf("Received host heartbeat\n");
 }
 

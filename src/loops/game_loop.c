@@ -42,6 +42,16 @@ static int handle_network(t_net *net, t_ui *ui, t_qst *qst, t_game *game)
 	return (0);
 }
 
+static void	handle_result(t_ui *ui, t_game *game)
+{
+	if (game->state == RESULTS)
+	{
+		ui->result_screen_time_left -= ui->dt;
+		if (ui->result_screen_time_left <= 0)
+			game->state = FINISHED;
+	}
+}
+
 int	game_loop(t_net *net, t_qst *qst, t_game *game)
 {
 	t_ui				ui;
@@ -69,12 +79,7 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 		if (ui.state == COMPLETE && IsKeyPressed(KEY_ENTER) && strlen((char *)input.text) > 0)
 			send_answer(net->sock, net->host_addr, (char *)input.text);
 
-		if (game->state == RESULTS)
-		{
-			ui.result_screen_time_left -= ui.dt;
-			if (ui.result_screen_time_left <= 0)
-				game->state = FINISHED;
-		}
+		handle_result(&ui, game);
 
 		update_ui(&ui, &pid);
 		render_ui(&ui, (char *)game->question, &input);

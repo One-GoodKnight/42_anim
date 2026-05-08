@@ -41,7 +41,9 @@ void	announce_question(t_net *net, char *qst)
 	sendto(sock, buff, strlen(buff) + 1, 0, (struct sockaddr*)&dest, sizeof(dest));
 }
 
+
 // CLIENT
+
 void	send_answer(int sock, struct sockaddr_in dest, char *answer)
 {
 	char buff[256];

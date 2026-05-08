@@ -25,8 +25,9 @@ void	update_ui(t_ui *ui, t_pid_controller *pid)
 	if (ui->state == BRING_BORDERS)
 		apply_pid_controller(ui, *pid);
 
-	if (ui->state == SHOW_TEXT)
-		printf("SHOW_TEXT\n");
+	//if (ui->state == SHOW_TEXT)
+	//	printf("SHOW_TEXT\n");
 
 	floating_corners(ui);
+	update_msg_popups_ttl(ui);
 }

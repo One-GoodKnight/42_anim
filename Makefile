@@ -36,9 +36,11 @@ SRCS			:= 								\
 	ui/render_ui/render_anim_text.c				\
 	ui/render_ui/render_corners.c				\
 	ui/render_ui/render_input.c					\
+	ui/render_ui/render_msg_popups.c			\
 	ui/render_ui/render_ui.c					\
 												\
 	ui/update_ui/floating_corners.c				\
+	ui/update_ui/msg_popup.c					\
 	ui/update_ui/pid_controller.c				\
 	ui/update_ui/update_ui.c					\
 												\

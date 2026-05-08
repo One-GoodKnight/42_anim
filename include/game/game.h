@@ -14,9 +14,6 @@ typedef struct s_game
 	char			question[256];
 
 	t_game_state	state;
-	
-	char			winner_name[256];
-	float			winner_time;
 }	t_game;
 
 void	init_game(t_game *game);

@@ -18,6 +18,7 @@ typedef struct	s_msg_popup
 	int					y;
 
 	float				ttl;  // time to live
+	bool				dead;
 }	t_msg_popup;
 
 #endif

@@ -43,6 +43,7 @@ void	render_ui(t_ui *ui, char *qst, t_input *input, Font font, Font font_anim, T
 	render_logo(ui, logo);
 	render_anim_text(ui, font_anim);
 
+	render_msg_popups(ui, font);
 	render_question(ui, qst, font);
 	render_input(ui, qst, input, font);
 

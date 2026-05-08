@@ -36,7 +36,7 @@ static void	render_question(t_ui *ui, char *qst, Font font)
 void	render_ui(t_ui *ui, char *qst, t_input *input)
 {
 	BeginDrawing();
-	ClearBackground(BLANK);
+	ClearBackground(BLACK);
 
 	render_background(ui);
 	render_corners(ui);

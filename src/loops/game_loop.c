@@ -69,7 +69,7 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 
 	while (game->state != FINISHED)
 	{
-		if (IsKeyPressed(KEY_ESCAPE))
+		if (WindowShouldClose())
 			return (release_window(&ui, &net->messages, 0));
 
 		if (handle_network(net, &ui, qst, game) == -1)

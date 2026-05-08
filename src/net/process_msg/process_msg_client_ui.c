@@ -41,6 +41,7 @@ static void	process_winner(t_ui *ui, t_msg *msg, t_game *game)
 
 	float winner_time = get_time() - ui->time_question_popped;
 	
+	// 3 winner messages pog
 	add_msg_popup(ui, name_utf8, ans_utf8, true, winner_time);
 	game->state = RESULTS;
 }

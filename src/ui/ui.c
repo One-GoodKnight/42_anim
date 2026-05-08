@@ -66,6 +66,9 @@ int	release_ui(t_ui *ui)
 	if (ui->logo.id != 0)
 		UnloadTexture(ui->logo);
 
+	if (ui->crown.id != 0)
+		UnloadTexture(ui->crown);
+
 	vec_free(&ui->messages_popups);
 
 	return (-1);

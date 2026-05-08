@@ -96,7 +96,7 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 
 		handle_input(&input);
 
-		if (IsKeyPressed(KEY_ENTER) && strlen((char *)input.text) > 0)
+		if (ui.state == COMPLETE && IsKeyPressed(KEY_ENTER) && strlen((char *)input.text) > 0)
 			send_answer(net->sock, net->host_addr, (char *)input.text);
 
 		if (game->state == RESULTS)

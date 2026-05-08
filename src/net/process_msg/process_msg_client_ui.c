@@ -3,7 +3,8 @@
 #include "ui/update_ui/update_ui.h"
 #include "net/message.h"
 #include "net/network.h"
-#include "string.h"
+#include "utils/utils.h"
+#include <string.h>
 
 static void	process_winner(t_ui *ui, t_msg *msg, t_game *game)
 {
@@ -13,7 +14,9 @@ static void	process_winner(t_ui *ui, t_msg *msg, t_game *game)
 	char *name = "temp name";
 	char *answer = "temp answer";
 
-	add_msg_popup(ui, name, answer, true, 5.44f);
+	float winner_time = get_time() - ui->time_question_popped;
+
+	add_msg_popup(ui, name, answer, true, winner_time);
 	game->state = RESULTS;
 }
 

@@ -48,6 +48,7 @@ SRCS			:= 								\
 	ui/init_ui.c								\
 												\
 												\
+	utils/get_time.c							\
 	utils/utf8.c								\
 	utils/utils.c								\
 	utils/utils_n.c								\

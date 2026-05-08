@@ -15,6 +15,8 @@ int		ft_strcmp_ignore_case(const unsigned char *s1, const unsigned char *s2);
 size_t	uint_len(unsigned int n);
 void	uitoa(unsigned char *dst, unsigned int n);
 
+float	get_time(void);
+
 void	free_array(void	**array);
 
 #endif

@@ -2,6 +2,7 @@
 #include "ui/update_ui/update_ui.h"
 #include "ui/ui.h"
 #include "raylib.h"
+#include "utils/utils.h"
 #include <stdio.h>
 
 static void fade(t_ui *ui)
@@ -25,8 +26,11 @@ void	update_ui(t_ui *ui, t_pid_controller *pid)
 	if (ui->state == BRING_BORDERS)
 		apply_pid_controller(ui, *pid);
 
-	//if (ui->state == SHOW_TEXT)
-	//	printf("SHOW_TEXT\n");
+	if (ui->state == SHOW_TEXT)
+	{
+		ui->time_question_popped = get_time();
+		ui->state = COMPLETE;
+	}
 
 	floating_corners(ui);
 	update_msg_popups_ttl(ui);

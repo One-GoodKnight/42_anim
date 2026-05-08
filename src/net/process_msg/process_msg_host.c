@@ -26,6 +26,8 @@ static void	process_answer(t_net *net, t_msg *msg, t_qst *qst)
 
 	if (check_win(ans, qst))
 		announce_winner(net, name, ans);
+	else
+		announce_attempt(net, name, ans);
 }
 
 void	process_msg_host(t_net *net, t_qst *qst)

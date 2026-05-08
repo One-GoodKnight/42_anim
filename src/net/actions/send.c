@@ -34,6 +34,17 @@ void	announce_winner(t_net *net, char *name, char *ans)
 	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
 }
 
+void	announce_attempt(t_net *net, char *name, char *ans)
+{
+	char message [256];
+	snprintf(message, sizeof(message), "ATTEMPT:%s|%s", name, ans);
+
+	int sock = net->sock;
+	struct sockaddr_in dest = net->multicast_addr;
+
+	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
+}
+
 void	announce_question(t_net *net, char *qst)
 {
 	char buff[256];

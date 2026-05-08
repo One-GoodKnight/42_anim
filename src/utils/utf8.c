@@ -15,7 +15,7 @@ void	latin1_to_utf8(unsigned char *utf8, unsigned char *src)
 		{
 			// 0b is for binary
 			// number of leading 1s is the number of bytes remaining for the current character
-			utf8[j++] = 0b11000000 | (src[i] >> 6); //keep only 2 bits because 6 are reserved from the line under
+			utf8[j++] = 0b11000000 | (src[i] >> 6); //keep only 2 bits because 6 are reserved from the line under (next byte)
 			utf8[j++] = 0b10000000 | ((0b00111111) & src[i]); //get the remaining 6 bits of the uchar
 		}
 		i++;
@@ -23,7 +23,7 @@ void	latin1_to_utf8(unsigned char *utf8, unsigned char *src)
 	utf8[j] = '\0';
 }
 
-size_t	count_leading_bits(char byte)
+size_t	count_leading_ones(char byte)
 {
 	size_t	count = 0;
 
@@ -44,9 +44,10 @@ void	utf8_to_latin1(unsigned char *dest, unsigned char *utf8)
 	j = 0;
 	while(utf8[j])
 	{
+		// skip characters with first byte over 0b11100000 (latin1 chars are at most 2 bytes)
 		if (utf8[j] >= 0b11100000)
 		{
-			j += count_leading_bits(utf8[j]);
+			j += count_leading_ones(utf8[j]);
 			continue ;
 		}
 		if (utf8[j] < 0b10000000)

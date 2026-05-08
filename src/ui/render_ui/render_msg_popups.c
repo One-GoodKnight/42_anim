@@ -4,62 +4,57 @@
 #include "raylib.h"
 #include <stdio.h>
 
-static int	min_width(t_msg_popup popup, Font font)
-{
-	char name_and_time[512];
-	if (popup.winner)
-		snprintf(name_and_time, sizeof(name_and_time), "%s   %.2f", popup.name, popup.win_time);
-	else
-		snprintf(name_and_time, sizeof(name_and_time), "%s", popup.name);
-
-	int	header_width = MeasureTextEx(font, (char *)name_and_time, (float)font.baseSize, FONT_SPACING).x;
-	int	msg_width = MeasureTextEx(font, (char *)popup.msg, (float)font.baseSize, FONT_SPACING).x;
-
-	if (header_width >= msg_width)
-		return (header_width);
-	return (msg_width);
-}
-
-static void	render_time(t_msg_popup popup, Font font, int popup_width)
+static void	render_time(t_msg_popup popup, Font font, Color color)
 {
 	char	time_text[256];
 	snprintf(time_text, sizeof(time_text), "%.2f", popup.win_time);
 
 	int time_width = MeasureTextEx(font, (char *)time_text, (float)font.baseSize, FONT_SPACING).x;
 
-	int x = popup.x + popup_width - time_width;
+	int x = popup.x + popup.width - time_width;
 	int y = popup.y;
 
-	DrawTextEx(font, time_text, (Vector2){x, y}, (float)font.baseSize, FONT_SPACING, FONT_COLOR);
+	DrawTextEx(font, time_text, (Vector2){x, y}, (float)font.baseSize, FONT_SPACING, color);
 }
 
-static void	render_borders(t_msg_popup popup, int width, int height)
+static void	render_borders(t_msg_popup popup, Color color)
 {
+	int width = popup.width;
+	int height = popup.height;
 	int	offset = POPUP_BORDER_OFFSET;
+	int thickness = POPUP_BORDER_THICKNESS;
 
-	DrawRectangle(popup.x - offset, popup.y - POPUP_BORDER_OFFSET, width + offset * 2, POPUP_BORDER_THICKNESS, BORDER_COLOR);
+	DrawRectangle(popup.x - offset, popup.y - offset, width + offset * 2, thickness, color);
 
-	DrawRectangle(popup.x + width + POPUP_BORDER_OFFSET, popup.y - offset, POPUP_BORDER_THICKNESS, height + offset * 2, BORDER_COLOR);
+	DrawRectangle(popup.x + width + offset, popup.y - offset, thickness, height + offset * 2, color);
 
-	DrawRectangle(popup.x - offset, popup.y + height + POPUP_BORDER_OFFSET, width + POPUP_BORDER_OFFSET * 2 + POPUP_BORDER_THICKNESS, POPUP_BORDER_THICKNESS, BORDER_COLOR);
+	DrawRectangle(popup.x - offset, popup.y + height + offset, width + offset * 2 + thickness, thickness, color);
 
-	DrawRectangle(popup.x - POPUP_BORDER_OFFSET, popup.y - offset, POPUP_BORDER_THICKNESS, height + offset * 2, BORDER_COLOR);
+	DrawRectangle(popup.x - offset, popup.y - offset, thickness, height + offset * 2, color);
+}
+
+static Color compute_color(t_msg_popup popup)
+{
+	float max_ttl = popup.winner ? WINNER_TTL : STD_TTL;
+	float t = popup.ttl / max_ttl;
+	Color color = (Color){BORDER_COLOR.r, BORDER_COLOR.g, BORDER_COLOR.b, t * 255};
+
+	return (color);
 }
 
 static void	render_popup(t_msg_popup popup, Font font)
 {
-	int	popup_width = min_width(popup, font);
+	Color color = compute_color(popup);
+
+	DrawTextEx(font, popup.name, (Vector2){popup.x, (int)popup.y}, (float)font.baseSize, FONT_SPACING, color);
+
 	int font_height = MeasureTextEx(font, "|", (float)font.baseSize, FONT_SPACING).y;
-	int	popup_height = font_height * 2 + SEPARATION_HEADER_MSG;
-
-	DrawTextEx(font, popup.name, (Vector2){popup.x, popup.y}, (float)font.baseSize, FONT_SPACING, FONT_COLOR);
-
-	DrawTextEx(font, popup.msg, (Vector2){popup.x, popup.y + font_height + SEPARATION_HEADER_MSG + 3}, (float)font.baseSize, FONT_SPACING, FONT_COLOR);
+	DrawTextEx(font, popup.msg, (Vector2){popup.x, (int)popup.y + font_height + SEPARATION_HEADER_MSG + 3}, (float)font.baseSize, FONT_SPACING, color);
 
 	if (popup.winner)
-		render_time(popup, font, popup_width);
+		render_time(popup, font, color);
 
-	render_borders(popup, popup_width, popup_height);
+	render_borders(popup, color);
 }
 
 void	render_msg_popups(t_ui *ui, Font font)

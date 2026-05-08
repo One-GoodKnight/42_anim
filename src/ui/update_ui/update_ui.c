@@ -33,5 +33,5 @@ void	update_ui(t_ui *ui, t_pid_controller *pid)
 	}
 
 	floating_corners(ui);
-	update_msg_popups_ttl(ui);
+	update_msg_popups(ui);
 }

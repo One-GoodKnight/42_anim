@@ -4,7 +4,6 @@
 #include "net/network.h"
 #include "net/actions.h"
 #include <string.h>
-#include <stdio.h>
 
 static void	process_answer(t_net *net, t_msg *msg, t_qst *qst)
 {
@@ -12,9 +11,21 @@ static void	process_answer(t_net *net, t_msg *msg, t_qst *qst)
 	if (strncmp(msg->msg, "ANSWER:", strlen("ANSWER:")) != 0)
 		return ;
 
-	if (check_win(msg->msg + strlen("ANSWER:"), qst))
-		announce_winner(net);
-	//printf("Received '%s'\n", msg->msg);
+	char *payload = msg->msg + strlen("ANSWER:");
+
+	char *separator = strchr(payload, '|');
+	if (!separator)
+		return ;
+
+	char name[256];
+	int name_len = separator - payload;
+	strncpy(name, payload, name_len);
+	name[name_len] = '\0';
+
+	char *ans = separator + 1;
+
+	if (check_win(ans, qst))
+		announce_winner(net, name, ans);
 }
 
 void	process_msg_host(t_net *net, t_qst *qst)

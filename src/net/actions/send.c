@@ -2,6 +2,8 @@
 #include "net/state.h"
 #include <string.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <pwd.h>
 
 // HOST
 
@@ -21,9 +23,11 @@ void	announce_hosting(t_net *net)
 	net->last_heartbeat_sent = time(NULL);
 }
 
-void	announce_winner(t_net *net)
+void	announce_winner(t_net *net, char *name, char *ans)
 {
-	char message[] = "WINNER: XXX won !";
+	char message [256];
+	snprintf(message, sizeof(message), "WINNER:%s|%s", name, ans);
+
 	int sock = net->sock;
 	struct sockaddr_in dest = net->multicast_addr;
 
@@ -47,7 +51,13 @@ void	announce_question(t_net *net, char *qst)
 void	send_answer(int sock, struct sockaddr_in dest, char *answer)
 {
 	char buff[256];
-	snprintf(buff, sizeof(buff), "ANSWER:%s", answer);
+
+	int	uid = getuid();
+	struct passwd *passwd = getpwuid(uid);
+	if (!passwd)
+		return ;
+
+	snprintf(buff, sizeof(buff), "ANSWER:%s|%s", passwd->pw_name, answer);
 	sendto(sock, buff, strlen(buff) + 1, 0, (struct sockaddr*)&dest, sizeof(dest));
 }
 

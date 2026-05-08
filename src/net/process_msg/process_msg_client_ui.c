@@ -11,12 +11,22 @@ static void	process_winner(t_ui *ui, t_msg *msg, t_game *game)
 	if (strncmp(msg->msg, "WINNER:", strlen("WINNER:")) != 0)
 		return ;
 
-	char *name = "temp name";
-	char *answer = "temp answer";
+	char *payload = msg->msg + strlen("WINNER:");
+
+	char *separator = strchr(payload, '|');
+	if (!separator)
+		return ;
+
+	char name[256];
+	int name_len = separator - payload;
+	strncpy(name, payload, name_len);
+	name[name_len] = '\0';
+
+	char *ans = separator + 1;
 
 	float winner_time = get_time() - ui->time_question_popped;
 
-	add_msg_popup(ui, name, answer, true, winner_time);
+	add_msg_popup(ui, name, ans, true, winner_time);
 	game->state = RESULTS;
 }
 

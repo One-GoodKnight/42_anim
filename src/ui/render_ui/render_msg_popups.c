@@ -6,7 +6,9 @@
 
 static void	render_popup(t_msg_popup popup, Font font)
 {
-	DrawTextEx(font, popup.msg, (Vector2){popup.x, popup.y}, (float)font.baseSize, FONT_SPACING, FONT_COLOR);
+	DrawTextEx(font, popup.name, (Vector2){popup.x, popup.y}, (float)font.baseSize, FONT_SPACING, FONT_COLOR);
+
+	DrawTextEx(font, popup.msg, (Vector2){popup.x, popup.y + 25}, (float)font.baseSize, FONT_SPACING, FONT_COLOR);
 
 	if (popup.winner == false)
 		return ;
@@ -14,7 +16,7 @@ static void	render_popup(t_msg_popup popup, Font font)
 	char	time_text[256];
 	snprintf(time_text, sizeof(time_text), "%.2f", popup.win_time);
 
-	DrawTextEx(font, time_text, (Vector2){popup.x, popup.y + 20}, (float)font.baseSize, FONT_SPACING, FONT_COLOR);
+	DrawTextEx(font, time_text, (Vector2){popup.x + 100, popup.y}, (float)font.baseSize, FONT_SPACING, FONT_COLOR);
 }
 
 void	render_msg_popups(t_ui *ui, Font font)

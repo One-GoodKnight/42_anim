@@ -21,6 +21,27 @@ static int	release_window(t_ui *ui, t_vec *messages, int ret)
 	return (ret);
 }
 
+static int handle_network(t_net *net, t_ui *ui, t_qst *qst, t_game *game)
+{
+	if (read_all_messages(net->sock, &net->messages) == -1)
+		return (-1);
+	handle_conflicts(net);
+
+	if (net->state == HOST)
+	{
+		announce_hosting(net);
+		process_msg_host(net, qst);
+	}
+
+	// todo: become a host if the host left
+	process_msg_client(net, game);
+	process_msg_client_ui(net, ui, game);
+
+	vec_clear(&net->messages);
+
+	return (0);
+}
+
 int	game_loop(t_net *net, t_qst *qst, t_game *game)
 {
 	t_ui				ui;
@@ -35,26 +56,13 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 	if (load_assets(&ui) == -1)
 		return (release_ui(&ui));
 
-	while (game->state != FINNISHED)
+	while (game->state != FINISHED)
 	{
 		if (IsKeyPressed(KEY_ESCAPE))
 			return (release_window(&ui, &net->messages, 0));
 
-		if (read_all_messages(net->sock, &net->messages) == -1)
+		if (handle_network(net, &ui, qst, game) == -1)
 			return (release_window(&ui, &net->messages, -1));
-		handle_conflicts(net);
-
-		if (net->state == HOST)
-		{
-			announce_hosting(net);
-			process_msg_host(net, qst);
-		}
-
-		// todo: become a host if the host left
-		process_msg_client(net, game);
-		process_msg_client_ui(net, &ui, game);
-
-		vec_clear(&net->messages);
 
 		handle_input(&input);
 
@@ -65,7 +73,7 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 		{
 			ui.result_screen_time_left -= ui.dt;
 			if (ui.result_screen_time_left <= 0)
-				game->state = FINNISHED;
+				game->state = FINISHED;
 		}
 
 		update_ui(&ui, &pid);

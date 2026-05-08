@@ -55,7 +55,7 @@ typedef struct s_ui
 
 	// assets
 	t_fonts		fonts;
-	Texture2D			logo;
+	Texture2D	logo;
 }	t_ui;
 
 void	init_ui(t_ui *ui);

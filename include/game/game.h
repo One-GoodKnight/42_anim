@@ -6,7 +6,7 @@ typedef enum e_game_state
 	WAITING,
 	IN_GAME,
 	RESULTS,
-	FINNISHED,
+	FINISHED,
 }	t_game_state;
 
 typedef struct s_game

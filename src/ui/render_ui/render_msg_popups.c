@@ -33,16 +33,33 @@ static void	render_time(t_msg_popup popup, Font font, int popup_width)
 	DrawTextEx(font, time_text, (Vector2){x, y}, (float)font.baseSize, FONT_SPACING, FONT_COLOR);
 }
 
+static void	render_borders(t_msg_popup popup, int width, int height)
+{
+	int	offset = POPUP_BORDER_OFFSET;
+
+	DrawRectangle(popup.x - offset, popup.y - POPUP_BORDER_OFFSET, width + offset * 2, POPUP_BORDER_THICKNESS, BORDER_COLOR);
+
+	DrawRectangle(popup.x + width + POPUP_BORDER_OFFSET, popup.y - offset, POPUP_BORDER_THICKNESS, height + offset * 2, BORDER_COLOR);
+
+	DrawRectangle(popup.x - offset, popup.y + height + POPUP_BORDER_OFFSET, width + POPUP_BORDER_OFFSET * 2 + POPUP_BORDER_THICKNESS, POPUP_BORDER_THICKNESS, BORDER_COLOR);
+
+	DrawRectangle(popup.x - POPUP_BORDER_OFFSET, popup.y - offset, POPUP_BORDER_THICKNESS, height + offset * 2, BORDER_COLOR);
+}
+
 static void	render_popup(t_msg_popup popup, Font font)
 {
 	int	popup_width = min_width(popup, font);
+	int font_height = MeasureTextEx(font, "|", (float)font.baseSize, FONT_SPACING).y;
+	int	popup_height = font_height * 2 + SEPARATION_HEADER_MSG;
 
 	DrawTextEx(font, popup.name, (Vector2){popup.x, popup.y}, (float)font.baseSize, FONT_SPACING, FONT_COLOR);
 
-	DrawTextEx(font, popup.msg, (Vector2){popup.x, popup.y + 25}, (float)font.baseSize, FONT_SPACING, FONT_COLOR);
+	DrawTextEx(font, popup.msg, (Vector2){popup.x, popup.y + font_height + SEPARATION_HEADER_MSG + 3}, (float)font.baseSize, FONT_SPACING, FONT_COLOR);
 
 	if (popup.winner)
 		render_time(popup, font, popup_width);
+
+	render_borders(popup, popup_width, popup_height);
 }
 
 void	render_msg_popups(t_ui *ui, Font font)

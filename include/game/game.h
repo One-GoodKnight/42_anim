@@ -1,6 +1,9 @@
 #ifndef GAME_H
 # define GAME_H
 
+# include "game/question.h"
+# include <stdbool.h>
+
 typedef enum e_game_state
 {
 	WAITING,
@@ -17,5 +20,6 @@ typedef struct s_game
 }	t_game;
 
 void	init_game(t_game *game);
+bool	check_win(char *answer, t_qst *qst);
 
 #endif

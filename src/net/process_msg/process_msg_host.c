@@ -1,4 +1,4 @@
-#include "game/check_win.h"
+#include "game/game.h"
 #include "game/question.h"
 #include "net/message.h"
 #include "net/network.h"

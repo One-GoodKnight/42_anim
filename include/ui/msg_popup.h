@@ -6,6 +6,11 @@
 # define WINNER_TTL 3
 # define STD_TTL	1
 
+# define POPUP_BORDER_OFFSET 6
+# define POPUP_BORDER_THICKNESS 2
+
+# define SEPARATION_HEADER_MSG 3
+
 typedef struct	s_msg_popup
 {
 	char				name[256];

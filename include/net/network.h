@@ -4,8 +4,6 @@
 # define MULTICAST_ADDR "239.74.74.74"
 # define PORT 7474
 
-# define HOST_HEARTBEAT_DELAY 1
-
 # include "net/state.h"
 # include "vector.h"
 # include <time.h>

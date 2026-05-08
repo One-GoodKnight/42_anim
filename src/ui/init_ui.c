@@ -38,6 +38,8 @@ void	init_ui(t_ui *ui)
 	ui->bottom_right_corner.org.x += local_offset;
 	ui->bottom_right_corner.org.y += local_offset;
 
+	ui->result_screen_time_left = 0;
+
 	ui->result_screen_time_left = RESULT_SCREEN_TIME;
 
 	vec_init(&ui->messages_popups, sizeof(t_msg_popup), NULL);

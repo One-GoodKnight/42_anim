@@ -42,6 +42,8 @@ typedef struct s_ui
 	t_corner	bottom_right_corner;
 	t_corner	bottom_left_corner;
 
+	float		time_question_popped;
+
 	float		result_screen_time_left;
 
 	t_vec		messages_popups;

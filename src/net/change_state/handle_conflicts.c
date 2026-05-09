@@ -27,6 +27,6 @@ void	handle_conflicts(t_net *net, t_game *game)
 	}
 
 	// terminate window if no host
-	if (time(NULL) - net->last_heartbeat_received >= HOST_TIMEOUT)
+	if (game && time(NULL) - net->last_heartbeat_received >= HOST_TIMEOUT)
 		game->state = FINISHED;
 }

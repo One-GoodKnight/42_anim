@@ -33,6 +33,7 @@ void	announce_winner(t_net *net, char *name, char *ans)
 
 	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
 	net->winner_message_sent = true;
+	printf("Winner announced\n");
 }
 
 void	announce_attempt(t_net *net, char *name, char *ans)
@@ -55,6 +56,7 @@ void	announce_question(t_net *net, char *qst)
 	struct sockaddr_in dest = net->multicast_addr;
 
 	sendto(sock, buff, strlen(buff) + 1, 0, (struct sockaddr*)&dest, sizeof(dest));
+	printf("Question announced\n");
 }
 
 

@@ -3,6 +3,8 @@
 
 # include "file_op/data.h"
 
+# define DEBUG_EASY_QST 1
+
 # define MAX_ADDITION_SUBSTRACTION 100
 # define MAX_MULTIPLICATION 20
 

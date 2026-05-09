@@ -8,5 +8,6 @@
 
 int	lobby_loop(t_data *data, t_net *net, t_qst *qst, t_game *game);
 int	game_loop(t_net *net, t_qst *qst, t_game *game);
+int host_bg_loop(t_net *net, t_qst *qst);
 
 #endif

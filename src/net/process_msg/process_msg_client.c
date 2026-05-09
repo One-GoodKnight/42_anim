@@ -23,6 +23,7 @@ static void	process_question(t_net *net, t_msg *msg, t_game *game)
 	strcpy(game->question, msg->msg + prefix_len);
 
 	game->state = IN_GAME;
+	net->last_heartbeat_received = time(NULL);
 	printf("Received a question\n");
 }
 

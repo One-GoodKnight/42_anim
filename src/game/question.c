@@ -4,6 +4,17 @@
 
 void	init_question(t_qst *qst, t_data *data)
 {
+	if (DEBUG_EASY_QST == 1)
+	{
+		qst->mode = STR;
+		qst->data.qst.text = malloc(2);
+		qst->data.qst.utf8 = malloc(2);
+		strcpy((char *)qst->data.qst.text, "1");
+		strcpy((char *)qst->data.qst.utf8, "1");
+		qst->data.str_qst.ans = qst->data.qst.text;
+		return ;
+	}
+
 	qst->data.qst.text = NULL;
 	qst->data.qst.utf8 = NULL;
 	qst->mode = rand() % (MODE_COUNT);

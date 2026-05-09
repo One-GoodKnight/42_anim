@@ -5,6 +5,7 @@
 
 void	reset_net_game_state(t_net *net)
 {
+	vec_clear(&net->messages);
 	net->winner_message_sent = false;
 	net->next_game_cooldown = NEXT_GAME_COOLDOWN;
 }

@@ -36,18 +36,25 @@ int	main(void)
 		return (1);
 	if (init_net(&net) == -1)
 		return release_mem(&data, NULL, NULL, 1);
-	init_game(&game);
 
 	while (1)
 	{
 		reset_net_game_state(&net);
+		init_game(&game);
 
 		// waiting for a game to start
+		printf("lobby loop\n");
 		if (lobby_loop(&data, &net, &qst, &game) == -1)
 			return (1);
 
 		// in the game (window open)
+		printf("game loop\n");
 		if (game_loop(&net, &qst, &game) == -1)
+			return (1);
+
+		// let the host pursue the game orchestration with it's window closed
+		printf("host bg loop\n");
+		if (host_bg_loop(&net, &qst) == -1)
 			return (1);
 	}
 

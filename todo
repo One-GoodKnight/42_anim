@@ -4,5 +4,8 @@ better contrl + (del | supp)
 remove spaces at the end when checking the end
 
 wait between games
-if the user leaves the interface, keep the game running in background
-make cursor blink
+if the host leaves the interface, keep the game running in background
+max game duration
+
+make the train take the same amount of time to travel on different screen resolutions
+make better random pos for small screen resolutions

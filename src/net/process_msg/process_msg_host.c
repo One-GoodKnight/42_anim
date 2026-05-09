@@ -25,10 +25,19 @@ static void	process_answer(t_net *net, t_msg *msg, t_qst *qst)
 	char *ans = separator + 1;
 
 	printf("receiving attempt\n");
-	if (net->winner_message_sent == false && check_win(ans, qst))
+	if (net->game_ended == false && check_win(ans, qst))
 		announce_winner(net, name, ans);
 	else
 		announce_attempt(net, name, ans);
+}
+
+static void	process_playing(t_net *net, t_msg *msg)
+{
+	if (strncmp(msg->msg, "PLAYING", strlen("PLAYING")) != 0)
+		return ;
+
+	net->last_heartbeat_received_playing = time(NULL);
+	printf("Received playing\n");
 }
 
 void	process_msg_host(t_net *net, t_qst *qst)
@@ -38,5 +47,6 @@ void	process_msg_host(t_net *net, t_qst *qst)
 	{
 		t_msg *msg = vec_get(&net->messages, i++);
 		process_answer(net, msg, qst);
+		process_playing(net, msg);
 	}
 }

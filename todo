@@ -3,6 +3,4 @@ shuffle letters inside current words only, not outside it
 better contrl + (del | supp)
 remove spaces at the end when checking the end
 
-wait between games
-? transmit next_game_cooldown from host to host
 ? check if no client while in host bg loop

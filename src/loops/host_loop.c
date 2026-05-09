@@ -16,7 +16,7 @@ static void tick_qst(t_net *net, t_qst *qst, float dt)
 
 static void	check_game_timeout(t_net *net, t_qst *qst)
 {
-	if (net->winner_message_sent == true)
+	if (net->game_ended == true)
 		return ;
 
 	if (time(NULL) - net->game_start >= GAME_TIMEOUT)
@@ -32,16 +32,21 @@ void	host_loop_helper(t_net *net, t_qst *qst, float dt)
 	check_game_timeout(net, qst);
 }
 
+static bool	clients_playing(t_net *net)
+{
+	if (time(NULL) - net->last_heartbeat_received_playing >= HOST_BG_LOOP_NO_CLIENT_TIMEOUT)
+		return (false);
+
+	return (true);
+}
+
 int host_bg_loop(t_net *net, t_qst *qst)
 {
 	if (net->state != HOST)
 		return (0);
 
-	while (1)
+	while (net->game_ended == false && clients_playing(net))
 	{
-		if (net->winner_message_sent == true)
-			return (0);
-
 		if (read_all_messages(net->sock, &net->messages) == -1)
 			return (-1);
 

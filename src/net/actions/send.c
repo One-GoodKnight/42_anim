@@ -31,7 +31,7 @@ void	announce_winner(t_net *net, char *name, char *ans)
 	struct sockaddr_in dest = net->multicast_addr;
 
 	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
-	net->winner_message_sent = true;
+	net->game_ended = true;
 	net->next_game_cooldown = NEXT_GAME_COOLDOWN;
 	printf("Winner announced\n");
 }
@@ -56,7 +56,7 @@ void	announce_timeout(t_net *net, char *ans)
 	struct sockaddr_in dest = net->multicast_addr;
 
 	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
-	net->winner_message_sent = true;  // stop processing answers
+	net->game_ended = true;  // stop processing answers
 	net->next_game_cooldown = NEXT_GAME_COOLDOWN;
 	printf("Timeout announced\n");
 }
@@ -111,3 +111,14 @@ void	send_answer(int sock, struct sockaddr_in dest, char *answer)
 	sendto(sock, buff, strlen(buff) + 1, 0, (struct sockaddr*)&dest, sizeof(dest));
 }
 
+void	send_playing(t_net *net)
+{
+	if (net->last_heartbeat_sent_playing == time(NULL))
+		return ;
+
+	char message[] = "PLAYING";
+	struct sockaddr_in dest = net->host_addr;
+
+	sendto(net->sock, message, strlen(message) + 1, 0, (struct sockaddr*)&dest, sizeof(dest));
+	net->last_heartbeat_sent_playing = time(NULL);
+}

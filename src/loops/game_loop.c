@@ -76,6 +76,9 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 		if (handle_network(net, &ui, qst, game, &input) == -1)
 			return (release_window(&ui, &net->messages, -1));
 
+		if (net->state == CLIENT)
+			send_playing(net);
+
 		handle_input(&input);
 
 		if (ui.state == COMPLETE && IsKeyPressed(KEY_ENTER) && strlen((char *)input.text) > 0)

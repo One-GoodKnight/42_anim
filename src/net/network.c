@@ -9,7 +9,7 @@ void	reset_net_game_state(t_net *net)
 	vec_clear(&net->messages);
 	net->game_start = DBL_MAX;
 	net->send_qst_cd = SEND_QUESTION_COOLDOWN;
-	net->winner_message_sent = false;
+	net->game_ended = false;
 }
 
 int	init_net(t_net *net)
@@ -35,8 +35,11 @@ int	init_net(t_net *net)
 	net->game_start = DBL_MAX;
 	net->send_qst_cd = 0;
 
-	net->last_heartbeat_received = 0;
+	net->last_heartbeat_sent = 0;
 	net->last_heartbeat_received = time(NULL);
+
+	net->last_heartbeat_sent_playing = 0;
+	net->last_heartbeat_received_playing = time(NULL);
 
 	reset_net_game_state(net);
 

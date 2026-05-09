@@ -6,6 +6,8 @@
 # include "game/game.h"
 # include "game/question.h"
 
+# define EXIT_PROGRAM 1
+
 int		lobby_loop(t_data *data, t_net *net, t_qst *qst, t_game *game);
 int		game_loop(t_net *net, t_qst *qst, t_game *game);
 

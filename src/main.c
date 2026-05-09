@@ -16,8 +16,8 @@
 static int release_mem(t_data *data, t_net *net, t_qst *qst, int ret)
 {
 	free_array((void *)data->lines);
-	free_qst(qst);
 	clean_net(net);
+	free_qst(qst);
 
 	return (ret);
 }
@@ -44,17 +44,20 @@ int	main(void)
 		// waiting for a game to start
 		printf("lobby loop\n");
 		if (lobby_loop(&data, &net, &qst, &game) == -1)
-			return (1);
+			return release_mem(&data, &net, &qst, 1);
 
 		// in the game (window open)
 		printf("game loop\n");
-		if (game_loop(&net, &qst, &game) == -1)
-			return (1);
+		int loop_ret = game_loop(&net, &qst, &game);
+		if (loop_ret == -1)
+			return release_mem(&data, &net, &qst, 1);
+		if (loop_ret == EXIT_PROGRAM)
+			return release_mem(&data, &net, &qst, 0);
 
 		// let the host pursue the game orchestration with it's window closed
 		printf("host bg loop\n");
 		if (host_bg_loop(&net, &qst) == -1)
-			return (1);
+			return release_mem(&data, &net, &qst, 1);
 	}
 
 	release_mem(&data, &net, &qst, 0);

@@ -70,6 +70,8 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 
 	while (game->state != FINISHED)
 	{
+		if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_ESCAPE))
+			return (release_window(&ui, &net->messages, EXIT_PROGRAM));
 		if (WindowShouldClose())
 			return (release_window(&ui, &net->messages, 0));
 

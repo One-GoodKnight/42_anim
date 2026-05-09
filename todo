@@ -1,6 +1,3 @@
 accents lower case
 shuffle letters inside current words only, not outside it
 better contrl + (del | supp)
-remove spaces at the end when checking the end
-
-? check if no client while in host bg loop

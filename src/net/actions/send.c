@@ -16,7 +16,7 @@ void	announce_hosting(t_net *net)
 	int sock = net->sock;
 	struct sockaddr_in dest = net->multicast_addr;
 
-	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
+	sendto(sock, message, strlen(message) + 1, 0, (struct sockaddr*)&dest, sizeof(dest));
 	
 	net->last_heartbeat_sent = time(NULL);
 	printf("I am the host\n");
@@ -30,7 +30,7 @@ void	announce_winner(t_net *net, char *name, char *ans)
 	int sock = net->sock;
 	struct sockaddr_in dest = net->multicast_addr;
 
-	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
+	sendto(sock, message, strlen(message) + 1, 0, (struct sockaddr*)&dest, sizeof(dest));
 	net->game_ended = true;
 	net->next_game_cooldown = NEXT_GAME_COOLDOWN;
 	printf("Winner announced\n");
@@ -44,7 +44,7 @@ void	announce_attempt(t_net *net, char *name, char *ans)
 	int sock = net->sock;
 	struct sockaddr_in dest = net->multicast_addr;
 
-	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
+	sendto(sock, message, strlen(message) + 1, 0, (struct sockaddr*)&dest, sizeof(dest));
 }
 
 void	announce_timeout(t_net *net, char *ans)
@@ -55,7 +55,7 @@ void	announce_timeout(t_net *net, char *ans)
 	int sock = net->sock;
 	struct sockaddr_in dest = net->multicast_addr;
 
-	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
+	sendto(sock, message, strlen(message) + 1, 0, (struct sockaddr*)&dest, sizeof(dest));
 	net->game_ended = true;  // stop processing answers
 	net->next_game_cooldown = NEXT_GAME_COOLDOWN;
 	printf("Timeout announced\n");
@@ -69,7 +69,7 @@ void	announce_next_game_cd(t_net *net)
 	int sock = net->sock;
 	struct sockaddr_in dest = net->multicast_addr;
 
-	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
+	sendto(sock, message, strlen(message) + 1, 0, (struct sockaddr*)&dest, sizeof(dest));
 }
 
 void	announce_start(t_net *net)
@@ -78,7 +78,7 @@ void	announce_start(t_net *net)
 	int sock = net->sock;
 	struct sockaddr_in dest = net->multicast_addr;
 
-	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
+	sendto(sock, message, strlen(message) + 1, 0, (struct sockaddr*)&dest, sizeof(dest));
 	printf("Start announced\n");
 }
 

@@ -22,6 +22,7 @@ SRCS			:= 								\
 	net/actions/send.c							\
 	net/actions/listen.c						\
 												\
+	net/change_state/check_host_timeout.c		\
 	net/change_state/handle_conflicts.c			\
 	net/change_state/set_initial_state.c		\
 												\

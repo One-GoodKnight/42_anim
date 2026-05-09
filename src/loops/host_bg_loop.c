@@ -10,18 +10,15 @@ int host_bg_loop(t_net *net, t_qst *qst)
 
 	while (1)
 	{
-		if (net->winner_message_sent == true)
+		if (net->winner_message_sent == true) // todo: also exit on game timeout
 			return (0);
 
 		if (read_all_messages(net->sock, &net->messages) == -1)
 			return (-1);
-		handle_conflicts(net, NULL);
+		handle_conflicts(net);
 
-		if (net->state == HOST)
-		{
-			announce_hosting(net);
-			process_msg_host(net, qst);
-		}
+		announce_hosting(net);
+		process_msg_host(net, qst);
 
 		usleep(0.016 * 1000000);
 	}

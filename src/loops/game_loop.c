@@ -2,6 +2,7 @@
 #include "game/question.h"
 #include "net/actions.h"
 #include "net/process_msg.h"
+#include "net/state.h"
 #include "ui/render_ui/render_ui.h"
 #include "ui/update_ui/pid_controller.h"
 #include "ui/ui.h"
@@ -10,8 +11,6 @@
 #include "window/window.h"
 #include "raylib.h"
 #include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 static int	release_window(t_ui *ui, t_vec *messages, int ret)
 {
@@ -27,7 +26,8 @@ static int handle_network(t_net *net, t_ui *ui, t_qst *qst, t_game *game)
 {
 	if (read_all_messages(net->sock, &net->messages) == -1)
 		return (-1);
-	handle_conflicts(net, game);
+	handle_conflicts(net);
+	check_host_timeout(net, game);
 
 	if (net->state == HOST)
 	{

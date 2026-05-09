@@ -5,7 +5,7 @@
 #include "string.h"
 #include <stdio.h>
 
-void	handle_conflicts(t_net *net, t_game *game)
+void	handle_conflicts(t_net *net)
 {
 	int i = 0;
 	while (i < net->messages.size)
@@ -25,8 +25,4 @@ void	handle_conflicts(t_net *net, t_game *game)
 			net->last_heartbeat_received = time(NULL);
 		}
 	}
-
-	// terminate window if no host
-	if (game && time(NULL) - net->last_heartbeat_received >= HOST_TIMEOUT)
-		game->state = FINISHED;
 }

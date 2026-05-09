@@ -17,6 +17,7 @@ typedef enum e_net_state
 } t_net_state;
 
 int		set_initial_state(t_net *net);
-void	handle_conflicts(t_net *net, t_game *game);
+void	handle_conflicts(t_net *net);
+void	check_host_timeout(t_net *net, t_game *game);
 
 #endif

@@ -6,8 +6,8 @@
 
 typedef struct s_pid_controller
 {
-	float	p;
-	float	d;
+	double	p;
+	double	d;
 }	t_pid_controller;
 
 void	init_pid_controller(t_pid_controller *pid);

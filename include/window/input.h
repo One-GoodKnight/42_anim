@@ -14,7 +14,7 @@ typedef struct s_input
 	unsigned char	utf8[INPUT_MAX_LEN * 2 + 1];
 	size_t			len;
 	size_t			cursor_i;
-	float			blink;
+	double			blink;
 	bool			active;
 }	t_input;
 

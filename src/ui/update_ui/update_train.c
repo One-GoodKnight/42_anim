@@ -6,12 +6,6 @@ void	update_train(t_ui *ui, char *qst)
 {
 	t_train *pika_choo = &ui->pika_choo;
 
-	if (pika_choo->cooldown > 0)
-	{
-		pika_choo->cooldown -= ui->dt;
-		return ;
-	}
-
 	if (pika_choo->pos.x < ui->width)
 	{
 		pika_choo->vel.x += TRAIN_SPEED * ui->dt;

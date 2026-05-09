@@ -42,9 +42,9 @@ typedef struct s_ui
 	float		dt;
 	t_ui_state	state;
 
-	float 		fade_progress;
-	float		time_question_popped;
-	float		result_screen_time_left;
+	double 		fade_progress;
+	double		time_question_popped;
+	double		result_screen_time_left;
 
 	t_vec		messages_popups;
 

@@ -10,7 +10,7 @@
 # define LISTENING_PHASE_DURATION 2
 # define HOST_TIMEOUT 3
 
-# define SEND_QUESTION_COOLDOWN 0.2f  // time between announce start and announce qst
+# define SEND_QUESTION_COOLDOWN 1.5f  // time between announce start and announce qst
 
 # include "net/state.h"
 # include "vector.h"
@@ -29,14 +29,15 @@ typedef struct s_net
 	time_t				last_heartbeat_sent;
 	time_t				last_heartbeat_received;
 
+	double				next_game_cooldown;
+
 	// current game
 	t_vec				messages;
 
 	double				game_start;
-	float				send_qst_cd;
+	double				send_qst_cd;
 
 	bool				winner_message_sent;
-	float				next_game_cooldown; //todo
 }   t_net;
 
 int		init_net(t_net *net);

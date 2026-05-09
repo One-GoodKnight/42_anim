@@ -41,7 +41,7 @@ typedef struct s_corner
 	// floating animation
 	t_vector2	offset;
 
-	float		phase;  // random start in the trig circle
+	double		phase;  // random start in the trig circle
 }	t_corner;
 
 void	init_corner(t_ui *ui, t_corner *corner, int x, int y, t_dir line_one_dir, int line_one_length, t_dir line_two_dir, int line_two_length);

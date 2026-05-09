@@ -4,6 +4,7 @@
 #include "net/network.h"
 #include "net/actions.h"
 #include <string.h>
+#include <stdio.h>
 
 static void	process_answer(t_net *net, t_msg *msg, t_qst *qst)
 {
@@ -23,6 +24,7 @@ static void	process_answer(t_net *net, t_msg *msg, t_qst *qst)
 
 	char *ans = separator + 1;
 
+	printf("receiving attempt\n");
 	if (net->winner_message_sent == false && check_win(ans, qst))
 		announce_winner(net, name, ans);
 	else

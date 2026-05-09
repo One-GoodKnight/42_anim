@@ -46,8 +46,6 @@ void	init_train(t_ui *ui)
 
 	pika_choo->vel.x = TRAIN_INIT_VEL;
 	pika_choo->vel.y = 0;
-
-	pika_choo->cooldown = TRAIN_COOLDOWN;
 }
 
 void	init_ui(t_ui *ui)

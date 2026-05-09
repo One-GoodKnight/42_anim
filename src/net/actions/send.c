@@ -32,6 +32,7 @@ void	announce_winner(t_net *net, char *name, char *ans)
 
 	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
 	net->winner_message_sent = true;
+	net->next_game_cooldown = NEXT_GAME_COOLDOWN;
 	printf("Winner announced\n");
 }
 

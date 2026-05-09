@@ -40,6 +40,8 @@ int	main(void)
 
 	while (1)
 	{
+		reset_net_game_state(&net);
+
 		// waiting for a game to start
 		if (lobby_loop(&data, &net, &qst, &game) == -1)
 			return (1);

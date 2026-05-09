@@ -3,6 +3,12 @@
 #include "net/setup_sock_addr.h"
 #include <arpa/inet.h>
 
+void	reset_net_game_state(t_net *net)
+{
+	net->winner_message_sent = false;
+	net->next_game_cooldown = NEXT_GAME_COOLDOWN;
+}
+
 int	init_net(t_net *net)
 {
 	vec_init(&net->messages, sizeof(t_msg), NULL);
@@ -21,6 +27,8 @@ int	init_net(t_net *net)
 	}
 
 	net->last_heartbeat_received = time(NULL);
+
+	reset_net_game_state(net);
 
 	return (0);
 }

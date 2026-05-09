@@ -24,7 +24,7 @@ static void	process_answer(t_net *net, t_msg *msg, t_qst *qst)
 
 	char *ans = separator + 1;
 
-	if (check_win(ans, qst))
+	if (net->winner_message_sent == false && check_win(ans, qst))
 		announce_winner(net, name, ans);
 	else
 		announce_attempt(net, name, ans);

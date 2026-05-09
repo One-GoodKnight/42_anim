@@ -1,11 +1,13 @@
 #ifndef NETWORK_H
 # define NETWORK_H
 
+# define MULTICAST_ADDR "239.74.74.74"
+# define PORT 7474
+
 # define LISTENING_PHASE_DURATION 2
 # define HOST_TIMEOUT 3
 
-# define MULTICAST_ADDR "239.74.74.74"
-# define PORT 7474
+# define NEXT_GAME_COOLDOWN 10
 
 # include "net/state.h"
 # include "vector.h"
@@ -25,9 +27,13 @@ typedef struct s_net
 
 	time_t				last_heartbeat_sent;
 	time_t				last_heartbeat_received;
+
+	bool				winner_message_sent;
+	float				next_game_cooldown; //todo
 }   t_net;
 
 int		init_net(t_net *net);
+void	reset_net_game_state(t_net *net);
 void	clean_net(t_net *net);
 void	set_to_host(t_net *net);
 int		get_my_addr(struct in_addr *addr);

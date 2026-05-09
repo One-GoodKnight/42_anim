@@ -13,6 +13,7 @@ void	init_input(t_input *input)
 	input->len = 0;
 	input->cursor_i = 1;
 	input->blink = 0;
+	input->active = false;
 }
 
 void	update_utf8(t_input *input)
@@ -22,6 +23,9 @@ void	update_utf8(t_input *input)
 
 void	handle_input(t_input *input)
 {
+	if (input->active == false)
+		return ;
+
 	int key = GetCharPressed();
 	while (key > 0)
 	{

@@ -13,18 +13,14 @@ static void	process_hosting(t_net *net, t_msg *msg)
 	printf("Received host heartbeat\n");
 }
 
-static void	process_question(t_net *net, t_msg *msg, t_game *game)
+static void	process_start(t_net *net, t_msg *msg, t_game *game)
 {
-	(void)net;
-	if (strncmp(msg->msg, "QUESTION:", strlen("QUESTION:")) != 0)
+	if (strncmp(msg->msg, "STARTING", strlen("STARTING")) != 0)
 		return ;
-
-	int prefix_len = strlen("QUESTION:");
-	strcpy(game->question, msg->msg + prefix_len);
 
 	game->state = IN_GAME;
 	net->last_heartbeat_received = time(NULL);
-	printf("Received a question\n");
+	printf("Received start announcement\n");
 }
 
 void	process_msg_client(t_net *net, t_game *game)
@@ -34,6 +30,6 @@ void	process_msg_client(t_net *net, t_game *game)
 	{
 		t_msg *msg = vec_get(&net->messages, i++);
 		process_hosting(net, msg);
-		process_question(net, msg, game);
+		process_start(net, msg, game);
 	}
 }

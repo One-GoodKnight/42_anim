@@ -1,3 +1,4 @@
+#include "game/game.h"
 #include "ui/update_ui/pid_controller.h"
 #include "ui/update_ui/update_ui.h"
 #include "ui/ui.h"
@@ -23,7 +24,8 @@ void	update_ui(t_ui *ui, t_pid_controller *pid, char *qst)
 	if (ui->state == BACKGROUND_FADE)
 		fade(ui);
 
-	update_train(ui, qst);
+	if (qst[0] != '\0')
+		update_train(ui, qst);
 	apply_pid_controller(ui, *pid);
 	floating_corners(ui);
 	update_msg_popups(ui);

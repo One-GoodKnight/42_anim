@@ -7,7 +7,6 @@
 
 static void	process_answer(t_net *net, t_msg *msg, t_qst *qst)
 {
-	(void)net;
 	if (strncmp(msg->msg, "ANSWER:", strlen("ANSWER:")) != 0)
 		return ;
 

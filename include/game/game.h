@@ -8,6 +8,7 @@ typedef enum e_game_state
 {
 	WAITING,
 	IN_GAME,
+	QST_RECEIVED,
 	RESULTS,
 	FINISHED,
 }	t_game_state;

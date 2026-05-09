@@ -12,8 +12,6 @@ void	announce_hosting(t_net *net)
 	if (time(NULL) == net->last_heartbeat_sent)
 		return ;
 
-	printf("I am the host\n");
-
 	char message[] = "HOSTING";
 	int sock = net->sock;
 	struct sockaddr_in dest = net->multicast_addr;
@@ -21,6 +19,7 @@ void	announce_hosting(t_net *net)
 	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
 	
 	net->last_heartbeat_sent = time(NULL);
+	printf("I am the host\n");
 }
 
 void	announce_winner(t_net *net, char *name, char *ans)
@@ -45,6 +44,16 @@ void	announce_attempt(t_net *net, char *name, char *ans)
 	struct sockaddr_in dest = net->multicast_addr;
 
 	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
+}
+
+void	announce_start(t_net *net)
+{
+	char message[] = "STARTING";
+	int sock = net->sock;
+	struct sockaddr_in dest = net->multicast_addr;
+
+	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
+	printf("Start announced\n");
 }
 
 void	announce_question(t_net *net, char *qst)

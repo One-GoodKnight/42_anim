@@ -9,6 +9,7 @@
 #include "ui/update_ui/update_ui.h"
 #include "window/input.h"
 #include "window/window.h"
+#include "loops.h"
 #include "raylib.h"
 #include <string.h>
 
@@ -22,7 +23,7 @@ static int	release_window(t_ui *ui, t_vec *messages, int ret)
 	return (ret);
 }
 
-static int handle_network(t_net *net, t_ui *ui, t_qst *qst, t_game *game)
+static int handle_network(t_net *net, t_ui *ui, t_qst *qst, t_game *game, t_input *input)
 {
 	if (read_all_messages(net->sock, &net->messages) == -1)
 		return (-1);
@@ -30,20 +31,17 @@ static int handle_network(t_net *net, t_ui *ui, t_qst *qst, t_game *game)
 	check_host_timeout(net, game);
 
 	if (net->state == HOST)
-	{
-		announce_hosting(net);
-		process_msg_host(net, qst);
-	}
+		host_loop_helper(net, qst, ui->dt);
 
 	process_msg_client(net, game);
-	process_msg_client_ui(net, ui, game);
+	process_msg_client_ui(net, ui, game, input);
 
 	vec_clear(&net->messages);
 
 	return (0);
 }
 
-static void	handle_result(t_ui *ui, t_game *game)
+static void	tick_result_screen(t_ui *ui, t_game *game)
 {
 	if (game->state == RESULTS)
 	{
@@ -75,7 +73,7 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 		if (WindowShouldClose())
 			return (release_window(&ui, &net->messages, 0));
 
-		if (handle_network(net, &ui, qst, game) == -1)
+		if (handle_network(net, &ui, qst, game, &input) == -1)
 			return (release_window(&ui, &net->messages, -1));
 
 		handle_input(&input);
@@ -83,7 +81,7 @@ int	game_loop(t_net *net, t_qst *qst, t_game *game)
 		if (ui.state == COMPLETE && IsKeyPressed(KEY_ENTER) && strlen((char *)input.text) > 0)
 			send_answer(net->sock, net->host_addr, (char *)input.text);
 
-		handle_result(&ui, game);
+		tick_result_screen(&ui, game);
 
 		char *qst = (char *)game->question;
 		update_ui(&ui, &pid, qst);

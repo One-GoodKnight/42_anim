@@ -19,10 +19,10 @@ int	lobby_loop(t_data *data, t_net *net, t_qst *qst, t_game *game)
 			init_question(qst, data);
 			if (!qst->data.qst.text)
 				return (-1);
-			announce_question(net, (char *)qst->data.qst.utf8);
+			announce_start(net);
 		}
 
-		// both limit the framerate of the loop and wait for the question so game state changes to IN_GAME
+		// both limit the framerate of the loop and wait for the start packet so game state changes to IN_GAME
 		usleep(0.016 * 1000000);
 
 		if (read_all_messages(net->sock, &net->messages) == -1)

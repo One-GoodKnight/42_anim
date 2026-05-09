@@ -8,7 +8,7 @@ SRCS			:= 								\
 	file_op/gnl/gnl_utils.c						\
 												\
 	loops/game_loop.c							\
-	loops/host_bg_loop.c						\
+	loops/host_loop.c							\
 	loops/lobby_loop.c							\
 												\
 	game/check_win.c							\

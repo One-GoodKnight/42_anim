@@ -5,7 +5,9 @@
 #include "ui/update_ui/update_ui.h"
 #include "utils/utf8.h"
 #include "utils/utils.h"
+#include "window/input.h"
 #include <string.h>
+#include <stdio.h>
 
 static int helper_winner_or_attempt(char *msg, char name_utf8[512], char ans_utf8[512])
 {
@@ -60,12 +62,27 @@ static void process_attempt(t_ui *ui, t_msg *msg)
 	add_msg_popup(ui, name_utf8, ans_utf8, false, 0.0f);
 }
 
-void	process_msg_client_ui(t_net *net, t_ui *ui, t_game *game)
+static void	process_question(t_net *net, t_msg *msg, t_game *game, t_input *input)
+{
+	if (strncmp(msg->msg, "QUESTION:", strlen("QUESTION:")) != 0)
+		return ;
+
+	int prefix_len = strlen("QUESTION:");
+	strcpy(game->question, msg->msg + prefix_len);
+
+	game->state = QST_RECEIVED;
+	net->last_heartbeat_received = time(NULL);
+	input->active = true;
+	printf("Received a question\n");
+}
+
+void	process_msg_client_ui(t_net *net, t_ui *ui, t_game *game, t_input *input)
 {
 	int i = 0;
 	while (i < net->messages.size)
 	{
 		t_msg *msg = vec_get(&net->messages, i++);
+		process_question(net, msg, game, input);
 		process_winner(ui, msg, game);
 		process_attempt(ui, msg);
 	}

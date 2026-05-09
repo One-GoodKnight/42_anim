@@ -1,6 +1,7 @@
 #ifndef INPUT_H
 # define INPUT_H
 
+# include <stdbool.h>
 # include <stddef.h>
 
 # define INPUT_MAX_LEN 30
@@ -14,6 +15,7 @@ typedef struct s_input
 	size_t			len;
 	size_t			cursor_i;
 	float			blink;
+	bool			active;
 }	t_input;
 
 void	init_input(t_input *input);

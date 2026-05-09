@@ -38,6 +38,9 @@ static void	update_cursor_blink(t_input *input, float dt)
 
 void	render_input(t_ui *ui, char *qst, t_input *input, Font font)
 {
+	if (input->active == false)
+		return ;
+
 	int	qst_text_width = MeasureTextEx(font, qst, (float)font.baseSize, FONT_SPACING).x;
 
 	int	x = ui->width / 2 - qst_text_width / 2;

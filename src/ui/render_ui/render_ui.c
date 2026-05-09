@@ -52,9 +52,7 @@ void	render_ui(t_ui *ui, char *qst, t_input *input)
 	render_anim_text(ui, ui->fonts.font_anim);
 
 	render_msg_popups(ui, ui->fonts.font_popups);
-
-	if (qst[0] != '\0')  // avoid weird cursor placement (qst not received yet)
-		render_input(ui, qst, input, ui->fonts.font);
+	render_input(ui, qst, input, ui->fonts.font);
 
 	if (ui->show_qst)
 		render_question(ui, qst, ui->fonts.font);

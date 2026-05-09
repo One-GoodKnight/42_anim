@@ -2,11 +2,12 @@
 #include "net/network.h"
 #include "net/setup_sock_addr.h"
 #include <arpa/inet.h>
+#include <float.h>
 
 void	reset_net_game_state(t_net *net)
 {
 	vec_clear(&net->messages);
-	net->game_start = time(NULL);
+	net->game_start = DBL_MAX;
 	net->send_qst_cd = SEND_QUESTION_COOLDOWN;
 	net->winner_message_sent = false;
 }
@@ -30,7 +31,7 @@ int	init_net(t_net *net)
 
 	net->next_game_cooldown = 0;
 
-	net->game_start = 0;
+	net->game_start = DBL_MAX;
 	net->send_qst_cd = 0;
 
 	net->last_heartbeat_received = 0;

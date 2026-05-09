@@ -70,7 +70,7 @@ void	announce_next_game_cd(t_net *net)
 	struct sockaddr_in dest = net->multicast_addr;
 
 	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
-	printf("Next game cd announced\n");
+	//printf("Next game cd announced\n");
 }
 
 void	announce_start(t_net *net)

@@ -35,7 +35,7 @@ static void	process_next_game_cd(t_net *net, t_msg *msg)
 	int	prefix_length = strlen("NEXT_GAME_CD:");
 	net->next_game_cooldown = atof(msg->msg + prefix_length);
 
-	printf("Received cd\n");
+	//printf("Received cd:%s\n", msg->msg + prefix_length);
 }
 
 void	process_msg_client(t_net *net, t_game *game)
@@ -46,6 +46,6 @@ void	process_msg_client(t_net *net, t_game *game)
 		t_msg *msg = vec_get(&net->messages, i++);
 		process_hosting(net, msg);
 		process_start(net, msg, game);
-		//process_next_game_cd(net, msg);
+		process_next_game_cd(net, msg);
 	}
 }

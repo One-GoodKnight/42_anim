@@ -58,6 +58,8 @@ int	main(void)
 		printf("host bg loop\n");
 		if (host_bg_loop(&net, &qst) == -1)
 			return release_mem(&data, &net, &qst, 1);
+
+		free_qst(&qst);
 	}
 
 	release_mem(&data, &net, &qst, 0);

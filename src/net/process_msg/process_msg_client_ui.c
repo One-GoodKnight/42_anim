@@ -43,7 +43,6 @@ static void	process_winner(t_ui *ui, t_msg *msg, t_game *game)
 
 	float winner_time = get_time() - ui->time_question_popped;
 	
-	// 3 winner messages pog
 	add_msg_popup(ui, name_utf8, ans_utf8, true, winner_time);
 	game->state = RESULTS;
 }
@@ -60,6 +59,23 @@ static void process_attempt(t_ui *ui, t_msg *msg)
 		return ;
 
 	add_msg_popup(ui, name_utf8, ans_utf8, false, 0.0f);
+}
+
+static void	process_timeout(t_ui *ui, t_msg *msg, t_game *game)
+{
+	char ans_utf8[512];
+
+	if (strncmp(msg->msg, "TIMEOUT", strlen("TIMEOUT")) != 0)
+		return ;
+
+	int prefix_len = strlen("TIMEOUT:");
+	char *ans = msg->msg + prefix_len;
+
+	latin1_to_utf8((unsigned char *)ans_utf8, (unsigned char *)ans);
+
+	float winner_time = get_time() - ui->time_question_popped;
+	add_msg_popup(ui, "Time out", ans_utf8, true, winner_time);
+	game->state = RESULTS;
 }
 
 static void	process_question(t_net *net, t_msg *msg, t_game *game, t_input *input)
@@ -85,5 +101,6 @@ void	process_msg_client_ui(t_net *net, t_ui *ui, t_game *game, t_input *input)
 		process_question(net, msg, game, input);
 		process_winner(ui, msg, game);
 		process_attempt(ui, msg);
+		process_timeout(ui, msg, game);
 	}
 }

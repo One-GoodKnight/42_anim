@@ -46,6 +46,19 @@ void	announce_attempt(t_net *net, char *name, char *ans)
 	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
 }
 
+void	announce_timeout(t_net *net, char *ans)
+{
+	char message [256];
+	snprintf(message, sizeof(message), "TIMEOUT:%s", ans);
+
+	int sock = net->sock;
+	struct sockaddr_in dest = net->multicast_addr;
+
+	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
+	net->winner_message_sent = true;  // stop processing answers
+	printf("Timeout announced\n");
+}
+
 void	announce_start(t_net *net)
 {
 	char message[] = "STARTING";
@@ -65,6 +78,7 @@ void	announce_question(t_net *net, char *qst)
 	struct sockaddr_in dest = net->multicast_addr;
 
 	sendto(sock, buff, strlen(buff) + 1, 0, (struct sockaddr*)&dest, sizeof(dest));
+	net->game_start = time(NULL);
 	printf("Question announced\n");
 }
 

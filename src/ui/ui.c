@@ -37,7 +37,7 @@ void	init_train(t_ui *ui)
 	pika_choo->width = train_width;
 	
 	// make the train appear at the same x cord for all resolutions
-	// so that the text shows at the same time
+	// so that the questions shows at the same time
 	int	max_supported_width = 3840;
 	int	universal_relative_x = ui->width - max_supported_width;
 

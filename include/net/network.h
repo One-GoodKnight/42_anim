@@ -4,12 +4,13 @@
 # define MULTICAST_ADDR "239.74.74.74"
 # define PORT 7474
 
+# define NEXT_GAME_COOLDOWN 10
+# define GAME_TIMEOUT 33
+
 # define LISTENING_PHASE_DURATION 2
 # define HOST_TIMEOUT 3
 
 # define SEND_QUESTION_COOLDOWN 0.2f  // time between announce start and announce qst
-
-# define NEXT_GAME_COOLDOWN 10
 
 # include "net/state.h"
 # include "vector.h"
@@ -25,11 +26,13 @@ typedef struct s_net
 	struct sockaddr_in  multicast_addr;	// host to clients
 	struct sockaddr_in  host_addr;		// client to host
 	
-	t_vec				messages;
-
 	time_t				last_heartbeat_sent;
 	time_t				last_heartbeat_received;
 
+	// current game
+	t_vec				messages;
+
+	double				game_start;
 	float				send_qst_cd;
 
 	bool				winner_message_sent;

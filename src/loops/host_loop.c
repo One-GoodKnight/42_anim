@@ -2,6 +2,7 @@
 #include "net/network.h"
 #include "net/process_msg.h"
 #include "net/state.h"
+#include <stdio.h>
 
 static void tick_qst(t_net *net, t_qst *qst, float dt)
 {
@@ -13,12 +14,22 @@ static void tick_qst(t_net *net, t_qst *qst, float dt)
 		announce_question(net, (char *)qst->data.qst.utf8);
 }
 
+static void	check_game_timeout(t_net *net, t_qst *qst)
+{
+	if (net->winner_message_sent == true)
+		return ;
+
+	if (time(NULL) - net->game_start >= GAME_TIMEOUT)
+		announce_timeout(net, (char *)qst->data.qst.utf8);
+}
+
 void	host_loop_helper(t_net *net, t_qst *qst, float dt)
 {
 	handle_conflicts(net);
 	announce_hosting(net);
 	process_msg_host(net, qst);
 	tick_qst(net, qst, dt);
+	check_game_timeout(net, qst);
 }
 
 int host_bg_loop(t_net *net, t_qst *qst)

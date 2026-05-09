@@ -6,6 +6,7 @@
 void	reset_net_game_state(t_net *net)
 {
 	vec_clear(&net->messages);
+	net->game_start = time(NULL);
 	net->send_qst_cd = SEND_QUESTION_COOLDOWN;
 	net->winner_message_sent = false;
 	net->next_game_cooldown = NEXT_GAME_COOLDOWN;
@@ -28,6 +29,7 @@ int	init_net(t_net *net)
 		return (-1);
 	}
 
+	net->game_start = 0;
 	net->send_qst_cd = 0;
 
 	net->last_heartbeat_received = 0;

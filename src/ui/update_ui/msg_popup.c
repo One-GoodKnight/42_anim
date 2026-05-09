@@ -34,18 +34,22 @@ static int	compute_popup_height(Font font)
 
 static int	rand_x(t_ui *ui, int popup_width)
 {
-	int range = ui->width - popup_width - MIN_DIST_EDGE * 2;
+	float min_dist_edge = ui->width * (MIN_DIST_EDGE / 100.0f);
+
+	int range = ui->width - popup_width - min_dist_edge * 2;
 	if (range <= 0)
 		return (0);
-	return (rand() % range + MIN_DIST_EDGE);
+	return (rand() % range + min_dist_edge);
 }
 
 static int	rand_y(t_ui *ui, int popup_height)
 {
-	int range = ui->height - popup_height - MIN_DIST_EDGE * 2;
+	float min_dist_edge = ui->height * (MIN_DIST_EDGE / 100.0f);
+
+	int range = ui->height - popup_height - min_dist_edge * 2;
 	if (range <= 0)
 		return (0);
-	return (rand() % range + MIN_DIST_EDGE);
+	return (rand() % range + min_dist_edge);
 }
 
 static t_vector2	gen_random_pos(t_ui *ui, int popup_width, int popup_height)

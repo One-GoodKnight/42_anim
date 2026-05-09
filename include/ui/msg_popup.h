@@ -8,7 +8,7 @@
 
 # define MIN_DIST_CENTER_X 350
 # define MIN_DIST_CENTER_Y 250
-# define MIN_DIST_EDGE 250
+# define MIN_DIST_EDGE 5  // %
 
 # define POPUP_SPEED 5
 

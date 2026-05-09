@@ -9,7 +9,11 @@ static int	tick_next_game(t_data *data, t_net *net, t_qst *qst)
 {
 	net->next_game_cooldown -= 0.016f;
 
-	announce_next_game_cd(net);
+	if (net->next_game_cd_sent != time(NULL))
+	{
+		announce_next_game_cd(net);
+		net->next_game_cd_sent = time(NULL);
+	}
 
 	if (net->next_game_cooldown > 0)
 		return (0);

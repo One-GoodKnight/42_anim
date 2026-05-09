@@ -29,6 +29,7 @@ int	init_net(t_net *net)
 		return (-1);
 	}
 
+	net->next_game_cd_sent = 0;
 	net->next_game_cooldown = 0;
 
 	net->game_start = DBL_MAX;

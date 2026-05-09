@@ -34,8 +34,6 @@ static void	process_next_game_cd(t_net *net, t_msg *msg)
 
 	int	prefix_length = strlen("NEXT_GAME_CD:");
 	net->next_game_cooldown = atof(msg->msg + prefix_length);
-
-	//printf("Received cd:%s\n", msg->msg + prefix_length);
 }
 
 void	process_msg_client(t_net *net, t_game *game)

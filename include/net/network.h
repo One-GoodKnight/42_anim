@@ -29,6 +29,7 @@ typedef struct s_net
 	time_t				last_heartbeat_sent;
 	time_t				last_heartbeat_received;
 
+	time_t				next_game_cd_sent;
 	double				next_game_cooldown;
 
 	// current game

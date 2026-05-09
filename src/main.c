@@ -1,4 +1,3 @@
-#include "raylib.h"
 #include "file_op/data.h"
 #include "game/game.h"
 #include "game/question.h"

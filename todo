@@ -7,4 +7,4 @@ wait between games
 max game duration
 
 make the train take the same amount of time to travel on different screen resolutions
-make better random pos for small screen resolutions
+make trains start at the same time (decouple window opening bloat from start of the train)

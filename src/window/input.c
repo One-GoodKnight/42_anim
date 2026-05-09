@@ -12,6 +12,7 @@ void	init_input(t_input *input)
 	input->utf8[0] = '\0';
 	input->len = 0;
 	input->cursor_i = 1;
+	input->blink = 0;
 }
 
 void	update_utf8(t_input *input)

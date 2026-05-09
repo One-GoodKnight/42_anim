@@ -28,6 +28,14 @@ static void	render_text(t_input *input, Font font, int x, int y)
 	DrawTextEx(font, (char *)input->utf8, (Vector2){x, y}, (float)font.baseSize, FONT_SPACING, FONT_COLOR);
 }
 
+static void	update_cursor_blink(t_input *input, float dt)
+{
+	input->blink += dt;
+
+	while (input->blink >= BLINK * 2)
+		input->blink -= BLINK * 2;
+}
+
 void	render_input(t_ui *ui, char *qst, t_input *input, Font font)
 {
 	int	qst_text_width = MeasureTextEx(font, qst, (float)font.baseSize, FONT_SPACING).x;
@@ -37,5 +45,9 @@ void	render_input(t_ui *ui, char *qst, t_input *input, Font font)
 	y += TEXT_Y_OFFSET;
 
 	render_text(input, font, x, y);
+
+	update_cursor_blink(input, ui->dt);
+	if (input->blink > BLINK)
+		return ;
 	render_cursor(input, x, y, font);
 }

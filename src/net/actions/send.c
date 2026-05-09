@@ -57,7 +57,20 @@ void	announce_timeout(t_net *net, char *ans)
 
 	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
 	net->winner_message_sent = true;  // stop processing answers
+	net->next_game_cooldown = NEXT_GAME_COOLDOWN;
 	printf("Timeout announced\n");
+}
+
+void	announce_next_game_cd(t_net *net)
+{
+	char message [256];
+	snprintf(message, sizeof(message), "NEXT_GAME_CD:%f", net->next_game_cooldown);
+
+	int sock = net->sock;
+	struct sockaddr_in dest = net->multicast_addr;
+
+	sendto(sock, message, sizeof(message), 0, (struct sockaddr*)&dest, sizeof(dest));
+	printf("Next game cd announced\n");
 }
 
 void	announce_start(t_net *net)

@@ -29,8 +29,11 @@ int	lobby_loop(t_data *data, t_net *net, t_qst *qst, t_game *game)
 			set_to_host(net);
 
 		if (net->state == HOST)
+		{
+			announce_hosting(net);
 			if (tick_next_game(data, net, qst) == -1)
 				return (-1);
+		}
 
 		// both limit the framerate of the loop and wait for the start packet so game state changes to IN_GAME
 		usleep(0.016f * 1000000);

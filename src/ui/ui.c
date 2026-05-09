@@ -31,14 +31,18 @@ void	init_train(t_ui *ui)
 {
 	t_train *pika_choo = &ui->pika_choo;
 	int		train_width = ui->train.width;
-	int		screen_height = ui->height;
 
 	ui->show_qst = false;
 
 	pika_choo->width = train_width;
+	
+	// make the train appear at the same x cord for all resolutions
+	// so that the text shows at the same time
+	int	max_supported_width = 3840;
+	int	universal_relative_x = ui->width - max_supported_width;
 
-	pika_choo->pos.x = 0 - train_width;
-	pika_choo->pos.y = screen_height / 2.0f - 131;
+	pika_choo->pos.x = universal_relative_x - train_width;
+	pika_choo->pos.y = ui->height / 2.0f - 131;
 
 	pika_choo->vel.x = TRAIN_INIT_VEL;
 	pika_choo->vel.y = 0;

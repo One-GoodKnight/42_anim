@@ -7,7 +7,7 @@
 # define LISTENING_PHASE_DURATION 2
 # define HOST_TIMEOUT 3
 
-# define SEND_QUESTION_COOLDOWN 0.5f  // time between announce start and announce qst
+# define SEND_QUESTION_COOLDOWN 0.2f  // time between announce start and announce qst
 
 # define NEXT_GAME_COOLDOWN 10
 

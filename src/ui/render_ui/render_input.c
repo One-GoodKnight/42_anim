@@ -12,13 +12,14 @@ static int	spacing_width(Font font)
 
 static void	render_cursor(t_input *input, int x, int y, Font font)
 {
-	char	erased = input->text[input->cursor_i - 1];
-	input->text[input->cursor_i - 1] = '\0';
+	// make the text of the input end at cursor temporary to get width from start to cursor
+	char	erased = input->text[input->cursor_i];
+	input->text[input->cursor_i] = '\0';
 	int	text_width = MeasureTextEx(font, (char *)input->text, (float)font.baseSize, FONT_SPACING).x;
-	input->text[input->cursor_i - 1] = erased;
+	input->text[input->cursor_i] = erased;
 	int	text_height = MeasureTextEx(font, "|", (float)font.baseSize, FONT_SPACING).y;
 
-	int	cursor_x = x + text_width + (input->cursor_i == 1 ? 0 : spacing_width(font));
+	int	cursor_x = x + text_width + (input->cursor_i == 0 ? 0 : spacing_width(font));
 	int	cursor_y = y;
 	DrawRectangle(cursor_x, cursor_y, 2, text_height, FONT_COLOR);
 }

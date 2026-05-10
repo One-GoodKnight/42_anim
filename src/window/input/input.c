@@ -2,7 +2,6 @@
 #include "raylib.h"
 #include "utils/utf8.h"
 #include <string.h>
-
 #include <stdio.h>
 
 void	init_input(t_input *input)
@@ -10,7 +9,7 @@ void	init_input(t_input *input)
 	input->text[0] = '\0';
 	input->utf8[0] = '\0';
 	input->len = 0;
-	input->cursor_i = 1;
+	input->cursor_i = 0;
 	input->blink = 0;
 	input->active = false;
 }
@@ -30,8 +29,8 @@ void	handle_input(t_input *input)
 	{
 		if (input->len < INPUT_MAX_LEN && key >= ' ' && key <= 255)
 		{
-			memmove(input->text + (input->cursor_i), input->text + (input->cursor_i - 1), input->len - (input->cursor_i - 1));
-			input->text[input->cursor_i - 1] = (unsigned char)key;
+			memmove(input->text + (input->cursor_i + 1), input->text + (input->cursor_i), input->len - (input->cursor_i));
+			input->text[input->cursor_i] = (unsigned char)key;
 			input->len++;
 			input->text[input->len] = '\0';
 			input->cursor_i++;
@@ -39,13 +38,8 @@ void	handle_input(t_input *input)
 		key = GetCharPressed();
 		update_utf8(input);
 	}
-
+	printf("%zu\n", input->cursor_i);
 	input_suppression(input);
 	input_movement(input);
-
-		//printf("%c\n", input->text[input->cursor_i]);
 }
-
-
-
 

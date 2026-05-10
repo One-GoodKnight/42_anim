@@ -58,6 +58,9 @@ void	handle_input(t_input *input)
 	input_suppression(input);
 	input_movement(input);
 
+	if (GetKeyPressed() != 0)
+		input->blink = 0;
+
 	latin1_to_utf8(input->utf8, input->text);
 }
 

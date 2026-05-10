@@ -55,7 +55,7 @@ int host_bg_loop(t_net *net, t_qst *qst)
 
 		vec_clear(&net->messages);
 		
-		usleep(0.016 * 1000000);
+		usleep(0.016f * 1000000);
 	}
 
 	return (0);

@@ -3,7 +3,9 @@
 
 # include "file_op/data.h"
 
-# define DEBUG_EASY_QST 1
+# define DEBUG_EASY_QST 0
+# define OFF -1
+# define FORCE_QST_TYPE SHUF_STR
 
 # define MAX_ADDITION_SUBSTRACTION 100
 # define MAX_MULTIPLICATION 20

@@ -10,7 +10,7 @@ void	init_question(t_qst *qst, t_data *data)
 		qst->mode = SHUF_STR;
 		qst->data.qst.text = malloc(1000);
 		qst->data.qst.utf8 = malloc(1000);
-		strcpy((char *)qst->data.qst.utf8, "ÀÉÛ");
+		strcpy((char *)qst->data.qst.utf8, "123");
 		utf8_to_latin1(qst->data.qst.text, qst->data.qst.utf8);
 		if (qst->mode == SHUF_STR)
 		{
@@ -25,6 +25,10 @@ void	init_question(t_qst *qst, t_data *data)
 	qst->data.qst.text = NULL;
 	qst->data.qst.utf8 = NULL;
 	qst->mode = rand() % (MODE_COUNT);
+
+	if (FORCE_QST_TYPE != OFF)
+		qst->mode = FORCE_QST_TYPE;
+
 	switch(qst->mode)
 	{
 		case NB:

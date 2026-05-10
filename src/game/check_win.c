@@ -13,11 +13,11 @@ bool	check_win(char *answer, t_qst *qst)
 				return (true);
 			break;
 		case STR:
-			if (ft_strcmp(ans, qst->data.str_qst.ans) == 0)
+			if (ft_strcmp(ans, qst->data.str_qst.ans, NULL) == 0)
 				return (true);
 			break;
 		case SHUF_STR:
-			if (ft_strcmp_ignore_case(ans, qst->data.shuf_str_qst.ans) == 0)
+			if (ft_strcmp(ans, qst->data.shuf_str_qst.ans, trans_lower) == 0)
 				return (true);
 			break;
 		case MODE_COUNT:

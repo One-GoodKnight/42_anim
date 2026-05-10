@@ -9,8 +9,8 @@ void	append_char(unsigned char *dst, unsigned char c);
 void	swap_uchar(unsigned char *u1, unsigned char *u2);
 bool 	ft_uatoi(const unsigned char *str, unsigned int *out);
 
-int		ft_strcmp(const unsigned char *s1, const unsigned char *s2);
-int		ft_strcmp_ignore_case(const unsigned char *s1, const unsigned char *s2);
+unsigned char	trans_lower(unsigned char c);
+int		ft_strcmp(const unsigned char *s1, const unsigned char *s2, unsigned char (*trans)(const unsigned char c));
 
 size_t	uint_len(unsigned int n);
 void	uitoa(unsigned char *dst, unsigned int n);

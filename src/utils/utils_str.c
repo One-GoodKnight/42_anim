@@ -11,36 +11,31 @@ size_t	ft_strlen(const unsigned char *s)
 	return (i);
 }
 
-int	ft_strcmp(const unsigned char *s1, const unsigned char *s2)
+static unsigned char	neutral(const unsigned char c)
 {
-	size_t			i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
+	return (c);
 }
 
-int	ft_strcmp_ignore_case(const unsigned char *s1, const unsigned char *s2)
+unsigned char	trans_lower(unsigned char c)
+{
+	if (c >= 'A' && c <= 'Z')
+		c += 32;
+	if (c >= 192 && c <= 222 && c != 215)
+		c += 32;
+	return (c);
+}
+
+int	ft_strcmp(const unsigned char *s1, const unsigned char *s2, unsigned char (*trans)(const unsigned char c))
 {
 	size_t			i;
-	unsigned char	s1_c;
-	unsigned char	s2_c;
+
+	if (trans == NULL)
+		trans = neutral;
 
 	i = 0;
-	while (s1[i] && s2[i])
-	{
-		s1_c = s1[i];
-		s2_c = s2[i];
-		if (s1_c >= 'A' && s1_c <= 'Z')
-			s1_c += 32;
-		if (s2_c >= 'A' && s2_c <= 'Z')
-			s2_c += 32;
-		if (s1_c != s2_c )
-			return (s1[i] - s2[i]);
+	while (s1[i] && s2[i] && trans(s1[i]) == trans(s2[i]))
 		i++;
-	}
-	return (s1[i] - s2[i]);
+	return (trans(s1[i]) - (s2[i]));
 }
 
 bool ft_uatoi(const unsigned char *str, unsigned int *out)

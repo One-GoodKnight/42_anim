@@ -1,4 +1,5 @@
 #include "game/question.h"
+#include "utils/utf8.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -6,12 +7,18 @@ void	init_question(t_qst *qst, t_data *data)
 {
 	if (DEBUG_EASY_QST == 1)
 	{
-		qst->mode = STR;
-		qst->data.qst.text = malloc(10);
-		qst->data.qst.utf8 = malloc(10);
-		strcpy((char *)qst->data.qst.text, "123456789");
-		strcpy((char *)qst->data.qst.utf8, "123456789");
-		qst->data.str_qst.ans = qst->data.qst.text;
+		qst->mode = SHUF_STR;
+		qst->data.qst.text = malloc(1000);
+		qst->data.qst.utf8 = malloc(1000);
+		strcpy((char *)qst->data.qst.utf8, "ÀÉÛ");
+		utf8_to_latin1(qst->data.qst.text, qst->data.qst.utf8);
+		if (qst->mode == SHUF_STR)
+		{
+			qst->data.str_qst.ans = malloc(1000);
+			memcpy(qst->data.str_qst.ans, qst->data.qst.text, 1000);
+		}
+		else
+			qst->data.str_qst.ans = qst->data.qst.text;
 		return ;
 	}
 

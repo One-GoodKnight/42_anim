@@ -1,39 +1,49 @@
 #include "window/input.h"
 #include "raylib.h"
 
-static void	arrow(t_input *input)
+static bool	arrow(t_input *input)
 {
+	bool moved = false;
+
 	if (IsKeyPressed(KEY_LEFT) || IsKeyPressedRepeat(KEY_LEFT))
 	{
 		if (input->cursor_i > 0)
 			input->cursor_i--;
+		moved = true;
 	}
 
 	if (IsKeyPressed(KEY_RIGHT) || IsKeyPressedRepeat(KEY_RIGHT))
 	{
 		if (input->cursor_i < input->len)
 			input->cursor_i++;
+		moved = true;
 	}
+
+	return (moved);
 }
 
-static void ctrl_arrow_left(t_input *input)
+static bool ctrl_arrow_left(t_input *input)
 {
 	if (IsKeyDown(KEY_LEFT_CONTROL) && (IsKeyPressed(KEY_LEFT) || IsKeyPressedRepeat(KEY_LEFT)))
 	{
 		int i = input->cursor_i - 1;
 		if (i == -1)
-			return ;
+			return (true);
 
 		while (i >= 0 && is_sep(input->text[i]))
 			i--;
-		while (i >= 0 && is_sep(input->text[i]))
+		while (i >= 0 && !is_sep(input->text[i]))
 			i--;
 
 		input->cursor_i = i + 1;
+
+		return (true);
 	}
+
+	return (false);
 }
 
-static void	ctrl_arrow_right(t_input *input)
+static bool	ctrl_arrow_right(t_input *input)
 {
 	if (IsKeyDown(KEY_LEFT_CONTROL) && (IsKeyPressed(KEY_RIGHT) || IsKeyPressedRepeat(KEY_RIGHT)))
 	{
@@ -41,20 +51,30 @@ static void	ctrl_arrow_right(t_input *input)
 
 		int i = input->cursor_i;
 		if (i == input_len)
-			return ;
+			return (true);
 
 		while (i < input_len && is_sep(input->text[i]))
 			i++;
-		while (i < input_len && is_sep(input->text[i]))
+		while (i < input_len && !is_sep(input->text[i]))
 			i++;
 
 		input->cursor_i = i;
+
+		return (true);
 	}
+
+	return (false);
 }
 
 void	input_movement(t_input *input)
 {
-	arrow(input);
-	ctrl_arrow_left(input);
-	ctrl_arrow_right(input);
+	bool	moved;
+
+	moved = ctrl_arrow_left(input);
+
+	if (!moved)
+		moved = ctrl_arrow_right(input);
+
+	if (!moved)
+		moved = arrow(input);
 }

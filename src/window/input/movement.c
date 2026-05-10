@@ -7,14 +7,12 @@ static void	arrow(t_input *input)
 	{
 		if (input->cursor_i > 0)
 			input->cursor_i--;
-		update_utf8(input);
 	}
 
 	if (IsKeyPressed(KEY_RIGHT) || IsKeyPressedRepeat(KEY_RIGHT))
 	{
 		if (input->cursor_i < input->len)
 			input->cursor_i++;
-		update_utf8(input);
 	}
 }
 
@@ -32,7 +30,6 @@ static void ctrl_arrow_left(t_input *input)
 			i--;
 
 		input->cursor_i = i + 1;
-		update_utf8(input);
 	}
 }
 
@@ -52,7 +49,6 @@ static void	ctrl_arrow_right(t_input *input)
 			i++;
 
 		input->cursor_i = i;
-		update_utf8(input);
 	}
 }
 

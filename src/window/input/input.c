@@ -2,7 +2,6 @@
 #include "raylib.h"
 #include "utils/utf8.h"
 #include <string.h>
-#include <stdio.h>
 
 void	init_input(t_input *input)
 {
@@ -27,6 +26,9 @@ void	handle_input(t_input *input)
 	int key = GetCharPressed();
 	while (key > 0)
 	{
+		if (key == 160)  // breaking space
+			key = ' ';
+
 		if (input->len < INPUT_MAX_LEN && key >= ' ' && key <= 255)
 		{
 			memmove(input->text + (input->cursor_i + 1), input->text + (input->cursor_i), input->len - (input->cursor_i));
@@ -36,10 +38,11 @@ void	handle_input(t_input *input)
 			input->cursor_i++;
 		}
 		key = GetCharPressed();
-		update_utf8(input);
 	}
-	printf("%zu\n", input->cursor_i);
+
 	input_suppression(input);
 	input_movement(input);
+
+	update_utf8(input);
 }
 

@@ -1,27 +1,6 @@
 #include "window/input.h"
 #include "raylib.h"
 
-static bool	arrow(t_input *input)
-{
-	bool moved = false;
-
-	if (IsKeyPressed(KEY_LEFT) || IsKeyPressedRepeat(KEY_LEFT))
-	{
-		if (input->cursor_i > 0)
-			input->cursor_i--;
-		moved = true;
-	}
-
-	if (IsKeyPressed(KEY_RIGHT) || IsKeyPressedRepeat(KEY_RIGHT))
-	{
-		if (input->cursor_i < input->len)
-			input->cursor_i++;
-		moved = true;
-	}
-
-	return (moved);
-}
-
 static bool ctrl_arrow_left(t_input *input)
 {
 	if (IsKeyDown(KEY_LEFT_CONTROL) && (IsKeyPressed(KEY_LEFT) || IsKeyPressedRepeat(KEY_LEFT)))
@@ -64,6 +43,27 @@ static bool	ctrl_arrow_right(t_input *input)
 	}
 
 	return (false);
+}
+
+static bool	arrow(t_input *input)
+{
+	bool moved = false;
+
+	if (IsKeyPressed(KEY_LEFT) || IsKeyPressedRepeat(KEY_LEFT))
+	{
+		if (input->cursor_i > 0)
+			input->cursor_i--;
+		moved = true;
+	}
+
+	if (IsKeyPressed(KEY_RIGHT) || IsKeyPressedRepeat(KEY_RIGHT))
+	{
+		if (input->cursor_i < input->len)
+			input->cursor_i++;
+		moved = true;
+	}
+
+	return (moved);
 }
 
 void	input_movement(t_input *input)

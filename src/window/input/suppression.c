@@ -2,9 +2,22 @@
 #include "raylib.h"
 #include "string.h"
 
-void	input_suppression(t_input *input)
+static bool ctrl_backspace(t_input *input)
 {
-	//backspace
+	if (IsKeyDown(KEY_LEFT_CONTROL) && (IsKeyPressed(KEY_BACKSPACE) || (IsKeyPressedRepeat(KEY_BACKSPACE))))
+	{
+		memmove(input->text, input->text + (input->cursor_i), input->len - input->cursor_i);
+		input->len = input->len - input->cursor_i;
+		input->text[input->len] = '\0';
+		input->cursor_i = 0;
+		return (true);
+	}
+
+	return (false);
+}
+
+static bool	backspace(t_input *input)
+{
 	if (IsKeyPressed(KEY_BACKSPACE) || IsKeyPressedRepeat(KEY_BACKSPACE))
 	{
     	if (input->len > 0 && input->cursor_i != 0)
@@ -14,17 +27,26 @@ void	input_suppression(t_input *input)
 			input->text[input->len] = '\0';
 			input->cursor_i--;
 		}
+		return (true);
 	}
 
-	if (IsKeyDown(KEY_LEFT_CONTROL) && (IsKeyPressed(KEY_BACKSPACE) || (IsKeyPressedRepeat(KEY_BACKSPACE))))
+	return (false);
+}
+
+static bool	ctrl_suppr(t_input *input)
+{
+	if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyDown(KEY_DELETE))
 	{
-		memmove(input->text, input->text + (input->cursor_i), input->len - input->cursor_i);
-		input->len = input->len - input->cursor_i;
+		input->len = input->cursor_i;
 		input->text[input->len] = '\0';
-		input->cursor_i = 0;
+		return (true);
 	}
 
-	//del
+	return (false);
+}
+
+static bool suppr(t_input *input)
+{
 	if (IsKeyPressed(KEY_DELETE) || IsKeyPressedRepeat(KEY_DELETE))
 	{
     	if (input->len > 0 && input->cursor_i != input->len)
@@ -33,11 +55,24 @@ void	input_suppression(t_input *input)
 			input->len--;
 			input->text[input->len] = '\0';
 		}
+		return (true);
 	}
 
-	if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyDown(KEY_DELETE))
-	{
-		input->len = input->cursor_i;
-		input->text[input->len] = '\0';
-	}
+	return (false);
+}
+
+void	input_suppression(t_input *input)
+{
+	bool	deleted;
+
+	deleted = ctrl_backspace(input);
+
+	if (!deleted)
+		deleted = ctrl_suppr(input);
+
+	if (!deleted)
+		deleted = backspace(input);
+
+	if (!deleted)
+		deleted = suppr(input);
 }

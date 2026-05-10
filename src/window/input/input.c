@@ -13,11 +13,6 @@ void	init_input(t_input *input)
 	input->active = false;
 }
 
-void	update_utf8(t_input *input)
-{
-	latin1_to_utf8(input->utf8, input->text);
-}
-
 void	handle_input(t_input *input)
 {
 	if (input->active == false)
@@ -28,6 +23,8 @@ void	handle_input(t_input *input)
 	{
 		if (key == 160)  // breaking space
 			key = ' ';
+		if (key == 173) // soft hyphen (invisible)
+			continue ;
 
 		if (input->len < INPUT_MAX_LEN && key >= ' ' && key <= 255)
 		{
@@ -37,12 +34,13 @@ void	handle_input(t_input *input)
 			input->text[input->len] = '\0';
 			input->cursor_i++;
 		}
+
 		key = GetCharPressed();
 	}
 
 	input_suppression(input);
 	input_movement(input);
 
-	update_utf8(input);
+	latin1_to_utf8(input->utf8, input->text);
 }
 

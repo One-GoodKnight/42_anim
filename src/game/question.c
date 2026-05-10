@@ -62,7 +62,7 @@ void	free_qst(t_qst *qst)
 	free(qst->data.qst.text);
 	qst->data.qst.text = NULL;
 
-	if (qst->mode == SHUF_STR)
+	if (qst->mode != STR)
 	{
 		free(qst->data.shuf_str_qst.ans);
 		qst->data.shuf_str_qst.ans = NULL;

@@ -1,3 +1,4 @@
+#include "game/question.h"
 #include "net/actions.h"
 #include "net/network.h"
 #include "net/process_msg.h"
@@ -20,7 +21,7 @@ static void	check_game_timeout(t_net *net, t_qst *qst)
 		return ;
 
 	if (time(NULL) - net->game_start >= GAME_TIMEOUT)
-		announce_timeout(net, (char *)qst->data.qst.utf8);
+		announce_timeout(net, (char *)qst->data.qst.ans);
 }
 
 void	host_loop_helper(t_net *net, t_qst *qst, float dt)

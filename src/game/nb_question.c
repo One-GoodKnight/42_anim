@@ -53,6 +53,7 @@ static int	find_divider(int n)
 t_nb_qst	generate_nb_question()
 {
 	t_nb_qst	qst;
+	int			ans = 0;
 
 	qst.op = rand() % OP_COUNT;
 	switch (qst.op)
@@ -60,7 +61,7 @@ t_nb_qst	generate_nb_question()
 		case ADDITION:
 			qst.n1 = rand() % (MAX_ADDITION_SUBSTRACTION + 1);
 			qst.n2 = rand() % (MAX_ADDITION_SUBSTRACTION + 1);
-			qst.ans = qst.n1 + qst.n2;
+			ans = qst.n1 + qst.n2;
 			qst.text = build_question_text(qst.n1, qst.n2, '+');
 			break;
 		case SUBSTRACTION:
@@ -72,29 +73,37 @@ t_nb_qst	generate_nb_question()
 				qst.n2 = qst.n1 - qst.n2;
 				qst.n1 -= qst.n2;
 			}
-			qst.ans = qst.n1 - qst.n2;
+			ans = qst.n1 - qst.n2;
 			qst.text = build_question_text(qst.n1, qst.n2, '-');
 			break;
 		case MULTIPLICATION:
 			qst.n1 = rand() % (MAX_MULTIPLICATION + 1);
 			qst.n2 = rand() % (MAX_MULTIPLICATION + 1);
-			qst.ans = qst.n1 * qst.n2;
+			ans = qst.n1 * qst.n2;
 			qst.text = build_question_text(qst.n1, qst.n2, 'x');
 			break;
 		case DIVISION:
 			qst.n1 = rand() % (MAX_DIVISION + 1);
 			qst.n2 = find_divider(qst.n1);
-			qst.ans = qst.n1 / qst.n2;
+			ans = qst.n1 / qst.n2;
 			qst.text = build_question_text(qst.n1, qst.n2, '/');
 			break;
 		case OP_COUNT:
 			break;
 	}
+
+	qst.ans = malloc(uint_len(ans) + 1);
+	if (!qst.ans)
+		return (qst);
+	uitoa(qst.ans, ans);
+
 	if (!qst.text)
 		return (qst);
+
 	qst.utf8 = malloc(ft_strlen(qst.text)*2 + 1);
 	if (!qst.utf8)
 		return (qst);
 	latin1_to_utf8(qst.utf8, qst.text);
+
 	return (qst);
 }

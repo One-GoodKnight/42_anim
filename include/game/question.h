@@ -33,7 +33,7 @@ typedef struct s_nb_qst
 {
 	unsigned char	*text;
 	unsigned char	*utf8;
-	int				ans;
+	unsigned char	*ans;
 	int				n1;
 	int				n2;
 	t_op			op;
@@ -62,6 +62,7 @@ typedef struct s_qst
 		{
 			unsigned char	*text;
 			unsigned char	*utf8;
+			unsigned char	*ans;
 		}	qst;
 		t_nb_qst		nb_qst;
 		t_str_qst		str_qst;

@@ -1,4 +1,3 @@
-#include "raylib.h"
 #include "file_op/read_file.h"
 #include <time.h>
 #include <stdlib.h>

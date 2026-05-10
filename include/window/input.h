@@ -19,6 +19,9 @@ typedef struct s_input
 }	t_input;
 
 void	init_input(t_input *input);
+void	update_utf8(t_input *input);
 void	handle_input(t_input *input);
+void	input_suppression(t_input *input);
+void	input_movement(t_input *input);
 
 #endif

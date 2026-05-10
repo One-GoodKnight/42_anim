@@ -59,8 +59,10 @@ SRCS			:= 								\
 	utils/utils_str.c							\
 	utils/utils_uchar.c							\
 												\
+	window/input/input.c						\
+	window/input/movement.c						\
+	window/input/suppression.c					\
 	window/init_window.c						\
-	window/input.c								\
 												\
 	init.c										\
 	main.c										\

@@ -13,6 +13,23 @@ void	init_input(t_input *input)
 	input->active = false;
 }
 
+bool	is_sep(unsigned char c)
+{
+	if (c == '_')
+		return (false);
+
+	if (c >= ' ' && c <= '/')
+		return (true);
+	if (c >= ':' && c <= '@')
+		return (true);
+	if (c >= '[' && c <= '`')
+		return (true);
+	if (c >= '{' && c <= '~')
+		return (true);
+
+	return (false);
+}
+
 void	handle_input(t_input *input)
 {
 	if (input->active == false)

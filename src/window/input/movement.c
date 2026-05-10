@@ -24,9 +24,9 @@ static void ctrl_arrow_left(t_input *input)
 		if (i == -1)
 			return ;
 
-		while (i >= 0 && input->text[i] == ' ')
+		while (i >= 0 && is_sep(input->text[i]))
 			i--;
-		while (i >= 0 && input->text[i] != ' ')
+		while (i >= 0 && is_sep(input->text[i]))
 			i--;
 
 		input->cursor_i = i + 1;
@@ -43,9 +43,9 @@ static void	ctrl_arrow_right(t_input *input)
 		if (i == input_len)
 			return ;
 
-		while (i < input_len && input->text[i] == ' ')
+		while (i < input_len && is_sep(input->text[i]))
 			i++;
-		while (i < input_len && input->text[i] != ' ')
+		while (i < input_len && is_sep(input->text[i]))
 			i++;
 
 		input->cursor_i = i;

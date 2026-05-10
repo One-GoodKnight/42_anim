@@ -23,5 +23,7 @@ bool	is_sep(unsigned char c);
 void	handle_input(t_input *input);
 void	input_suppression(t_input *input);
 void	input_movement(t_input *input);
+bool 	ctrl_arrow_left(t_input *input, bool force);
+bool	ctrl_arrow_right(t_input *input, bool force);
 
 #endif

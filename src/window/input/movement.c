@@ -1,9 +1,9 @@
 #include "window/input.h"
 #include "raylib.h"
 
-static bool ctrl_arrow_left(t_input *input)
+bool ctrl_arrow_left(t_input *input, bool force)
 {
-	if (IsKeyDown(KEY_LEFT_CONTROL) && (IsKeyPressed(KEY_LEFT) || IsKeyPressedRepeat(KEY_LEFT)))
+	if (force || (IsKeyDown(KEY_LEFT_CONTROL) && (IsKeyPressed(KEY_LEFT) || IsKeyPressedRepeat(KEY_LEFT))))
 	{
 		int i = input->cursor_i - 1;
 		if (i == -1)
@@ -22,9 +22,9 @@ static bool ctrl_arrow_left(t_input *input)
 	return (false);
 }
 
-static bool	ctrl_arrow_right(t_input *input)
+bool	ctrl_arrow_right(t_input *input, bool force)
 {
-	if (IsKeyDown(KEY_LEFT_CONTROL) && (IsKeyPressed(KEY_RIGHT) || IsKeyPressedRepeat(KEY_RIGHT)))
+	if (force || (IsKeyDown(KEY_LEFT_CONTROL) && (IsKeyPressed(KEY_RIGHT) || IsKeyPressedRepeat(KEY_RIGHT))))
 	{
 		int	input_len = (int)input->len;
 
@@ -70,10 +70,10 @@ void	input_movement(t_input *input)
 {
 	bool	moved;
 
-	moved = ctrl_arrow_left(input);
+	moved = ctrl_arrow_left(input, false);
 
 	if (!moved)
-		moved = ctrl_arrow_right(input);
+		moved = ctrl_arrow_right(input, false);
 
 	if (!moved)
 		moved = arrow(input);

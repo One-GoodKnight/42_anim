@@ -3,19 +3,35 @@
 #include "utils/utf8.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 void	shuffle_text(unsigned char *text)
 {
 	size_t	len;
 	size_t	i;
-	size_t	rand_i;
 
 	len = ft_strlen(text);
 	i = 0;
 	while (text[i])
 	{
-		rand_i = rand() % len;
-		swap_uchar(&text[i], &text[rand_i]);
+		if (text[i] == ' ')
+		{
+			i++;
+			continue ;
+		}
+
+		size_t lower_bound = i;
+		while (lower_bound > 0 && text[lower_bound - 1] != ' ')
+			lower_bound--;
+
+		size_t upper_bound = i;
+		while (upper_bound < len - 1 && text[upper_bound + 1] != ' ')
+			upper_bound++;
+
+		size_t diff = upper_bound - lower_bound;
+
+		size_t rand_i = rand() % (diff + 1);
+		swap_uchar(&text[i], &text[lower_bound + rand_i]);
 		i++;
 	}
 }

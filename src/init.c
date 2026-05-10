@@ -14,5 +14,7 @@ int	load_data(t_data *data)
 	get_lines_from_file(data);
 	if (!data->lines)
 		return (-1);
+	if (data->count == 0)
+		return (-1);
 	return (0);
 }

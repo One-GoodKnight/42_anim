@@ -1,1 +1,4 @@
-shuffle letters inside current words only, not outside it
+when receiving a question, compore send ip to stored host ip and change it if they are not the same
+
+make a system to force clients to have the latest version (host sends version in heartbeat and if client has a higher version, make the client become the host),
+also change conflict handling to also track version use in addition to ip comparison
